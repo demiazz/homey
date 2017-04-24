@@ -1,0 +1,8 @@
+/*.log
+/coverage
+/dist
+/node_modules
+/index.es.js
+/index.es.js.flow
+/index.js
+/index.js.flow
