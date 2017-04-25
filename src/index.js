@@ -15,3 +15,7 @@ export function queryAll(selector: string, element: Element): Array<Element> {
 }
 
 export const qa = queryAll;
+
+export function parent(element: Element): ?Element {
+  return element.parentElement;
+}
