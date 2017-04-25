@@ -22,7 +22,7 @@ describe("queryAll", () => {
 
     const subject = document.querySelector(`.${root}`);
 
-    expect(queryAll(subject, `.${matched}`)).toEqual(
+    expect(queryAll(`.${matched}`, subject)).toEqual(
       [].slice.call(document.querySelectorAll(`.${root} .${matched}`))
     );
   });
@@ -40,7 +40,7 @@ describe("queryAll", () => {
 
     const subject = document.querySelector(`.${root}`);
 
-    expect(queryAll(subject, `.${matched}`)).toEqual([]);
+    expect(queryAll(`.${matched}`, subject)).toEqual([]);
   });
 
   it("has a `qa` shortcut", () => {

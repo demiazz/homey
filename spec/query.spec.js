@@ -20,7 +20,9 @@ describe("query", () => {
 
     const subject = document.querySelector(`.${root}`);
 
-    expect(query(subject, `.${matched}`)).toBe(
+    expect(subject).toBeDefined();
+
+    expect(query(`.${matched}`, subject)).toBe(
       document.querySelector(`.${matched}`)
     );
   });
@@ -37,7 +39,7 @@ describe("query", () => {
 
     const subject = document.querySelector(`.${root}`);
 
-    expect(query(subject, `.${matched}`)).toBe(null);
+    expect(query(`.${matched}`, subject)).toBe(null);
   });
 
   it("has a `q` shortcut", () => {

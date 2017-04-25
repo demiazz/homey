@@ -1,4 +1,4 @@
-export function query(element: Element, selector: string): Element | null;
-export function q(Element: Element, selector: string): Element | null;
-export function queryAll(element: Element, selector: string): Element[];
-export function qa(element: Element, selector: string): Element[];
+export function query(selector: string, element: Element): Element | null;
+export function q(selector: string, element: Element): Element | null;
+export function queryAll(selector: string, element: Element): Element[];
+export function qa(selector: string, element: Element): Element[];
