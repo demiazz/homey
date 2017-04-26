@@ -3,13 +3,17 @@ const nodeResolve = require("rollup-plugin-node-resolve");
 const commonJS = require("rollup-plugin-commonjs");
 
 module.exports = {
-  basePath: "../",
+  basePath: "../../",
 
   frameworks: ["jasmine"],
 
   files: [
     {
-      pattern: "build/setup-tests.js",
+      pattern: "build/jasmine/setup.js",
+      watched: process.env.CI !== "true"
+    },
+    {
+      pattern: "build/jasmine/fixtures.js",
       watched: process.env.CI !== "true"
     },
     {
@@ -24,7 +28,8 @@ module.exports = {
   ],
 
   preprocessors: {
-    "build/setup-tests.js": ["rollup"],
+    "build/jasmine/setup.js": ["rollup"],
+    "build/jasmine/fixtures.js": ["rollup"],
     "spec/**/*.spec.js": ["rollup"]
   },
 

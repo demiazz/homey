@@ -21,13 +21,11 @@
   "typings": "d.ts/homey.d.ts",
   "files": [
     "d.ts/homey.d.ts",
-    "dist/homey.umd.js",
-    "dist/homey.umd.min.js",
-    "dist/homey.umd.min.js.map",
-    "index.es.js",
-    "index.es.js.flow",
-    "index.js",
-    "index.js.flow",
+    "dist/homey.js",
+    "dist/homey.min.js",
+    "dist/homey.min.js.map",
+    "lib/*.js",
+    "lib/*.js.flow",
     "CHANGELOG.md",
     "LICENSE",
     "README.md"
@@ -35,10 +33,10 @@
   "scripts": {
     "check": "$(yarn bin)/flow --show-all-errors src",
     "pretest": "yarn run check",
-    "test": "cross-env NODE_ENV=test $(yarn bin)/karma start build/karma.local.js --single-run",
-    "test:watch": "cross-env NODE_ENV=test $(yarn bin)/karma start build/karma.local.js",
-    "test:ci": "cross-env NODE_ENV=test $(yarn bin)/karma start build/karma.ci.js",
-    "build": "node build/build.js",
+    "test": "cross-env NODE_ENV=test $(yarn bin)/karma start build/karma/local.js --single-run",
+    "test:watch": "cross-env NODE_ENV=test $(yarn bin)/karma start build/karma/local.js",
+    "test:ci": "cross-env NODE_ENV=test $(yarn bin)/karma start build/karma/ci.js",
+    "build": "node build/bundle/index.js",
     "docs": "node build/docs.js",
     "version": "yarn run build && yarn run docs && git add -A README.md",
     "lint-staged": "$(yarn bin)/lint-staged"

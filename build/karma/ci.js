@@ -1,7 +1,7 @@
 const path = require("path");
 const istanbul = require("rollup-plugin-istanbul");
 
-const baseConfig = require("./karma.base");
+const baseConfig = require("./base");
 
 function getBuild() {
   let id = `HOMEY - TRAVIS #${process.env.TRAVIS_BUILD_NUMBER}`;
