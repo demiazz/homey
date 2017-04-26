@@ -1,10 +1,28 @@
 /* @flow */
 
-/* ----- Utilities ----- */
+/* ----- utilities ----- */
 
-function toArray(nodeList: NodeList<*>): Array<*> {
+function nodeListToArray(nodeList: NodeList<*>): Array<*> {
   return Array.prototype.slice.call(nodeList);
 }
+
+function nodeMapToArray(map: NamedNodeMap): Array<Attr> {
+  return Array.prototype.slice.call(map);
+}
+
+/* ----- query ----- */
+
+export function query(selector: string, element: Element): ?Element {
+  return element.querySelector(selector);
+}
+
+/* ----- queryAll ----- */
+
+export function queryAll(selector: string, element: Element): Array<Element> {
+  return nodeListToArray(element.querySelectorAll(selector));
+}
+
+/* ----- matches ----- */
 
 type MatchesFn = (selector: string) => boolean;
 
@@ -29,25 +47,17 @@ function getMatchesFn(): MatchesFn {
 
 const matchesFn: MatchesFn = getMatchesFn();
 
-/* ----- Selectors ----- */
-
-export function query(selector: string, element: Element): ?Element {
-  return element.querySelector(selector);
-}
-
-export function queryAll(selector: string, element: Element): Array<Element> {
-  return toArray(element.querySelectorAll(selector));
-}
-
 export function matches(selector: string, element: Element): boolean {
   return matchesFn.call(element, selector);
 }
 
-/* ----- Traversing ----- */
+/* ----- parent ----- */
 
 export function parent(element: Element): ?Element {
   return element.parentElement;
 }
+
+/* ----- parents ----- */
 
 export function parents(element: Element): Array<Element> {
   const result = [];
@@ -61,4 +71,39 @@ export function parents(element: Element): Array<Element> {
   }
 
   return result;
+}
+
+/* ----- dataset ----- */
+
+type Dataset = { [key: string]: string };
+type DatasetFn = (element: HTMLElement) => Dataset;
+
+function nativeDatasetFn(element: HTMLElement) {
+  return element.dataset;
+}
+
+function polyfilledDatasetFn(element: HTMLElement): Dataset {
+  return nodeMapToArray(element.attributes).reduce((data, { name, value }) => {
+    if (/^data-(.+)/.test(name)) {
+      const normalizedName = name
+        .substr(5)
+        .replace(/-\w/g, str => str[1].toUpperCase());
+
+      data[normalizedName] = value;
+    }
+
+    return data;
+  }, {});
+}
+
+function getDatasetFn() {
+  const element = document.createElement("div");
+
+  return element.dataset ? nativeDatasetFn : polyfilledDatasetFn;
+}
+
+const datasetFn: DatasetFn = getDatasetFn();
+
+export function dataset(element: HTMLElement): Dataset {
+  return datasetFn(element);
 }
