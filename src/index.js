@@ -92,7 +92,7 @@ export function remove(element: Element): boolean {
 type Dataset = { [key: string]: string };
 type DatasetFn = (element: HTMLElement) => Dataset;
 
-function nativeDatasetFn(element: HTMLElement) {
+function nativeDatasetFn(element: HTMLElement): Dataset {
   return element.dataset;
 }
 
