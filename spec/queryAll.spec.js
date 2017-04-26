@@ -1,46 +1,42 @@
 import { queryAll, qa } from "../src";
 
 describe("queryAll", () => {
-  const root = "root";
-  const matched = "child";
-  const notMatched = "other";
-
   afterEach(clearFixtures);
 
   it("returns array of childs which matched by selector", () => {
     useFixture(
       `
-      <div class="${root}" >
-        <div class="${matched}"></div>
-        <div class="${matched}"></div>
-        <div class="${notMatched}"></div>
+      <div class="root" >
+        <div class="matched"></div>
+        <div class="matched"></div>
+        <div class="notMatched"></div>
       </div>
-      <div class="${matched}"></div>
-      <div class="${matched}"></div>
+      <div class="matched"></div>
+      <div class="matched"></div>
     `
     );
 
-    const subject = document.querySelector(`.${root}`);
+    const subject = document.querySelector(".root");
 
-    expect(queryAll(`.${matched}`, subject)).toEqual(
-      [].slice.call(document.querySelectorAll(`.${root} .${matched}`))
+    expect(queryAll(".matched", subject)).toEqual(
+      [].slice.call(document.querySelectorAll(".root .matched"))
     );
   });
 
   it("returns empty array when children which matched by selector not existed", () => {
     useFixture(
       `
-      <div class="${root}" >
-        <div class="${notMatched}"></div>
+      <div class="root" >
+        <div class="notMatched"></div>
       </div>
-      <div class="${matched}"></div>
-      <div class="${matched}"></div>
+      <div class="matched"></div>
+      <div class="matched"></div>
     `
     );
 
-    const subject = document.querySelector(`.${root}`);
+    const subject = document.querySelector(".root");
 
-    expect(queryAll(`.${matched}`, subject)).toEqual([]);
+    expect(queryAll(".matched", subject)).toEqual([]);
   });
 
   it("has a `qa` shortcut", () => {
