@@ -15,9 +15,7 @@
     "name": "Alexey Plutalov",
     "email": "demiazz.py@gmail.com"
   },
-  "main": "index.js",
-  "module": "index.es.js",
-  "jsnext:main": "index.es.js",
+  "main": "lib/index.js",
   "typings": "d.ts/homey.d.ts",
   "files": [
     "d.ts/homey.d.ts",
