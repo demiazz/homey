@@ -1,10 +1,10 @@
 /* @flow */
 
 function remove(element: Element): boolean {
-  const parentElement = element.parentElement;
+  const parent = element.parentElement;
 
-  if (parentElement) {
-    parentElement.removeChild(element);
+  if (parent) {
+    parent.removeChild(element);
 
     return true;
   }

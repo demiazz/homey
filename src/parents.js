@@ -3,12 +3,12 @@
 function parents(element: Element): Array<Element> {
   const result = [];
 
-  let parentElement = element.parentElement;
+  let parent = element.parentElement;
 
-  while (parentElement) {
-    result.push(parentElement);
+  while (parent) {
+    result.push(parent);
 
-    parentElement = parentElement.parentElement;
+    parent = parent.parentElement;
   }
 
   return result;
