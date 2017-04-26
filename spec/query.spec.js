@@ -1,4 +1,4 @@
-import { query, q } from "../src";
+import { query } from "../src";
 
 describe("query", () => {
   afterEach(clearFixtures);
@@ -32,9 +32,5 @@ describe("query", () => {
     const subject = document.querySelector(".root");
 
     expect(query(".matched", subject)).toBe(null);
-  });
-
-  it("has a `q` shortcut", () => {
-    expect(query).toBe(q);
   });
 });

@@ -1,4 +1,4 @@
-import { queryAll, qa } from "../src";
+import { queryAll } from "../src";
 
 describe("queryAll", () => {
   afterEach(clearFixtures);
@@ -37,9 +37,5 @@ describe("queryAll", () => {
     const subject = document.querySelector(".root");
 
     expect(queryAll(".matched", subject)).toEqual([]);
-  });
-
-  it("has a `qa` shortcut", () => {
-    expect(queryAll).toBe(qa);
   });
 });
