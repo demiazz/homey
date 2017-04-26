@@ -33,4 +33,20 @@ describe("query", () => {
 
     expect(query(".matched", subject)).toBe(null);
   });
+
+  describe("when element not given", () => {
+    it("returns first child matched by selector in document", () => {
+      useFixture(
+        `
+        <div class="wrapper">
+          <div class="root"></div>
+        </div>
+      `
+      );
+
+      const subject = document.querySelector(".root");
+
+      expect(query(".root")).toBe(subject);
+    });
+  });
 });
