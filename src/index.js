@@ -73,6 +73,20 @@ export function parents(element: Element): Array<Element> {
   return result;
 }
 
+/* ----- remove ----- */
+
+export function remove(element: Element): boolean {
+  const parentElement = element.parentElement;
+
+  if (parentElement) {
+    parentElement.removeChild(element);
+
+    return true;
+  }
+
+  return false;
+}
+
 /* ----- dataset ----- */
 
 type Dataset = { [key: string]: string };
