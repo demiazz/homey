@@ -1,25 +1,28 @@
 /* @flow */
 
 import matches from "./matches";
+import parent from "./parent";
 
 type PredicateFn = (element: Element) => boolean;
 
 function parentByPredicate(predicate: PredicateFn, element: Element): ?Element {
-  let parent = element.parentElement;
+  let current = parent(element);
 
-  while (parent) {
-    if (predicate(parent)) {
-      return parent;
+  while (current) {
+    if (predicate(current)) {
+      return current;
     }
 
-    parent = parent.parentElement;
+    current = parent(current);
   }
 
   return null;
 }
 
 function parentBySelector(selector: string, element: Element): ?Element {
-  return parentByPredicate(e => matches(selector, e), element);
+  const predicate = matches.bind(null, selector);
+
+  return parentByPredicate(predicate, element);
 }
 
 function parentBy(condition: PredicateFn, element: Element): ?Element {
