@@ -38,4 +38,21 @@ describe("queryAll", () => {
 
     expect(queryAll(".matched", subject)).toEqual([]);
   });
+
+  describe("when element not given", () => {
+    it("returns array of childs which matched by selector", () => {
+      useFixture(
+        `
+        <div class="wrapper">
+          <div class="root"></div>
+        </div>
+        <div class="root"></div>
+      `
+      );
+
+      expect(queryAll(".root")).toEqual(
+        [].slice.call(document.querySelectorAll(".root"))
+      );
+    });
+  });
 });
