@@ -11,6 +11,7 @@ import remove from "./remove";
 import dataset from "./dataset";
 import addClass from "./addClass";
 import removeClass from "./removeClass";
+import toggleClass from "./toggleClass";
 
 export {
   query,
@@ -23,5 +24,6 @@ export {
   remove,
   dataset,
   addClass,
-  removeClass
+  removeClass,
+  toggleClass
 };
