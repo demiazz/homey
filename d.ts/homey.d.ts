@@ -12,3 +12,4 @@ export function dataset(element: HTMLElement): { [key: string]: string };
 export function addClass(cssClass: string, element: Element): boolean;
 export function removeClass(cssClass: string, element: Element): boolean;
 export function toggleClass(cssClass: string, element: Element): boolean;
+export function hasClass(cssClass: string, element: Element): boolean;
