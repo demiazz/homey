@@ -7,10 +7,6 @@ import parents from "./parents";
 import parentsBy from "./parentsBy";
 import remove from "./remove";
 import dataset from "./dataset";
-import addClass from "./addClass";
-import removeClass from "./removeClass";
-import toggleClass from "./toggleClass";
-import hasClass from "./hasClass";
 
 /*
  *
@@ -39,21 +35,64 @@ function queryAll(selector: string, element: Element): Array<Element> {
 }
 
 /*
+ * Classes
+ */
+
+function hasClass(cssClass: string, element: Element): boolean {
+  return element.classList.contains(cssClass);
+}
+
+function addClass(cssClass: string, element: Element): boolean {
+  const result = !hasClass(cssClass, element);
+
+  if (result) {
+    element.classList.add(cssClass);
+  }
+
+  return result;
+}
+
+function removeClass(cssClass: string, element: Element): boolean {
+  const result = hasClass(cssClass, element);
+
+  if (result) {
+    element.classList.remove(cssClass);
+  }
+
+  return result;
+}
+
+function toggleClass(cssClass: string, element: Element): boolean {
+  const result = !hasClass(cssClass, element);
+
+  if (result) {
+    addClass(cssClass, element);
+  } else {
+    removeClass(cssClass, element);
+  }
+
+  return result;
+}
+
+/*
  * Exports
  */
 
 export {
+  /* queries */
   query,
   queryAll,
+  /* classes */
+  hasClass,
+  addClass,
+  removeClass,
+  toggleClass,
+  /* other */
   matches,
   parent,
   parentBy,
   parents,
   parentsBy,
   remove,
-  dataset,
-  addClass,
-  removeClass,
-  toggleClass,
-  hasClass
+  dataset
 };
