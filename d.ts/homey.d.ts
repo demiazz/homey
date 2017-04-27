@@ -9,4 +9,4 @@ export function parents(element: Element): Element[];
 export function parentsBy(selector: string | PredicateFn, element: Element): Element[];
 export function remove(element: Element): boolean;
 export function dataset(element: HTMLElement): { [key: string]: string };
-export function addClass(cssClass: string, element: Element): void;
+export function addClass(cssClass: string, element: Element): boolean;
