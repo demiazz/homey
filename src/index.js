@@ -10,6 +10,7 @@ import parentsBy from "./parentsBy";
 import remove from "./remove";
 import dataset from "./dataset";
 import addClass from "./addClass";
+import removeClass from "./removeClass";
 
 export {
   query,
@@ -21,5 +22,6 @@ export {
   parentsBy,
   remove,
   dataset,
-  addClass
+  addClass,
+  removeClass
 };
