@@ -1,14 +1,7 @@
 /* @flow */
 
-import matches from "./matches";
-import parent from "./parent";
-import parentBy from "./parentBy";
-import parents from "./parents";
-import parentsBy from "./parentsBy";
-import remove from "./remove";
-
 /*
- *
+ * Utilities
  */
 
 function toArray(arrayLike: any): Array<any> {
@@ -19,13 +12,9 @@ function toArray(arrayLike: any): Array<any> {
  * Queries
  */
 
-/* ----- query ----- */
-
 function query(selector: string, element: Element): ?Element {
   return (element || document).querySelector(selector);
 }
-
-/* ----- queryAll ----- */
 
 function queryAll(selector: string, element: Element): Array<Element> {
   const elements = (element || document).querySelectorAll(selector);
@@ -33,17 +22,39 @@ function queryAll(selector: string, element: Element): Array<Element> {
   return (toArray(elements): Array<Element>);
 }
 
+type MatchesFn = (selector: string) => boolean;
+type MatchesAPI = { matches: MatchesFn } & { matchesSelector: MatchesFn } & {
+    msMatchesSelector: MatchesFn
+  } & { mozMatchesSelector: MatchesFn } & {
+    webkitMatchesSelector: MatchesFn
+  } & { oMatchesSelector: MatchesFn };
+
+function getMatchesFn(): MatchesFn {
+  const e = ((document.createElement("div"): any): MatchesAPI);
+
+  return (
+    e.matches ||
+    e.matchesSelector ||
+    e.msMatchesSelector ||
+    e.mozMatchesSelector ||
+    e.webkitMatchesSelector ||
+    e.oMatchesSelector
+  );
+}
+
+const matchesFn: MatchesFn = getMatchesFn();
+
+function matches(selector: string, element: Element): boolean {
+  return matchesFn.call(element, selector);
+}
+
 /*
  * Classes
  */
 
-/* ----- hasClass ----- */
-
 function hasClass(cssClass: string, element: Element): boolean {
   return element.classList.contains(cssClass);
 }
-
-/* ----- addClass ----- */
 
 function addClass(cssClass: string, element: Element): boolean {
   const result = !hasClass(cssClass, element);
@@ -55,8 +66,6 @@ function addClass(cssClass: string, element: Element): boolean {
   return result;
 }
 
-/* ----- removeClass ----- */
-
 function removeClass(cssClass: string, element: Element): boolean {
   const result = hasClass(cssClass, element);
 
@@ -66,8 +75,6 @@ function removeClass(cssClass: string, element: Element): boolean {
 
   return result;
 }
-
-/* ----- toggleClass ----- */
 
 function toggleClass(cssClass: string, element: Element): boolean {
   const result = !hasClass(cssClass, element);
@@ -114,10 +121,96 @@ function getDatasetFn() {
 
 const datasetFn: DatasetFn = getDatasetFn();
 
-/* ----- dataset ----- */
-
 function dataset(element: HTMLElement): Dataset {
   return datasetFn(element);
+}
+
+/*
+ * Traverse
+ */
+
+function parent(element: Element): ?Element {
+  return element.parentElement;
+}
+
+type PredicateFn = (element: Element) => boolean;
+
+function parentByPredicate(predicate: PredicateFn, element: Element): ?Element {
+  let current = parent(element);
+
+  while (current) {
+    if (predicate(current)) {
+      return current;
+    }
+
+    current = parent(current);
+  }
+
+  return null;
+}
+
+function parentBySelector(selector: string, element: Element): ?Element {
+  const predicate = matches.bind(null, selector);
+
+  return parentByPredicate(predicate, element);
+}
+
+function parentBy(condition: PredicateFn, element: Element): ?Element {
+  return typeof condition === "string"
+    ? parentBySelector(condition, element)
+    : parentByPredicate(condition, element);
+}
+
+function parents(element: Element): Array<Element> {
+  const result = [];
+
+  let current = element.parentElement;
+
+  while (current) {
+    result.push(current);
+
+    current = current.parentElement;
+  }
+
+  return result;
+}
+
+function parentsByPredicate(
+  predicate: PredicateFn,
+  element: Element
+): Array<Element> {
+  return parents(element).filter(predicate);
+}
+
+function parentsBySelector(selector: string, element: Element): Array<Element> {
+  const predicate = matches.bind(null, selector);
+
+  return parentsByPredicate(predicate, element);
+}
+
+function parentsBy(
+  condition: string | PredicateFn,
+  element: Element
+): Array<Element> {
+  return typeof condition === "string"
+    ? parentsBySelector(condition, element)
+    : parentsByPredicate(condition, element);
+}
+
+/*
+ * Manipulate
+ */
+
+function remove(element: Element): boolean {
+  const parentElement = element.parentElement;
+
+  if (parentElement) {
+    parentElement.removeChild(element);
+
+    return true;
+  }
+
+  return false;
 }
 
 /*
@@ -128,6 +221,7 @@ export {
   /* queries */
   query,
   queryAll,
+  matches,
   /* classes */
   hasClass,
   addClass,
@@ -135,11 +229,11 @@ export {
   toggleClass,
   /* dataset */
   dataset,
-  /* other */
-  matches,
+  /* traverse */
   parent,
   parentBy,
   parents,
   parentsBy,
+  /* manipulate */
   remove
 };
