@@ -30,12 +30,12 @@ module.exports = {
   preprocessors: {
     "build/jasmine/setup.js": ["rollup"],
     "build/jasmine/fixtures.js": ["rollup"],
-    "spec/**/*.spec.js": ["rollup"]
+    "spec/**/*.spec.js": ["rollup", "sourcemap"]
   },
 
   rollupPreprocessor: {
     format: "iife",
-    sourceMap: "inline",
+    sourceMap: true,
     plugins: [
       babel({
         presets: [["es2015", { modules: false }]],
@@ -47,7 +47,12 @@ module.exports = {
     cache: false
   },
 
-  plugins: ["karma-jasmine", "karma-rollup-plugin", "karma-spec-reporter"],
+  plugins: [
+    "karma-jasmine",
+    "karma-rollup-plugin",
+    "karma-sourcemap-loader",
+    "karma-spec-reporter"
+  ],
 
   reporters: ["spec"]
 };
