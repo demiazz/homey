@@ -9,6 +9,7 @@ import parents from "./parents";
 import parentsBy from "./parentsBy";
 import remove from "./remove";
 import dataset from "./dataset";
+import addClass from "./addClass";
 
 export {
   query,
@@ -19,5 +20,6 @@ export {
   parents,
   parentsBy,
   remove,
-  dataset
+  dataset,
+  addClass
 };
