@@ -24,8 +24,8 @@ function toArray(arrayLike: any): Array<any> {
  * Queries
  */
 
-function query(selector: Selector, element: Element): ?Element {
-  return (element || document).querySelector(selector);
+function query(element: Element, selector: Selector): ?Element {
+  return element.querySelector(selector);
 }
 
 function queryAll(selector: Selector, element: Element): Elements {

@@ -16,7 +16,7 @@ describe("query", () => {
 
     const subject = document.querySelector(".root");
 
-    expect(query(".matched", subject)).toBe(subject.querySelector(".matched"));
+    expect(query(subject, ".matched")).toBe(subject.querySelector(".matched"));
   });
 
   it("returns null when child which matched by selector not exists", () => {
@@ -31,22 +31,6 @@ describe("query", () => {
 
     const subject = document.querySelector(".root");
 
-    expect(query(".matched", subject)).toBe(null);
-  });
-
-  describe("when element not given", () => {
-    it("returns first child matched by selector in document", () => {
-      useFixture(
-        `
-        <div class="wrapper">
-          <div class="root"></div>
-        </div>
-      `
-      );
-
-      const subject = document.querySelector(".root");
-
-      expect(query(".root")).toBe(subject);
-    });
+    expect(query(subject, ".matched")).toBe(null);
   });
 });
