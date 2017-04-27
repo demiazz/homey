@@ -4,7 +4,11 @@
  * Types
  */
 
+type CSSClass = string;
+
 type Elements = Array<Element>;
+
+type Selector = string;
 
 /*
  * Utilities
@@ -18,17 +22,17 @@ function toArray(arrayLike: any): Array<any> {
  * Queries
  */
 
-function query(selector: string, element: Element): ?Element {
+function query(selector: Selector, element: Element): ?Element {
   return (element || document).querySelector(selector);
 }
 
-function queryAll(selector: string, element: Element): Elements {
+function queryAll(selector: Selector, element: Element): Elements {
   const elements = (element || document).querySelectorAll(selector);
 
   return (toArray(elements): Elements);
 }
 
-type MatchesFn = (selector: string) => boolean;
+type MatchesFn = (selector: Selector) => boolean;
 type MatchesAPI = { matches: MatchesFn } & { matchesSelector: MatchesFn } & {
     msMatchesSelector: MatchesFn
   } & { mozMatchesSelector: MatchesFn } & {
@@ -50,7 +54,7 @@ function getMatchesFn(): MatchesFn {
 
 const matchesFn: MatchesFn = getMatchesFn();
 
-function matches(selector: string, element: Element): boolean {
+function matches(selector: Selector, element: Element): boolean {
   return matchesFn.call(element, selector);
 }
 
@@ -58,11 +62,11 @@ function matches(selector: string, element: Element): boolean {
  * Classes
  */
 
-function hasClass(cssClass: string, element: Element): boolean {
+function hasClass(cssClass: CSSClass, element: Element): boolean {
   return element.classList.contains(cssClass);
 }
 
-function addClass(cssClass: string, element: Element): boolean {
+function addClass(cssClass: CSSClass, element: Element): boolean {
   const result = !hasClass(cssClass, element);
 
   if (result) {
@@ -72,7 +76,7 @@ function addClass(cssClass: string, element: Element): boolean {
   return result;
 }
 
-function removeClass(cssClass: string, element: Element): boolean {
+function removeClass(cssClass: CSSClass, element: Element): boolean {
   const result = hasClass(cssClass, element);
 
   if (result) {
@@ -82,7 +86,7 @@ function removeClass(cssClass: string, element: Element): boolean {
   return result;
 }
 
-function toggleClass(cssClass: string, element: Element): boolean {
+function toggleClass(cssClass: CSSClass, element: Element): boolean {
   const result = !hasClass(cssClass, element);
 
   if (result) {
@@ -155,7 +159,7 @@ function parentByPredicate(predicate: PredicateFn, element: Element): ?Element {
   return null;
 }
 
-function parentBySelector(selector: string, element: Element): ?Element {
+function parentBySelector(selector: Selector, element: Element): ?Element {
   const predicate = matches.bind(null, selector);
 
   return parentByPredicate(predicate, element);
@@ -188,14 +192,14 @@ function parentsByPredicate(
   return parents(element).filter(predicate);
 }
 
-function parentsBySelector(selector: string, element: Element): Elements {
+function parentsBySelector(selector: Selector, element: Element): Elements {
   const predicate = matches.bind(null, selector);
 
   return parentsByPredicate(predicate, element);
 }
 
 function parentsBy(
-  condition: string | PredicateFn,
+  condition: Selector | PredicateFn,
   element: Element
 ): Elements {
   return typeof condition === "string"
