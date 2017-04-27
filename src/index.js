@@ -28,8 +28,8 @@ function query(element: Element, selector: Selector): ?Element {
   return element.querySelector(selector);
 }
 
-function queryAll(selector: Selector, element: Element): Elements {
-  const elements = (element || document).querySelectorAll(selector);
+function queryAll(element: Element, selector: Selector): Elements {
+  const elements = element.querySelectorAll(selector);
 
   return (toArray(elements): Elements);
 }

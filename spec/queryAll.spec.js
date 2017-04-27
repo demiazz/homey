@@ -18,7 +18,7 @@ describe("queryAll", () => {
 
     const subject = document.querySelector(".root");
 
-    expect(queryAll(".matched", subject)).toEqual(
+    expect(queryAll(subject, ".matched")).toEqual(
       [].slice.call(document.querySelectorAll(".root .matched"))
     );
   });
@@ -36,23 +36,6 @@ describe("queryAll", () => {
 
     const subject = document.querySelector(".root");
 
-    expect(queryAll(".matched", subject)).toEqual([]);
-  });
-
-  describe("when element not given", () => {
-    it("returns array of childs which matched by selector", () => {
-      useFixture(
-        `
-        <div class="wrapper">
-          <div class="root"></div>
-        </div>
-        <div class="root"></div>
-      `
-      );
-
-      expect(queryAll(".root")).toEqual(
-        [].slice.call(document.querySelectorAll(".root"))
-      );
-    });
+    expect(queryAll(subject, ".matched")).toEqual([]);
   });
 });
