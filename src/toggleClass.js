@@ -1,15 +1,19 @@
 /* @flow */
 
-function toggleClass(cssClass: string, element: Element): boolean {
-  const contains = element.classList.contains(cssClass);
+import addClass from "./addClass";
+import hasClass from "./hasClass";
+import removeClass from "./removeClass";
 
-  if (contains) {
-    element.classList.remove(cssClass);
+function toggleClass(cssClass: string, element: Element): boolean {
+  const result = !hasClass(cssClass, element);
+
+  if (result) {
+    addClass(cssClass, element);
   } else {
-    element.classList.add(cssClass);
+    removeClass(cssClass, element);
   }
 
-  return !contains;
+  return result;
 }
 
 export default toggleClass;
