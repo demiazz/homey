@@ -1,6 +1,12 @@
 /* @flow */
 
 /*
+ * Types
+ */
+
+type Elements = Array<Element>;
+
+/*
  * Utilities
  */
 
@@ -16,10 +22,10 @@ function query(selector: string, element: Element): ?Element {
   return (element || document).querySelector(selector);
 }
 
-function queryAll(selector: string, element: Element): Array<Element> {
+function queryAll(selector: string, element: Element): Elements {
   const elements = (element || document).querySelectorAll(selector);
 
-  return (toArray(elements): Array<Element>);
+  return (toArray(elements): Elements);
 }
 
 type MatchesFn = (selector: string) => boolean;
@@ -161,7 +167,7 @@ function parentBy(condition: PredicateFn, element: Element): ?Element {
     : parentByPredicate(condition, element);
 }
 
-function parents(element: Element): Array<Element> {
+function parents(element: Element): Elements {
   const result = [];
 
   let current = element.parentElement;
@@ -178,11 +184,11 @@ function parents(element: Element): Array<Element> {
 function parentsByPredicate(
   predicate: PredicateFn,
   element: Element
-): Array<Element> {
+): Elements {
   return parents(element).filter(predicate);
 }
 
-function parentsBySelector(selector: string, element: Element): Array<Element> {
+function parentsBySelector(selector: string, element: Element): Elements {
   const predicate = matches.bind(null, selector);
 
   return parentsByPredicate(predicate, element);
@@ -191,7 +197,7 @@ function parentsBySelector(selector: string, element: Element): Array<Element> {
 function parentsBy(
   condition: string | PredicateFn,
   element: Element
-): Array<Element> {
+): Elements {
   return typeof condition === "string"
     ? parentsBySelector(condition, element)
     : parentsByPredicate(condition, element);
