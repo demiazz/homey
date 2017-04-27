@@ -8,6 +8,8 @@ type CSSClass = string;
 
 type Elements = Array<Element>;
 
+type Predicate = (element: Element) => boolean;
+
 type Selector = string;
 
 /*
@@ -143,9 +145,7 @@ function parent(element: Element): ?Element {
   return element.parentElement;
 }
 
-type PredicateFn = (element: Element) => boolean;
-
-function parentByPredicate(predicate: PredicateFn, element: Element): ?Element {
+function parentByPredicate(predicate: Predicate, element: Element): ?Element {
   let current = parent(element);
 
   while (current) {
@@ -165,7 +165,7 @@ function parentBySelector(selector: Selector, element: Element): ?Element {
   return parentByPredicate(predicate, element);
 }
 
-function parentBy(condition: PredicateFn, element: Element): ?Element {
+function parentBy(condition: Predicate, element: Element): ?Element {
   return typeof condition === "string"
     ? parentBySelector(condition, element)
     : parentByPredicate(condition, element);
@@ -185,10 +185,7 @@ function parents(element: Element): Elements {
   return result;
 }
 
-function parentsByPredicate(
-  predicate: PredicateFn,
-  element: Element
-): Elements {
+function parentsByPredicate(predicate: Predicate, element: Element): Elements {
   return parents(element).filter(predicate);
 }
 
@@ -199,7 +196,7 @@ function parentsBySelector(selector: Selector, element: Element): Elements {
 }
 
 function parentsBy(
-  condition: Selector | PredicateFn,
+  condition: Selector | Predicate,
   element: Element
 ): Elements {
   return typeof condition === "string"
