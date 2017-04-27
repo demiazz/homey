@@ -19,7 +19,7 @@ describe("parentsBy", () => {
 
       const subject = document.querySelector(".root");
 
-      expect(parentsBy(".parent", subject)).toEqual([
+      expect(parentsBy(subject, ".parent")).toEqual([
         document.querySelector(".parent")
       ]);
     });
@@ -37,7 +37,7 @@ describe("parentsBy", () => {
 
       const subject = document.querySelector(".root");
 
-      expect(parentsBy(".parent", subject)).toEqual([]);
+      expect(parentsBy(subject, ".parent")).toEqual([]);
     });
   });
 
@@ -58,7 +58,7 @@ describe("parentsBy", () => {
       const subject = document.querySelector(".root");
       const predicate = e => matches(e, ".parent");
 
-      expect(parentsBy(predicate, subject)).toEqual([
+      expect(parentsBy(subject, predicate)).toEqual([
         document.querySelector(".parent")
       ]);
     });
@@ -77,7 +77,7 @@ describe("parentsBy", () => {
       const subject = document.querySelector(".root");
       const predicate = e => matches(e, ".parent");
 
-      expect(parentsBy(predicate, subject)).toEqual([]);
+      expect(parentsBy(subject, predicate)).toEqual([]);
     });
   });
 });

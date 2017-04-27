@@ -140,7 +140,14 @@ function parent(element: Element): ?Element {
   return element.parentElement;
 }
 
-function parentByPredicate(predicate: PredicateFn, element: Element): ?Element {
+function parentBy(
+  element: Element,
+  condition: PredicateFn | Selector
+): ?Element {
+  const predicate = typeof condition === "string"
+    ? e => matches(e, ((condition: any): string))
+    : condition;
+
   let current = parent(element);
 
   while (current) {
@@ -152,18 +159,6 @@ function parentByPredicate(predicate: PredicateFn, element: Element): ?Element {
   }
 
   return null;
-}
-
-function parentBySelector(selector: Selector, element: Element): ?Element {
-  const predicate = e => matches(e, selector);
-
-  return parentByPredicate(predicate, element);
-}
-
-function parentBy(condition: PredicateFn, element: Element): ?Element {
-  return typeof condition === "string"
-    ? parentBySelector(condition, element)
-    : parentByPredicate(condition, element);
 }
 
 function parents(element: Element): Elements {
@@ -180,26 +175,15 @@ function parents(element: Element): Elements {
   return result;
 }
 
-function parentsByPredicate(
-  predicate: PredicateFn,
-  element: Element
-): Elements {
-  return parents(element).filter(predicate);
-}
-
-function parentsBySelector(selector: Selector, element: Element): Elements {
-  const predicate = e => matches(e, selector);
-
-  return parentsByPredicate(predicate, element);
-}
-
 function parentsBy(
-  condition: Selector | PredicateFn,
-  element: Element
+  element: Element,
+  condition: Selector | PredicateFn
 ): Elements {
-  return typeof condition === "string"
-    ? parentsBySelector(condition, element)
-    : parentsByPredicate(condition, element);
+  const predicate = typeof condition === "string"
+    ? e => matches(e, ((condition: any): string))
+    : condition;
+
+  return parents(element).filter(predicate);
 }
 
 /*
