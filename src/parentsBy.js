@@ -1,7 +1,7 @@
 /* @flow */
 
 import matches from "./matches";
-import parent from "./parent";
+import parents from "./parents";
 
 type PredicateFn = (element: Element) => boolean;
 
@@ -9,19 +9,7 @@ function parentsByPredicate(
   predicate: PredicateFn,
   element: Element
 ): Array<Element> {
-  const result = [];
-
-  let current = parent(element);
-
-  while (current) {
-    if (predicate(current)) {
-      result.push(current);
-    }
-
-    current = parent(current);
-  }
-
-  return result;
+  return parents(element).filter(predicate);
 }
 
 function parentsBySelector(selector: string, element: Element): Array<Element> {
