@@ -56,7 +56,7 @@ describe("parentsBy", () => {
       );
 
       const subject = document.querySelector(".root");
-      const predicate = e => matches(".parent", e);
+      const predicate = e => matches(e, ".parent");
 
       expect(parentsBy(predicate, subject)).toEqual([
         document.querySelector(".parent")
@@ -75,7 +75,7 @@ describe("parentsBy", () => {
       );
 
       const subject = document.querySelector(".root");
-      const predicate = e => matches(".parent", e);
+      const predicate = e => matches(e, ".parent");
 
       expect(parentsBy(predicate, subject)).toEqual([]);
     });

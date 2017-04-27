@@ -7,7 +7,7 @@ type PredicateFn = (element: Element) => boolean;
 
 export function query(element: Element, selector: string): Element | null;
 export function queryAll(element: Element, selector: string): Elements;
-export function matches(selector: string, element: Element): boolean;
+export function matches(element: Element, selector: string): boolean;
 
 /*
  * Classes

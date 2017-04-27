@@ -51,7 +51,7 @@ function getMatchesFn(): MatchesFn {
 
 const matchesFn: MatchesFn = getMatchesFn();
 
-function matches(selector: Selector, element: Element): boolean {
+function matches(element: Element, selector: Selector): boolean {
   return matchesFn.call(element, selector);
 }
 
@@ -155,7 +155,7 @@ function parentByPredicate(predicate: PredicateFn, element: Element): ?Element {
 }
 
 function parentBySelector(selector: Selector, element: Element): ?Element {
-  const predicate = matches.bind(null, selector);
+  const predicate = e => matches(e, selector);
 
   return parentByPredicate(predicate, element);
 }
@@ -188,7 +188,7 @@ function parentsByPredicate(
 }
 
 function parentsBySelector(selector: Selector, element: Element): Elements {
-  const predicate = matches.bind(null, selector);
+  const predicate = e => matches(e, selector);
 
   return parentsByPredicate(predicate, element);
 }

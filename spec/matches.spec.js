@@ -8,7 +8,7 @@ describe("matches", () => {
 
     const subject = document.querySelector(".root");
 
-    expect(matches(".matched", subject)).toBe(true);
+    expect(matches(subject, ".matched")).toBe(true);
   });
 
   it("returns false if element not matches by selector", () => {
@@ -16,6 +16,6 @@ describe("matches", () => {
 
     const subject = document.querySelector(".root");
 
-    expect(matches(".matched", subject)).toBe(false);
+    expect(matches(subject, ".matched")).toBe(false);
   });
 });

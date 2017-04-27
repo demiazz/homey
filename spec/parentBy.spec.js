@@ -52,7 +52,7 @@ describe("parentBy", () => {
       );
 
       const subject = document.querySelector(".root");
-      const predicate = e => matches(".parent", e);
+      const predicate = e => matches(e, ".parent");
 
       expect(parentBy(predicate, subject)).toBe(
         document.querySelector(".parent")
@@ -71,7 +71,7 @@ describe("parentBy", () => {
       );
 
       const subject = document.querySelector(".root");
-      const predicate = e => matches(".parent", e);
+      const predicate = e => matches(e, ".parent");
 
       expect(parentBy(predicate, subject)).toBe(null);
     });
