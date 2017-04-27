@@ -9,7 +9,7 @@ describe("toggleClass", () => {
     const subject = document.querySelector(".root");
 
     expect(subject.classList.contains("foo")).toBe(true);
-    expect(toggleClass("foo", subject)).toBe(false);
+    expect(toggleClass(subject, "foo")).toBe(false);
     expect(subject.classList.contains("foo")).toBe(false);
   });
 
@@ -19,7 +19,7 @@ describe("toggleClass", () => {
     const subject = document.querySelector(".root");
 
     expect(subject.classList.contains("foo")).toBe(false);
-    expect(toggleClass("foo", subject)).toBe(true);
+    expect(toggleClass(subject, "foo")).toBe(true);
     expect(subject.classList.contains("foo")).toBe(true);
   });
 });

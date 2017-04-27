@@ -8,7 +8,7 @@ describe("hasClass", () => {
 
     const subject = document.querySelector(".root");
 
-    expect(hasClass("foo", subject)).toBe(true);
+    expect(hasClass(subject, "foo")).toBe(true);
   });
 
   it("returns false if element hasn't a given class", () => {
@@ -16,6 +16,6 @@ describe("hasClass", () => {
 
     const subject = document.querySelector(".root");
 
-    expect(hasClass("foo", subject)).toBe(false);
+    expect(hasClass(subject, "foo")).toBe(false);
   });
 });

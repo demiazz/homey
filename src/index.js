@@ -59,12 +59,12 @@ function matches(element: Element, selector: Selector): boolean {
  * Classes
  */
 
-function hasClass(cssClass: CSSClass, element: Element): boolean {
+function hasClass(element: Element, cssClass: CSSClass): boolean {
   return element.classList.contains(cssClass);
 }
 
-function addClass(cssClass: CSSClass, element: Element): boolean {
-  const result = !hasClass(cssClass, element);
+function addClass(element: Element, cssClass: CSSClass): boolean {
+  const result = !hasClass(element, cssClass);
 
   if (result) {
     element.classList.add(cssClass);
@@ -73,8 +73,8 @@ function addClass(cssClass: CSSClass, element: Element): boolean {
   return result;
 }
 
-function removeClass(cssClass: CSSClass, element: Element): boolean {
-  const result = hasClass(cssClass, element);
+function removeClass(element: Element, cssClass: CSSClass): boolean {
+  const result = hasClass(element, cssClass);
 
   if (result) {
     element.classList.remove(cssClass);
@@ -83,13 +83,13 @@ function removeClass(cssClass: CSSClass, element: Element): boolean {
   return result;
 }
 
-function toggleClass(cssClass: CSSClass, element: Element): boolean {
-  const result = !hasClass(cssClass, element);
+function toggleClass(element: Element, cssClass: CSSClass): boolean {
+  const result = !hasClass(element, cssClass);
 
   if (result) {
-    addClass(cssClass, element);
+    addClass(element, cssClass);
   } else {
-    removeClass(cssClass, element);
+    removeClass(element, cssClass);
   }
 
   return result;

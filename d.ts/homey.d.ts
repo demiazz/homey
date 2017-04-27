@@ -13,10 +13,10 @@ export function matches(element: Element, selector: string): boolean;
  * Classes
  */
 
-export function hasClass(cssClass: string, element: Element): boolean;
-export function addClass(cssClass: string, element: Element): boolean;
-export function removeClass(cssClass: string, element: Element): boolean;
-export function toggleClass(cssClass: string, element: Element): boolean;
+export function hasClass(element: Element, cssClass: string): boolean;
+export function addClass(element: Element, cssClass: string): boolean;
+export function removeClass(element: Element, cssClass: string): boolean;
+export function toggleClass(element: Element, cssClass: string): boolean;
 
 /*
  * Dataset
