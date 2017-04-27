@@ -1,13 +1,15 @@
 /* @flow */
 
+import hasClass from "./hasClass";
+
 function removeClass(cssClass: string, element: Element): boolean {
-  if (!element.classList.contains(cssClass)) {
-    return false;
+  const result = hasClass(cssClass, element);
+
+  if (result) {
+    element.classList.remove(cssClass);
   }
 
-  element.classList.remove(cssClass);
-
-  return true;
+  return result;
 }
 
 export default removeClass;
