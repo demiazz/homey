@@ -35,22 +35,17 @@ function queryAll(selector: Selector, element: Element): Elements {
 }
 
 type MatchesFn = (selector: Selector) => boolean;
-type MatchesAPI = { matches: MatchesFn } & { matchesSelector: MatchesFn } & {
-    msMatchesSelector: MatchesFn
-  } & { mozMatchesSelector: MatchesFn } & {
-    webkitMatchesSelector: MatchesFn
-  } & { oMatchesSelector: MatchesFn };
 
 function getMatchesFn(): MatchesFn {
-  const e = ((document.createElement("div"): any): MatchesAPI);
+  const element = (document.createElement("div"): any);
 
   return (
-    e.matches ||
-    e.matchesSelector ||
-    e.msMatchesSelector ||
-    e.mozMatchesSelector ||
-    e.webkitMatchesSelector ||
-    e.oMatchesSelector
+    element.matches ||
+    element.matchesSelector ||
+    element.msMatchesSelector ||
+    element.mozMatchesSelector ||
+    element.webkitMatchesSelector ||
+    element.oMatchesSelector
   );
 }
 
