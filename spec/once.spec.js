@@ -48,4 +48,24 @@ describe("once", () => {
     expect(listener).toHaveBeenCalledTimes(1);
     expect(listener).toHaveBeenCalledWith(listenedEvent);
   });
+
+  it("returns function for removing event listener", () => {
+    useFixture(`<div class="root"></div>`);
+
+    const subject = document.querySelector(".root");
+    const listener = jasmine.createSpy("listener");
+
+    const off = once(subject, "click", listener);
+
+    expect(listener).not.toHaveBeenCalled();
+
+    off();
+
+    const event = document.createEvent("HTMLEvents");
+    event.initEvent("click", true, true);
+
+    subject.dispatchEvent(event);
+
+    expect(listener).not.toHaveBeenCalled();
+  });
 });

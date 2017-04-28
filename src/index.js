@@ -234,7 +234,7 @@ function once(
   element: Element,
   eventType: EventType,
   listener: Function
-): void {
+): () => void {
   const wrappedListener = event => {
     element.removeEventListener(eventType, wrappedListener);
 
@@ -242,6 +242,8 @@ function once(
   };
 
   element.addEventListener(eventType, wrappedListener);
+
+  return () => off(element, eventType, wrappedListener);
 }
 
 /*
