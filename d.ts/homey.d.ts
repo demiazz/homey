@@ -53,3 +53,4 @@ export function remove(element: Element): boolean;
  */
 
 export function on(Element: Element, event: string, listener: Function): void;
+export function off(Element: Element, event: string, listener: Function): void;

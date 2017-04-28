@@ -218,6 +218,10 @@ function on(element: Element, event: string, listener: Function): void {
   element.addEventListener(event, listener);
 }
 
+function off(element: Element, event: string, listener: Function): void {
+  element.removeEventListener(event, listener);
+}
+
 /*
  * Exports
  */
@@ -245,5 +249,6 @@ export {
   /* manipulate */
   remove,
   /* events */
-  on
+  on,
+  off
 };
