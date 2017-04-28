@@ -211,6 +211,14 @@ function remove(element: Element): boolean {
 }
 
 /*
+ * Events
+ */
+
+function on(element: Element, event: string, listener: Function): void {
+  element.addEventListener(event, listener);
+}
+
+/*
  * Exports
  */
 
@@ -235,5 +243,7 @@ export {
   parents,
   parentsBy,
   /* manipulate */
-  remove
+  remove,
+  /* events */
+  on
 };

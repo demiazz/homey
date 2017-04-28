@@ -47,3 +47,9 @@ export function parentsBy(element: Element, selector: Selector | PredicateFn): E
  */
 
 export function remove(element: Element): boolean;
+
+/*
+ * Events
+ */
+
+export function on(Element: Element, event: string, listener: Function): void;
