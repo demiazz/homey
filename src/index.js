@@ -21,6 +21,14 @@ function toArray(arrayLike: any): Array<any> {
 }
 
 /*
+ * Aliases
+ */
+
+const html: Element = window.document.documentElement;
+
+const body: Element = window.document.body;
+
+/*
  * Queries
  */
 
@@ -207,6 +215,9 @@ function remove(element: Element): boolean {
  */
 
 export {
+  /* aliases */
+  html,
+  body,
   /* queries */
   query,
   queryAll,

@@ -4,6 +4,13 @@ type PredicateFn = (element: Element) => boolean;
 type Selector = string;
 
 /*
+ * Aliases
+ */
+
+export const html: Element;
+export const body: Element;
+
+/*
  * Queries
  */
 
