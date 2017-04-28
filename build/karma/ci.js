@@ -143,13 +143,6 @@ module.exports = function karma(config) {
       platform: "Windows 8"
     },
 
-    sl_ie_9: {
-      base: "SauceLabs",
-      browserName: "internet explorer",
-      version: "9.0",
-      platform: "Windows 7"
-    },
-
     // Safari (last 6 versions)
 
     sl_safari_10: {
