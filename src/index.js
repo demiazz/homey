@@ -89,8 +89,9 @@ function toggleClass(
   state?: boolean
 ): boolean {
   const target = arguments.length === 3 ? state : !hasClass(element, cssClass);
+  const toggleFn = target ? addClass : removeClass;
 
-  return target ? addClass(element, cssClass) : removeClass(element, cssClass);
+  return toggleFn(element, cssClass);
 }
 
 /* 
