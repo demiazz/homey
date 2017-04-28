@@ -8,6 +8,8 @@ type CSSClass = string;
 
 type Elements = Array<Element>;
 
+type EventType = string;
+
 type PredicateFn = (element: Element) => boolean;
 
 type Selector = string;
@@ -214,11 +216,25 @@ function remove(element: Element): boolean {
  * Events
  */
 
-function on(element: Element, eventType: string, listener: Function): void {
-  element.addEventListener(eventType, listener);
+function off(element: Element, eventType: EventType, listener: Function): void {
+  element.removeEventListener(eventType, listener);
 }
 
-function once(element: Element, eventType: string, listener: Function): void {
+function on(
+  element: Element,
+  eventType: EventType,
+  listener: Function
+): () => void {
+  element.addEventListener(eventType, listener);
+
+  return () => off(element, eventType, listener);
+}
+
+function once(
+  element: Element,
+  eventType: EventType,
+  listener: Function
+): void {
   const wrappedListener = event => {
     element.removeEventListener(eventType, wrappedListener);
 
@@ -226,10 +242,6 @@ function once(element: Element, eventType: string, listener: Function): void {
   };
 
   element.addEventListener(eventType, wrappedListener);
-}
-
-function off(element: Element, eventType: string, listener: Function): void {
-  element.removeEventListener(eventType, listener);
 }
 
 /*
