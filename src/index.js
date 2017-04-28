@@ -178,7 +178,7 @@ function parentsBy(
   condition: Selector | PredicateFn
 ): Elements {
   const predicate = typeof condition === "string"
-    ? e => matches(e, ((condition: any): string))
+    ? e => matches(e, condition)
     : condition;
 
   return parents(element).filter(predicate);

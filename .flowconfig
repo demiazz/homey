@@ -7,3 +7,4 @@
 
 [options]
 module.system.node.resolve_dirname=src
+experimental.const_params=true
