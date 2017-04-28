@@ -98,6 +98,7 @@ function toggleClass(
  */
 
 type Dataset = { [key: string]: string };
+
 type DatasetFn = (element: HTMLElement) => Dataset;
 
 function nativeDataset(element: HTMLElement): Dataset {
@@ -118,7 +119,7 @@ function polyfillDataset(element: HTMLElement): Dataset {
   }, {});
 }
 
-function getDatasetFn() {
+function getDatasetFn(): DatasetFn {
   const element = document.createElement("div");
 
   return element.dataset ? nativeDataset : polyfillDataset;
@@ -143,7 +144,7 @@ function parentBy(
   condition: PredicateFn | Selector
 ): ?Element {
   const predicate = typeof condition === "string"
-    ? e => matches(e, ((condition: any): string))
+    ? e => matches(e, condition)
     : condition;
 
   let current = parent(element);
