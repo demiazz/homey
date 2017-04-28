@@ -18,7 +18,7 @@ export function matches(element: Element, selector: Selector): boolean;
 export function hasClass(element: Element, cssClass: CSSClass): boolean;
 export function addClass(element: Element, cssClass: CSSClass): boolean;
 export function removeClass(element: Element, cssClass: CSSClass): boolean;
-export function toggleClass(element: Element, cssClass: CSSClass): boolean;
+export function toggleClass(element: Element, cssClass: CSSClass, state?: boolean): boolean;
 
 /*
  * Dataset

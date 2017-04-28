@@ -83,16 +83,14 @@ function removeClass(element: Element, cssClass: CSSClass): boolean {
   return result;
 }
 
-function toggleClass(element: Element, cssClass: CSSClass): boolean {
-  const result = !hasClass(element, cssClass);
+function toggleClass(
+  element: Element,
+  cssClass: CSSClass,
+  state?: boolean
+): boolean {
+  const target = arguments.length === 3 ? state : !hasClass(element, cssClass);
 
-  if (result) {
-    addClass(element, cssClass);
-  } else {
-    removeClass(element, cssClass);
-  }
-
-  return result;
+  return target ? addClass(element, cssClass) : removeClass(element, cssClass);
 }
 
 /* 
