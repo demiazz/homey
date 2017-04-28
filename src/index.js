@@ -164,12 +164,12 @@ function parentBy(
 function parents(element: Element): Elements {
   const result = [];
 
-  let current = element.parentElement;
+  let current = parent(element);
 
   while (current) {
     result.push(current);
 
-    current = current.parentElement;
+    current = parent(current);
   }
 
   return result;
