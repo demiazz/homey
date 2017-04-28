@@ -52,5 +52,6 @@ export function remove(element: Element): boolean;
  * Events
  */
 
-export function on(Element: Element, event: string, listener: Function): void;
-export function off(Element: Element, event: string, listener: Function): void;
+export function on(Element: Element, eventType: string, listener: Function): void;
+export function once(Element: Element, eventType: string, listener: Function): void;
+export function off(Element: Element, eventType: string, listener: Function): void;

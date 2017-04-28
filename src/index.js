@@ -214,12 +214,22 @@ function remove(element: Element): boolean {
  * Events
  */
 
-function on(element: Element, event: string, listener: Function): void {
-  element.addEventListener(event, listener);
+function on(element: Element, eventType: string, listener: Function): void {
+  element.addEventListener(eventType, listener);
 }
 
-function off(element: Element, event: string, listener: Function): void {
-  element.removeEventListener(event, listener);
+function once(element: Element, eventType: string, listener: Function): void {
+  const wrappedListener = event => {
+    element.removeEventListener(eventType, wrappedListener);
+
+    listener(event);
+  };
+
+  element.addEventListener(eventType, wrappedListener);
+}
+
+function off(element: Element, eventType: string, listener: Function): void {
+  element.removeEventListener(eventType, listener);
 }
 
 /*
@@ -250,5 +260,6 @@ export {
   remove,
   /* events */
   on,
+  once,
   off
 };
