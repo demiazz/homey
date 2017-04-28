@@ -189,7 +189,7 @@ function parentsBy(
  */
 
 function remove(element: Element): boolean {
-  const parentElement = element.parentElement;
+  const parentElement = parent(element);
 
   if (parentElement) {
     parentElement.removeChild(element);
