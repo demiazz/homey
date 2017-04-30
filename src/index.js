@@ -10,6 +10,8 @@ type Elements = Array<Element>;
 
 type EventType = string;
 
+type EventTypes = string;
+
 type PredicateFn = (element: Element) => boolean;
 
 type Selector = string;
@@ -222,12 +224,14 @@ function off(element: Element, eventType: EventType, listener: Function): void {
 
 function on(
   element: Element,
-  eventType: EventType,
+  eventTypes: EventTypes,
   listener: Function
 ): () => void {
-  element.addEventListener(eventType, listener);
+  const events = eventTypes.split(" ");
 
-  return () => off(element, eventType, listener);
+  events.forEach(eventType => element.addEventListener(eventType, listener));
+
+  return () => events.forEach(eventType => off(element, eventType, listener));
 }
 
 function once(
