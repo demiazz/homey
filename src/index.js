@@ -8,8 +8,6 @@ type CSSClass = string;
 
 type Elements = Array<Element>;
 
-type EventType = string;
-
 type EventTypes = string;
 
 type PredicateFn = (element: Element) => boolean;
@@ -218,8 +216,14 @@ function remove(element: Element): boolean {
  * Events
  */
 
-function off(element: Element, eventType: EventType, listener: Function): void {
-  element.removeEventListener(eventType, listener);
+function off(
+  element: Element,
+  eventTypes: EventTypes,
+  listener: Function
+): void {
+  eventTypes.split(" ").forEach(eventType => {
+    element.removeEventListener(eventType, listener);
+  });
 }
 
 function on(
