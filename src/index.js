@@ -236,18 +236,22 @@ function on(
 
 function once(
   element: Element,
-  eventType: EventType,
+  eventTypes: EventTypes,
   listener: Function
 ): () => void {
-  const wrappedListener = event => {
-    element.removeEventListener(eventType, wrappedListener);
+  const offListeners = eventTypes.split(" ").map(eventType => {
+    const wrappedListener = event => {
+      element.removeEventListener(eventType, wrappedListener);
 
-    listener(event);
-  };
+      listener(event);
+    };
 
-  element.addEventListener(eventType, wrappedListener);
+    element.addEventListener(eventType, wrappedListener);
 
-  return () => off(element, eventType, wrappedListener);
+    return () => off(element, eventType, wrappedListener);
+  });
+
+  return () => offListeners.forEach(offListener => offListener());
 }
 
 /*
