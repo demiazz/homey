@@ -118,10 +118,10 @@ describe("once", () => {
       expect(listener).toHaveBeenCalledWith(listenedCustomEvent);
 
       const clickEvent = document.createEvent("HTMLEvents");
-      clickEvent.initEvent("click");
+      clickEvent.initEvent("click", true, true);
 
       const customEvent = document.createEvent("HTMLEvents");
-      customEvent.initEvent("custom-event");
+      customEvent.initEvent("custom-event", true, true);
 
       subject.dispatchEvent(clickEvent);
       subject.dispatchEvent(customEvent);
