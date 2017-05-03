@@ -13,8 +13,7 @@ describe("on", () => {
 
     expect(listener).not.toHaveBeenCalled();
 
-    const event = document.createEvent("HTMLEvents");
-    event.initEvent("click", true, true);
+    const event = createEvent("click");
 
     subject.dispatchEvent(event);
 
@@ -32,8 +31,7 @@ describe("on", () => {
 
     expect(listener).not.toHaveBeenCalled();
 
-    const listenedEvent = document.createEvent("HTMLEvents");
-    listenedEvent.initEvent("click", true, true);
+    const listenedEvent = createEvent("click");
 
     subject.dispatchEvent(listenedEvent);
 
@@ -42,8 +40,7 @@ describe("on", () => {
 
     off();
 
-    const event = document.createEvent("HTMLEvents");
-    event.initEvent("click", true, true);
+    const event = createEvent("click");
 
     subject.dispatchEvent(event);
 
@@ -62,11 +59,8 @@ describe("on", () => {
 
       expect(listener).not.toHaveBeenCalled();
 
-      const clickEvent = document.createEvent("HTMLEvents");
-      clickEvent.initEvent("click", true, true);
-
-      const customEvent = document.createEvent("HTMLEvents");
-      customEvent.initEvent("click", true, true);
+      const clickEvent = createEvent("click");
+      const customEvent = createEvent("custom-event");
 
       subject.dispatchEvent(clickEvent);
       subject.dispatchEvent(customEvent);
@@ -86,11 +80,8 @@ describe("on", () => {
 
       expect(listener).not.toHaveBeenCalled();
 
-      const listenedClickEvent = document.createEvent("HTMLEvents");
-      listenedClickEvent.initEvent("click", true, true);
-
-      const listenedCustomEvent = document.createEvent("HTMLEvents");
-      listenedCustomEvent.initEvent("custom-event", true, true);
+      const listenedClickEvent = createEvent("click");
+      const listenedCustomEvent = createEvent("custom-event");
 
       subject.dispatchEvent(listenedClickEvent);
       subject.dispatchEvent(listenedCustomEvent);
@@ -101,11 +92,8 @@ describe("on", () => {
 
       off();
 
-      const clickEvent = document.createEvent("HTMLEvents");
-      clickEvent.initEvent("click", true, true);
-
-      const customEvent = document.createEvent("HTMLEvents");
-      customEvent.initEvent("custom-event", true, true);
+      const clickEvent = createEvent("click");
+      const customEvent = createEvent("custom-event");
 
       subject.dispatchEvent(clickEvent);
       subject.dispatchEvent(customEvent);

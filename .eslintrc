@@ -26,7 +26,8 @@
   },
   "globals": {
     "useFixture": false,
-    "clearFixtures": false
+    "clearFixtures": false,
+    "createEvent": false
   },
   "parser": "babel-eslint"
 }

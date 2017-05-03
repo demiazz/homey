@@ -17,6 +17,10 @@ module.exports = {
       watched: process.env.CI !== "true"
     },
     {
+      pattern: "build/jasmine/helpers.js",
+      watched: process.env.CI !== "true"
+    },
+    {
       pattern: "src/index.js",
       watched: process.env.CI !== "true",
       included: false
@@ -30,6 +34,7 @@ module.exports = {
   preprocessors: {
     "build/jasmine/setup.js": ["rollup"],
     "build/jasmine/fixtures.js": ["rollup"],
+    "build/jasmine/helpers.js": ["rollup"],
     "spec/**/*.spec.js": ["rollup", "sourcemap"]
   },
 
