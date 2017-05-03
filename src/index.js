@@ -8,6 +8,8 @@ type CSSClass = string;
 
 type Elements = Array<Element>;
 
+type EventListener = (event: Event) => mixed;
+
 type EventTypes = string;
 
 type PredicateFn = (element: Element) => boolean;
@@ -219,7 +221,7 @@ function remove(element: Element): boolean {
 function off(
   element: Element,
   eventTypes: EventTypes,
-  listener: Function
+  listener: EventListener
 ): void {
   eventTypes.split(" ").forEach(eventType => {
     element.removeEventListener(eventType, listener);
@@ -229,7 +231,7 @@ function off(
 function on(
   element: Element,
   eventTypes: EventTypes,
-  listener: Function
+  listener: EventListener
 ): () => void {
   const events = eventTypes.split(" ");
 
@@ -241,7 +243,7 @@ function on(
 function once(
   element: Element,
   eventTypes: EventTypes,
-  listener: Function
+  listener: EventListener
 ): () => void {
   const offListeners = eventTypes.split(" ").map(eventType => {
     const wrappedListener = event => {
