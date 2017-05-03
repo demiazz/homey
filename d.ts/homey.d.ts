@@ -1,6 +1,8 @@
 type CSSClass = string;
 type Elements = Element[];
+type EventDetails = { [key: string]: any };
 type EventListener = (event: Event) => any;
+type EventType = string;
 type EventTypes = string;
 type PredicateFn = (element: Element) => boolean;
 type Selector = string;
@@ -56,3 +58,4 @@ export function remove(element: Element): boolean;
 
 export function on(element: Element, eventTypes: EventTypes, listener: EventListener): () => void;
 export function once(element: Element, eventTypes: EventTypes, listener: EventListener): () => void;
+export function dispatch(element: Element, eventType: EventType, listener: EventListener): boolean;

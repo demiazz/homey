@@ -8,7 +8,11 @@ type CSSClass = string;
 
 type Elements = Array<Element>;
 
+type EventDetails = { [key: string]: mixed };
+
 type EventListener = (event: Event) => mixed;
+
+type EventType = string;
 
 type EventTypes = string;
 
@@ -252,6 +256,19 @@ function once(
   return () => offs.forEach(off => off());
 }
 
+function dispatch(
+  element: Element,
+  eventType: EventType,
+  details: EventDetails = {}
+): boolean {
+  const event = (document.createEvent("HTMLEvents"): any);
+
+  event.initEvent(eventType, true, true);
+  (event: any).details = details;
+
+  return element.dispatchEvent(event);
+}
+
 /*
  * Exports
  */
@@ -280,5 +297,6 @@ export {
   remove,
   /* events */
   on,
-  once
+  once,
+  dispatch
 };
