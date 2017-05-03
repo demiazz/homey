@@ -1,14 +1,19 @@
 import { once } from "../src";
 
 describe("once", () => {
-  afterEach(clearFixtures);
+  let subject;
+  let listener;
 
-  it("adds event listener", () => {
+  beforeEach(() => {
     useFixture(`<div class="root"></div>`);
 
-    const subject = document.querySelector(".root");
-    const listener = jasmine.createSpy("listener");
+    subject = document.querySelector(".root");
+    listener = jasmine.createSpy("listener");
+  });
 
+  afterEach(clearFixtures);
+
+  it("adds listener for DOM event", () => {
     once(subject, "click", listener);
 
     expect(listener).not.toHaveBeenCalled();
@@ -21,12 +26,20 @@ describe("once", () => {
     expect(listener).toHaveBeenCalledWith(event);
   });
 
-  it("adds event listener which will be raised only once", () => {
-    useFixture(`<div class="root"></div>`);
+  it("adds listener for custom event", () => {
+    once(subject, "custom", listener);
 
-    const subject = document.querySelector(".root");
-    const listener = jasmine.createSpy("listener");
+    expect(listener).not.toHaveBeenCalled();
 
+    const event = createEvent("custom");
+
+    subject.dispatchEvent(event);
+
+    expect(listener).toHaveBeenCalledTimes(1);
+    expect(listener).toHaveBeenCalledWith(event);
+  });
+
+  it("adds listener which called on first event trigger only", () => {
     once(subject, "click", listener);
 
     expect(listener).not.toHaveBeenCalled();
@@ -38,20 +51,15 @@ describe("once", () => {
     expect(listener).toHaveBeenCalledTimes(1);
     expect(listener).toHaveBeenCalledWith(listenedEvent);
 
-    const event = createEvent("click");
+    const unlistenedEvent = createEvent("click");
 
-    subject.dispatchEvent(event);
+    subject.dispatchEvent(unlistenedEvent);
 
     expect(listener).toHaveBeenCalledTimes(1);
     expect(listener).toHaveBeenCalledWith(listenedEvent);
   });
 
-  it("returns function for removing event listener", () => {
-    useFixture(`<div class="root"></div>`);
-
-    const subject = document.querySelector(".root");
-    const listener = jasmine.createSpy("listener");
-
+  it("returns function for removing listener", () => {
     const off = once(subject, "click", listener);
 
     expect(listener).not.toHaveBeenCalled();
@@ -65,76 +73,75 @@ describe("once", () => {
     expect(listener).not.toHaveBeenCalled();
   });
 
-  describe("when given space-separated events types", () => {
-    it("adds event listener for each given event type", () => {
-      useFixture(`<div class="root"></div>`);
-
-      const subject = document.querySelector(".root");
-      const listener = jasmine.createSpy("listener");
-
-      once(subject, "click custom-event", listener);
+  describe("when given space-separated events types list", () => {
+    it("adds listener for DOM events", () => {
+      once(subject, "click dblclick", listener);
 
       expect(listener).not.toHaveBeenCalled();
 
-      const clickEvent = createEvent("click");
-      const customEvent = createEvent("custom-event");
+      const events = [createEvent("click"), createEvent("dblclick")];
 
-      subject.dispatchEvent(clickEvent);
-      subject.dispatchEvent(customEvent);
+      events.forEach(event => {
+        subject.dispatchEvent(event);
 
-      expect(listener).toHaveBeenCalledTimes(2);
-      expect(listener).toHaveBeenCalledWith(clickEvent);
-      expect(listener).toHaveBeenCalledWith(customEvent);
+        expect(listener).toHaveBeenCalledWith(event);
+      });
+
+      expect(listener).toHaveBeenCalledTimes(events.length);
     });
 
-    it("adds event listener which will be raised only once for each event type", () => {
-      useFixture(`<div class="root"></div>`);
-
-      const subject = document.querySelector(".root");
-      const listener = jasmine.createSpy("listener");
-
-      once(subject, "click custom-event", listener);
+    it("adds listener for custom events", () => {
+      once(subject, "foo bar", listener);
 
       expect(listener).not.toHaveBeenCalled();
 
-      const listenedClickEvent = createEvent("click");
-      const listenedCustomEvent = createEvent("custom-event");
+      const events = [createEvent("foo"), createEvent("bar")];
 
-      subject.dispatchEvent(listenedClickEvent);
-      subject.dispatchEvent(listenedCustomEvent);
+      events.forEach(event => {
+        subject.dispatchEvent(event);
 
-      expect(listener).toHaveBeenCalledTimes(2);
-      expect(listener).toHaveBeenCalledWith(listenedClickEvent);
-      expect(listener).toHaveBeenCalledWith(listenedCustomEvent);
+        expect(listener).toHaveBeenCalledWith(event);
+      });
 
-      const clickEvent = createEvent("click");
-      const customEvent = createEvent("custom-event");
+      expect(listener).toHaveBeenCalledTimes(events.length);
+    });
 
-      subject.dispatchEvent(clickEvent);
-      subject.dispatchEvent(customEvent);
+    it("adds listener which called on first trigger for each event", () => {
+      once(subject, "click custom", listener);
 
-      expect(listener).toHaveBeenCalledTimes(2);
-      expect(listener).toHaveBeenCalledWith(listenedClickEvent);
-      expect(listener).toHaveBeenCalledWith(listenedCustomEvent);
+      expect(listener).not.toHaveBeenCalled();
+
+      const listenedEvents = [createEvent("click"), createEvent("custom")];
+
+      listenedEvents.forEach(event => {
+        subject.dispatchEvent(event);
+
+        expect(listener).toHaveBeenCalledWith(event);
+      });
+
+      expect(listener).toHaveBeenCalledTimes(listenedEvents.length);
+
+      const unlistenedEvents = [createEvent("click"), createEvent("custom")];
+
+      unlistenedEvents.forEach(event => {
+        subject.dispatchEvent(event);
+      });
+
+      expect(listener).toHaveBeenCalledTimes(listenedEvents.length);
     });
 
     it("returns function for removing listener for all event types", () => {
-      useFixture(`<div class="root"></div>`);
-
-      const subject = document.querySelector(".root");
-      const listener = jasmine.createSpy("listener");
-
-      const off = once(subject, "click custom-event", listener);
+      const off = once(subject, "click custom", listener);
 
       expect(listener).not.toHaveBeenCalled();
 
-      const clickEvent = createEvent("click");
-      const customEvent = createEvent("custom-event");
-
       off();
 
-      subject.dispatchEvent(clickEvent);
-      subject.dispatchEvent(customEvent);
+      const events = [createEvent("click"), createEvent("custom")];
+
+      events.forEach(event => {
+        subject.dispatchEvent(event);
+      });
 
       expect(listener).not.toHaveBeenCalled();
     });
