@@ -1,9 +1,5 @@
 /* @flow */
 
-/*
- * Types
- */
-
 type CSSClass = string;
 
 type Elements = Array<Element>;
@@ -20,25 +16,19 @@ type PredicateFn = (element: Element) => boolean;
 
 type Selector = string;
 
-/*
- * Utilities
- */
+/* Utilities */
 
 function toArray(arrayLike: any): Array<any> {
   return Array.prototype.slice.call(arrayLike);
 }
 
-/*
- * Aliases
- */
+/* Aliases */
 
 const html: Element = window.document.documentElement;
 
 const body: Element = window.document.body;
 
-/*
- * Queries
- */
+/* Queries */
 
 function query(element: Element, selector: Selector): ?Element {
   return element.querySelector(selector);
@@ -71,9 +61,7 @@ function matches(element: Element, selector: Selector): boolean {
   return matchesFn.call(element, selector);
 }
 
-/*
- * Classes
- */
+/* Classes */
 
 function hasClass(element: Element, cssClass: CSSClass): boolean {
   return element.classList.contains(cssClass);
@@ -110,9 +98,7 @@ function toggleClass(
   return toggleFn(element, cssClass);
 }
 
-/*
- * Dataset
- */
+/* Dataset */
 
 type Dataset = { [key: string]: string };
 
@@ -202,9 +188,7 @@ function parentsBy(
   return parents(element).filter(predicate);
 }
 
-/*
- * Manipulate
- */
+/* Manipulate */
 
 function remove(element: Element): boolean {
   const parentElement = parent(element);
@@ -218,9 +202,7 @@ function remove(element: Element): boolean {
   return false;
 }
 
-/*
- * Events
- */
+/* Events */
 
 function on(
   element: Element,
@@ -269,9 +251,7 @@ function dispatch(
   return element.dispatchEvent(event);
 }
 
-/*
- * Exports
- */
+/* Exports */
 
 export {
   /* aliases */
