@@ -218,26 +218,18 @@ function remove(element: Element): boolean {
  * Events
  */
 
-function off(
-  element: Element,
-  eventTypes: EventTypes,
-  listener: EventListener
-): void {
-  eventTypes.split(" ").forEach(eventType => {
-    element.removeEventListener(eventType, listener);
-  });
-}
-
 function on(
   element: Element,
   eventTypes: EventTypes,
   listener: EventListener
 ): () => void {
-  const events = eventTypes.split(" ");
+  const offs = eventTypes.split(" ").map(eventType => {
+    element.addEventListener(eventType, listener);
 
-  events.forEach(eventType => element.addEventListener(eventType, listener));
+    return () => element.removeEventListener(eventType, listener);
+  });
 
-  return () => events.forEach(eventType => off(element, eventType, listener));
+  return () => offs.forEach(off => off());
 }
 
 function once(
@@ -245,7 +237,7 @@ function once(
   eventTypes: EventTypes,
   listener: EventListener
 ): () => void {
-  const offListeners = eventTypes.split(" ").map(eventType => {
+  const offs = eventTypes.split(" ").map(eventType => {
     const wrappedListener = event => {
       element.removeEventListener(eventType, wrappedListener);
 
@@ -254,10 +246,10 @@ function once(
 
     element.addEventListener(eventType, wrappedListener);
 
-    return () => off(element, eventType, wrappedListener);
+    return () => element.removeEventListener(eventType, wrappedListener);
   });
 
-  return () => offListeners.forEach(offListener => offListener());
+  return () => offs.forEach(off => off());
 }
 
 /*
