@@ -104,7 +104,7 @@ function toggleClass(
   return toggleFn(element, cssClass);
 }
 
-/* 
+/*
  * Dataset
  */
 
@@ -286,6 +286,5 @@ export {
   remove,
   /* events */
   on,
-  once,
-  off
+  once
 };
