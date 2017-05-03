@@ -1,5 +1,6 @@
 type CSSClass = string;
-type Elements = Elements;
+type Elements = Element[];
+type EventListener = (event: Event) => any;
 type EventTypes = string;
 type PredicateFn = (element: Element) => boolean;
 type Selector = string;
@@ -53,5 +54,5 @@ export function remove(element: Element): boolean;
  * Events
  */
 
-export function on(Element: Element, eventTypes: EventTypes, listener: Function): () => void;
-export function once(Element: Element, eventTypes: EventTypes, listener: Function): () => void;
+export function on(element: Element, eventTypes: EventTypes, listener: EventListener): () => void;
+export function once(element: Element, eventTypes: EventTypes, listener: EventListener): () => void;
