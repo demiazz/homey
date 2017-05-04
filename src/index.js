@@ -186,12 +186,30 @@ function parentsBy(
   return parents(element).filter(predicate);
 }
 
-function closest(element: Element, selector: Selector): ?Element {
+type ClosestFn = (element: Element, selector: Selector) => ?Element;
+
+function polyfillClosest(element: Element, selector: Selector): ?Element {
   if (matches(element, selector)) {
     return element;
   }
 
   return parentBy(element, selector);
+}
+
+function nativeClosest(element: Element, selector: Selector): ?Element {
+  return element.closest(selector);
+}
+
+function getClosestFn(): ClosestFn {
+  const element = document.createElement("div");
+
+  return element.closest ? nativeClosest : polyfillClosest;
+}
+
+const closestFn: ClosestFn = getClosestFn();
+
+function closest(element: Element, selector: Selector): ?Element {
+  return closestFn(element, selector);
 }
 
 /* Manipulate */
