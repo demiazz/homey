@@ -86,66 +86,52 @@ describe("once", () => {
   describe("supports events capturing", () => {
     it("doesn't use capturing by default", () => {
       useFixture(`
-        <div class="parent">
-          <div class="root">
-            <div class="child"></child>
-          </div>
+        <div class="root">
+          <div class="child"></div>
         </div>
       `);
 
-      const parent = document.querySelector(".parent");
       const subject = document.querySelector(".root");
       const child = document.querySelector(".child");
-      const parentListener = jasmine.createSpy("parentListener");
-      const subjectListener = jasmine.createSpy("subjectListener");
+      const listener = jasmine.createSpy("listener").and.callFake(event => {
+        expect(event.eventPhase).toBe(Event.BUBBLING_PHASE);
+      });
 
-      once(parent, "click", parentListener);
-      once(subject, "click", subjectListener);
+      once(subject, "click", listener);
 
-      expect(parentListener).not.toHaveBeenCalled();
-      expect(subjectListener).not.toHaveBeenCalled();
+      expect(listener).not.toHaveBeenCalled();
 
       const event = createEvent("click");
 
       child.dispatchEvent(event);
 
-      expect(parentListener).toHaveBeenCalledTimes(1);
-      expect(parentListener).toHaveBeenCalledWith(event);
-      expect(subjectListener).toHaveBeenCalledTimes(1);
-      expect(subjectListener).toHaveBeenCalledWith(event);
-      expect(subjectListener).toHaveBeenCalledBefore(parentListener);
+      expect(listener).toHaveBeenCalledTimes(1);
+      expect(listener).toHaveBeenCalledWith(event);
     });
 
     it("uses capturing when flag given", () => {
       useFixture(`
-        <div class="parent">
-          <div class="root">
-            <div class="child"></child>
-          </div>
+        <div class="root">
+          <div class="child"></div>
         </div>
       `);
 
-      const parent = document.querySelector(".parent");
       const subject = document.querySelector(".root");
       const child = document.querySelector(".child");
-      const parentListener = jasmine.createSpy("parentListener");
-      const subjectListener = jasmine.createSpy("subjectListener");
+      const listener = jasmine.createSpy("listener").and.callFake(event => {
+        expect(event.eventPhase).toBe(Event.CAPTURING_PHASE);
+      });
 
-      once(parent, "click", parentListener, true);
-      once(subject, "click", subjectListener, true);
+      once(subject, "click", listener, true);
 
-      expect(parentListener).not.toHaveBeenCalled();
-      expect(subjectListener).not.toHaveBeenCalled();
+      expect(listener).not.toHaveBeenCalled();
 
       const event = createEvent("click");
 
       child.dispatchEvent(event);
 
-      expect(parentListener).toHaveBeenCalledTimes(1);
-      expect(parentListener).toHaveBeenCalledWith(event);
-      expect(subjectListener).toHaveBeenCalledTimes(1);
-      expect(subjectListener).toHaveBeenCalledWith(event);
-      expect(parentListener).toHaveBeenCalledBefore(subjectListener);
+      expect(listener).toHaveBeenCalledTimes(1);
+      expect(listener).toHaveBeenCalledWith(event);
     });
   });
 });
