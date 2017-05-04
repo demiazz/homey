@@ -1,7 +1,5 @@
 /* @flow */
 
-import type { Selector } from "./types";
-
 import { html, body } from "./aliases";
 import addClass from "./css/add-class";
 import hasClass from "./css/has-class";
@@ -14,15 +12,12 @@ import once from "./events/once";
 import remove from "./manipulation/remove";
 import query from "./queries/query";
 import queryAll from "./queries/query-all";
+import closest from "./traversing/closest";
 import matches from "./traversing/matches";
 import parent from "./traversing/parent";
 import parentBy from "./traversing/parent-by";
 import parents from "./traversing/parents";
 import parentsBy from "./traversing/parents-by";
-
-/* Types */
-
-type PredicateFn = (element: Element) => boolean;
 
 /* Dataset */
 
@@ -58,47 +53,6 @@ const datasetFn: DatasetFn = getDatasetFn();
 
 function dataset(element: HTMLElement): Dataset {
   return datasetFn(element);
-}
-
-/*
- * Traverse
- */
-
-type ClosestFn = (element: Element, selector: Selector) => ?Element;
-
-function polyfillClosest(element: Element, selector: Selector): ?Element {
-  if (matches(element, selector)) {
-    return element;
-  }
-
-  return parentBy(element, selector);
-}
-
-function nativeClosest(element: Element, selector: Selector): ?Element {
-  return element.closest(selector);
-}
-
-function getClosestFn(): ClosestFn {
-  const element = document.createElement("div");
-
-  return element.closest ? nativeClosest : polyfillClosest;
-}
-
-const closestFn: ClosestFn = getClosestFn();
-
-function closest(
-  element: Element,
-  condition: Selector | PredicateFn
-): ?Element {
-  if (typeof condition === "string") {
-    return closestFn(element, condition);
-  }
-
-  if (condition(element)) {
-    return element;
-  }
-
-  return parentBy(element, condition);
 }
 
 /* Exports */

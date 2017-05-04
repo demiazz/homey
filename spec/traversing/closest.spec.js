@@ -1,4 +1,4 @@
-import { closest, matches } from "../src";
+import { closest, matches } from "../../src";
 
 describe("closest", () => {
   afterEach(clearFixtures);
