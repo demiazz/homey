@@ -186,6 +186,14 @@ function parentsBy(
   return parents(element).filter(predicate);
 }
 
+function closest(element: Element, selector: Selector): ?Element {
+  if (matches(element, selector)) {
+    return element;
+  }
+
+  return parentBy(element, selector);
+}
+
 /* Manipulate */
 
 function remove(element: Element): boolean {
@@ -263,6 +271,7 @@ export {
   parentBy,
   parents,
   parentsBy,
+  closest,
   /* manipulate */
   remove,
   /* events */

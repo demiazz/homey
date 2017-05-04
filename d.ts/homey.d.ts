@@ -44,6 +44,7 @@ export function parent(element: Element): Element | null;
 export function parentBy(element: Element, selector: Selector | PredicateFn): Element | null;
 export function parents(element: Element): Elements;
 export function parentsBy(element: Element, selector: Selector | PredicateFn): Elements;
+export function closest(element: Element, selector: Selector): Element | null;
 
 /*
  * Manipulate
