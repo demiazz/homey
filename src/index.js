@@ -7,6 +7,7 @@ import query from "./queries/query";
 import queryAll from "./queries/query-all";
 import matches from "./traversing/matches";
 import parent from "./traversing/parent";
+import parentBy from "./traversing/parent-by";
 
 /* Types */
 
@@ -96,27 +97,6 @@ function dataset(element: HTMLElement): Dataset {
 /*
  * Traverse
  */
-
-function parentBy(
-  element: Element,
-  condition: PredicateFn | Selector
-): ?Element {
-  const predicate = typeof condition === "string"
-    ? e => matches(e, condition)
-    : condition;
-
-  let current = parent(element);
-
-  while (current) {
-    if (predicate(current)) {
-      return current;
-    }
-
-    current = parent(current);
-  }
-
-  return null;
-}
 
 function parents(element: Element): Elements {
   const result = [];

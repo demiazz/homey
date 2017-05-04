@@ -1,19 +1,17 @@
-import { matches, parentBy } from "../src";
+import { matches, parentBy } from "../../src";
 
 describe("parentBy", () => {
   afterEach(clearFixtures);
 
   describe("when selector given", () => {
     it("returns parent element which matches by selector", () => {
-      useFixture(
-        `
+      useFixture(`
         <div class="parent">
           <div class="wrapper">
             <div class="root"></div>
           </div>
         </div>
-      `
-      );
+      `);
 
       const subject = document.querySelector(".root");
 
@@ -23,15 +21,13 @@ describe("parentBy", () => {
     });
 
     it("returns null if parent element which matches doesn't exists", () => {
-      useFixture(
-        `
+      useFixture(`
         <div class="outer-wrapper">
           <div class="inner-wrapper">
             <div class="root"></div>
           </div>
         </div>
-      `
-      );
+      `);
 
       const subject = document.querySelector(".root");
 
@@ -41,15 +37,13 @@ describe("parentBy", () => {
 
   describe("when predicate function is given", () => {
     it("returns parent element which matches by predicate", () => {
-      useFixture(
-        `
+      useFixture(`
         <div class="parent">
           <div class="wrapper">
             <div class="root"></div>
           </div>
         </div>
-      `
-      );
+      `);
 
       const subject = document.querySelector(".root");
       const predicate = e => matches(e, ".parent");
@@ -60,15 +54,13 @@ describe("parentBy", () => {
     });
 
     it("returns null if parent element which matches doesn't exists", () => {
-      useFixture(
-        `
+      useFixture(`
         <div class="outer-wrapper">
           <div class="inner-wrapper">
             <div class="root"></div>
           </div>
         </div>
-      `
-      );
+      `);
 
       const subject = document.querySelector(".root");
       const predicate = e => matches(e, ".parent");
