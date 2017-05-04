@@ -5,6 +5,8 @@ import type { EventListener, EventType, Selector } from "../types";
 import matches from "../traversing/matches";
 import parent from "../traversing/parent";
 
+import on from "./on";
+
 function delegate(
   element: Element,
   selector: Selector,
@@ -33,9 +35,7 @@ function delegate(
     }
   }
 
-  element.addEventListener(eventType, wrappedListener);
-
-  return () => element.removeEventListener(eventType, wrappedListener);
+  return on(element, eventType, wrappedListener);
 }
 
 export default delegate;
