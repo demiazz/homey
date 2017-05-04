@@ -22,27 +22,20 @@ import parents from "./traversing/parents";
 import parentsBy from "./traversing/parents-by";
 
 export {
-  /* aliases */
   body,
   html,
-  /* css */
   addClass,
   hasClass,
   removeClass,
   toggleClass,
-  /* data */
   dataset,
-  /* events */
   delegate,
   dispatch,
   on,
   once,
-  /* manipulate */
   remove,
-  /* queries */
   query,
   queryAll,
-  /* traversing */
   closest,
   matches,
   parent,
