@@ -10,8 +10,6 @@ type EventListener = (event: Event) => mixed;
 
 type EventType = string;
 
-type EventTypes = string;
-
 type PredicateFn = (element: Element) => boolean;
 
 type Selector = string;
@@ -206,36 +204,28 @@ function remove(element: Element): boolean {
 
 function on(
   element: Element,
-  eventTypes: EventTypes,
+  eventType: EventType,
   listener: EventListener
 ): () => void {
-  const offs = eventTypes.split(" ").map(eventType => {
-    element.addEventListener(eventType, listener);
+  element.addEventListener(eventType, listener);
 
-    return () => element.removeEventListener(eventType, listener);
-  });
-
-  return () => offs.forEach(off => off());
+  return () => element.removeEventListener(eventType, listener);
 }
 
 function once(
   element: Element,
-  eventTypes: EventTypes,
+  eventType: EventType,
   listener: EventListener
 ): () => void {
-  const offs = eventTypes.split(" ").map(eventType => {
-    const wrappedListener = event => {
-      element.removeEventListener(eventType, wrappedListener);
+  function wrappedListener(event) {
+    element.removeEventListener(eventType, wrappedListener);
 
-      listener(event);
-    };
+    listener(event);
+  }
 
-    element.addEventListener(eventType, wrappedListener);
+  element.addEventListener(eventType, wrappedListener);
 
-    return () => element.removeEventListener(eventType, wrappedListener);
-  });
-
-  return () => offs.forEach(off => off());
+  return () => element.removeEventListener(eventType, wrappedListener);
 }
 
 function dispatch(
