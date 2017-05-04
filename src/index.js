@@ -1,11 +1,12 @@
 /* @flow */
 
-import type { CSSClass, Selector } from "./types";
+import type { Selector } from "./types";
 
 import { html, body } from "./aliases";
 import addClass from "./css/add-class";
 import hasClass from "./css/has-class";
 import removeClass from "./css/remove-class";
+import toggleClass from "./css/toggle-class";
 import query from "./queries/query";
 import queryAll from "./queries/query-all";
 import matches from "./traversing/matches";
@@ -23,19 +24,6 @@ type EventListener = (event: Event) => mixed;
 type EventType = string;
 
 type PredicateFn = (element: Element) => boolean;
-
-/* Classes */
-
-function toggleClass(
-  element: Element,
-  cssClass: CSSClass,
-  state?: boolean
-): boolean {
-  const target = arguments.length === 3 ? state : !hasClass(element, cssClass);
-  const toggleFn = target ? addClass : removeClass;
-
-  return toggleFn(element, cssClass);
-}
 
 /* Dataset */
 

@@ -1,4 +1,4 @@
-import { toggleClass } from "../src";
+import { toggleClass } from "../../src";
 
 describe("toggleClass", () => {
   afterEach(clearFixtures);
