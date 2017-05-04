@@ -11,7 +11,8 @@ function delegate(
   element: Element,
   selector: Selector,
   eventType: EventType,
-  listener: EventListener
+  listener: EventListener,
+  useCapture?: boolean = false
 ): () => void {
   function wrappedListener(event) {
     if (!(event.target instanceof Element)) {
@@ -35,7 +36,7 @@ function delegate(
     }
   }
 
-  return on(element, eventType, wrappedListener);
+  return on(element, eventType, wrappedListener, useCapture);
 }
 
 export default delegate;

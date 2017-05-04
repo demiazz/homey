@@ -58,5 +58,5 @@ export function remove(element: Element): boolean;
 
 export function on(element: Element, eventType: EventType, listener: EventListener, useCapture?: boolean): () => void;
 export function once(element: Element, eventType: EventType, listener: EventListener, useCapture?: boolean): () => void;
-export function delegate(element: Element, selector: Selector, eventType: EventType, listener: EventListener): () => void;
+export function delegate(element: Element, selector: Selector, eventType: EventType, listener: EventListener, useCapture?: boolean): () => void;
 export function dispatch(element: Element, eventType: EventType, listener: EventListener): boolean;

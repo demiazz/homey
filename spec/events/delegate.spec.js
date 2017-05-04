@@ -292,4 +292,70 @@ describe("delegate", () => {
       expect(listener).not.toHaveBeenCalled();
     });
   });
+
+  describe("supports events capturing", () => {
+    it("doesn't use capturing by default", () => {
+      useFixture(`
+        <div class="parent">
+          <div class="root">
+            <div class="child"></child>
+          </div>
+        </div>
+      `);
+
+      const parent = document.querySelector(".parent");
+      const subject = document.querySelector(".root");
+      const child = document.querySelector(".child");
+      const parentListener = jasmine.createSpy("parentListener");
+      const subjectListener = jasmine.createSpy("subjectListener");
+
+      delegate(parent, ".child", "click", parentListener);
+      delegate(subject, ".child", "click", subjectListener);
+
+      expect(parentListener).not.toHaveBeenCalled();
+      expect(subjectListener).not.toHaveBeenCalled();
+
+      const event = createEvent("click");
+
+      child.dispatchEvent(event);
+
+      expect(parentListener).toHaveBeenCalledTimes(1);
+      expect(parentListener).toHaveBeenCalledWith(event);
+      expect(subjectListener).toHaveBeenCalledTimes(1);
+      expect(subjectListener).toHaveBeenCalledWith(event);
+      expect(subjectListener).toHaveBeenCalledBefore(parentListener);
+    });
+
+    it("uses capturing when flag given", () => {
+      useFixture(`
+        <div class="parent">
+          <div class="root">
+            <div class="child"></child>
+          </div>
+        </div>
+      `);
+
+      const parent = document.querySelector(".parent");
+      const subject = document.querySelector(".root");
+      const child = document.querySelector(".child");
+      const parentListener = jasmine.createSpy("parentListener");
+      const subjectListener = jasmine.createSpy("subjectListener");
+
+      delegate(parent, ".child", "click", parentListener, true);
+      delegate(subject, ".child", "click", subjectListener, true);
+
+      expect(parentListener).not.toHaveBeenCalled();
+      expect(subjectListener).not.toHaveBeenCalled();
+
+      const event = createEvent("click");
+
+      child.dispatchEvent(event);
+
+      expect(parentListener).toHaveBeenCalledTimes(1);
+      expect(parentListener).toHaveBeenCalledWith(event);
+      expect(subjectListener).toHaveBeenCalledTimes(1);
+      expect(subjectListener).toHaveBeenCalledWith(event);
+      expect(parentListener).toHaveBeenCalledBefore(subjectListener);
+    });
+  });
 });
