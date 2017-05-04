@@ -1,6 +1,6 @@
 /* @flow */
 
-import type { Elements, Selector } from "./types";
+import type { Selector } from "./types";
 
 import { html, body } from "./aliases";
 import query from "./queries/query";
@@ -9,6 +9,7 @@ import matches from "./traversing/matches";
 import parent from "./traversing/parent";
 import parentBy from "./traversing/parent-by";
 import parents from "./traversing/parents";
+import parentsBy from "./traversing/parents-by";
 
 /* Types */
 
@@ -98,17 +99,6 @@ function dataset(element: HTMLElement): Dataset {
 /*
  * Traverse
  */
-
-function parentsBy(
-  element: Element,
-  condition: Selector | PredicateFn
-): Elements {
-  const predicate = typeof condition === "string"
-    ? e => matches(e, condition)
-    : condition;
-
-  return parents(element).filter(predicate);
-}
 
 type ClosestFn = (element: Element, selector: Selector) => ?Element;
 
