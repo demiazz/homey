@@ -1,4 +1,4 @@
-import { on } from "../src";
+import { on } from "../../src";
 
 describe("on", () => {
   let subject;

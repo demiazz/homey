@@ -1,12 +1,13 @@
 /* @flow */
 
-import type { Selector } from "./types";
+import type { EventType, Selector } from "./types";
 
 import { html, body } from "./aliases";
 import addClass from "./css/add-class";
 import hasClass from "./css/has-class";
 import removeClass from "./css/remove-class";
 import toggleClass from "./css/toggle-class";
+import on from "./events/on";
 import query from "./queries/query";
 import queryAll from "./queries/query-all";
 import matches from "./traversing/matches";
@@ -20,8 +21,6 @@ import parentsBy from "./traversing/parents-by";
 type EventDetails = { [key: string]: mixed };
 
 type EventListener = (event: Event) => mixed;
-
-type EventType = string;
 
 type PredicateFn = (element: Element) => boolean;
 
@@ -117,16 +116,6 @@ function remove(element: Element): boolean {
 }
 
 /* Events */
-
-function on(
-  element: Element,
-  eventType: EventType,
-  listener: EventListener
-): () => void {
-  element.addEventListener(eventType, listener);
-
-  return () => element.removeEventListener(eventType, listener);
-}
 
 function once(
   element: Element,
