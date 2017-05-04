@@ -1,4 +1,4 @@
-import { dispatch } from "../src";
+import { dispatch } from "../../src";
 
 describe("dispatch", () => {
   let root;

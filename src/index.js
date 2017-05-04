@@ -1,6 +1,6 @@
 /* @flow */
 
-import type { EventType, Selector } from "./types";
+import type { Selector } from "./types";
 
 import { html, body } from "./aliases";
 import addClass from "./css/add-class";
@@ -8,6 +8,7 @@ import hasClass from "./css/has-class";
 import removeClass from "./css/remove-class";
 import toggleClass from "./css/toggle-class";
 import delegate from "./events/delegate";
+import dispatch from "./events/dispatch";
 import on from "./events/on";
 import once from "./events/once";
 import query from "./queries/query";
@@ -19,8 +20,6 @@ import parents from "./traversing/parents";
 import parentsBy from "./traversing/parents-by";
 
 /* Types */
-
-type EventDetails = { [key: string]: mixed };
 
 type PredicateFn = (element: Element) => boolean;
 
@@ -113,21 +112,6 @@ function remove(element: Element): boolean {
   }
 
   return false;
-}
-
-/* Events */
-
-function dispatch(
-  element: Element,
-  eventType: EventType,
-  details: EventDetails = {}
-): boolean {
-  const event = (document.createEvent("HTMLEvents"): any);
-
-  event.initEvent(eventType, true, true);
-  (event: any).details = details;
-
-  return element.dispatchEvent(event);
 }
 
 /* Exports */
