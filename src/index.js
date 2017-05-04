@@ -208,8 +208,19 @@ function getClosestFn(): ClosestFn {
 
 const closestFn: ClosestFn = getClosestFn();
 
-function closest(element: Element, selector: Selector): ?Element {
-  return closestFn(element, selector);
+function closest(
+  element: Element,
+  condition: Selector | PredicateFn
+): ?Element {
+  if (typeof condition === "string") {
+    return closestFn(element, condition);
+  }
+
+  if (condition(element)) {
+    return element;
+  }
+
+  return parentBy(element, condition);
 }
 
 /* Manipulate */
