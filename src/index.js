@@ -8,6 +8,7 @@ import queryAll from "./queries/query-all";
 import matches from "./traversing/matches";
 import parent from "./traversing/parent";
 import parentBy from "./traversing/parent-by";
+import parents from "./traversing/parents";
 
 /* Types */
 
@@ -97,20 +98,6 @@ function dataset(element: HTMLElement): Dataset {
 /*
  * Traverse
  */
-
-function parents(element: Element): Elements {
-  const result = [];
-
-  let current = parent(element);
-
-  while (current) {
-    result.push(current);
-
-    current = parent(current);
-  }
-
-  return result;
-}
 
 function parentsBy(
   element: Element,

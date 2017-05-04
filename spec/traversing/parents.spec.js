@@ -1,14 +1,12 @@
-import { parents } from "../src";
+import { parents } from "../../src";
 
 describe("parents", () => {
   it("returns all parents", () => {
-    useFixture(
-      `
+    useFixture(`
       <div class="parent">
         <div class="root"></div>
       </div>
-    `
-    );
+    `);
 
     const subject = document.querySelector(".root");
 
