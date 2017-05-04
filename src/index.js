@@ -1,8 +1,9 @@
 /* @flow */
 
-import type { Selector } from "./types";
+import type { CSSClass, Selector } from "./types";
 
 import { html, body } from "./aliases";
+import hasClass from "./css/has-class";
 import query from "./queries/query";
 import queryAll from "./queries/query-all";
 import matches from "./traversing/matches";
@@ -13,8 +14,6 @@ import parentsBy from "./traversing/parents-by";
 
 /* Types */
 
-type CSSClass = string;
-
 type EventDetails = { [key: string]: mixed };
 
 type EventListener = (event: Event) => mixed;
@@ -24,10 +23,6 @@ type EventType = string;
 type PredicateFn = (element: Element) => boolean;
 
 /* Classes */
-
-function hasClass(element: Element, cssClass: CSSClass): boolean {
-  return element.classList.contains(cssClass);
-}
 
 function addClass(element: Element, cssClass: CSSClass): boolean {
   const result = !hasClass(element, cssClass);
