@@ -5,6 +5,7 @@ import type { Elements, Selector } from "./types";
 import { html, body } from "./aliases";
 import query from "./queries/query";
 import queryAll from "./queries/query-all";
+import matches from "./traversing/matches";
 
 /* Types */
 
@@ -17,29 +18,6 @@ type EventListener = (event: Event) => mixed;
 type EventType = string;
 
 type PredicateFn = (element: Element) => boolean;
-
-/* Queries */
-
-type MatchesFn = (selector: Selector) => boolean;
-
-function getMatchesFn(): MatchesFn {
-  const element = (document.createElement("div"): any);
-
-  return (
-    element.matches ||
-    element.matchesSelector ||
-    element.msMatchesSelector ||
-    element.mozMatchesSelector ||
-    element.webkitMatchesSelector ||
-    element.oMatchesSelector
-  );
-}
-
-const matchesFn: MatchesFn = getMatchesFn();
-
-function matches(element: Element, selector: Selector): boolean {
-  return matchesFn.call(element, selector);
-}
 
 /* Classes */
 

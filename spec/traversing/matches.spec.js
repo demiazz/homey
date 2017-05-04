@@ -1,4 +1,4 @@
-import { matches } from "../src";
+import { matches } from "../../src";
 
 describe("matches", () => {
   afterEach(clearFixtures);
