@@ -1,5 +1,7 @@
 /* @flow */
 
+import { html, body } from "./aliases";
+
 type CSSClass = string;
 
 type Elements = Array<Element>;
@@ -19,12 +21,6 @@ type Selector = string;
 function toArray(arrayLike: any): Array<any> {
   return Array.prototype.slice.call(arrayLike);
 }
-
-/* Aliases */
-
-const html: Element = window.document.documentElement;
-
-const body: Element = window.document.body;
 
 /* Queries */
 

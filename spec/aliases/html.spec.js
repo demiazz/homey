@@ -1,4 +1,4 @@
-import { html } from "../src";
+import { html } from "../../src";
 
 describe("html", () => {
   it("alias to `window.document.documentElement`", () => {

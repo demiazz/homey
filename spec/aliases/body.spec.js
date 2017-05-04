@@ -1,4 +1,4 @@
-import { body } from "../src";
+import { body } from "../../src";
 
 describe("body", () => {
   it("alias to `window.document.body`", () => {
