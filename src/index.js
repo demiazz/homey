@@ -265,6 +265,39 @@ function once(
   return () => element.removeEventListener(eventType, wrappedListener);
 }
 
+function delegate(
+  element: Element,
+  selector: Selector,
+  eventType: EventType,
+  listener: EventListener
+): () => void {
+  function wrappedListener(event) {
+    if (!(event.target instanceof Element)) {
+      return;
+    }
+
+    let current = event.target;
+
+    while (current) {
+      if (matches(current, selector)) {
+        listener(event);
+
+        return;
+      }
+
+      if (current === element) {
+        return;
+      }
+
+      current = parent(current);
+    }
+  }
+
+  element.addEventListener(eventType, wrappedListener);
+
+  return () => element.removeEventListener(eventType, wrappedListener);
+}
+
 function dispatch(
   element: Element,
   eventType: EventType,
@@ -306,5 +339,6 @@ export {
   /* events */
   on,
   once,
+  delegate,
   dispatch
 };
