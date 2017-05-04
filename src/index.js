@@ -6,6 +6,7 @@ import { html, body } from "./aliases";
 import query from "./queries/query";
 import queryAll from "./queries/query-all";
 import matches from "./traversing/matches";
+import parent from "./traversing/parent";
 
 /* Types */
 
@@ -95,10 +96,6 @@ function dataset(element: HTMLElement): Dataset {
 /*
  * Traverse
  */
-
-function parent(element: Element): ?Element {
-  return element.parentElement;
-}
 
 function parentBy(
   element: Element,

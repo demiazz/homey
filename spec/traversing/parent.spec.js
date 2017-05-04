@@ -1,4 +1,4 @@
-import { parent } from "../src";
+import { parent } from "../../src";
 
 describe("parent", () => {
   afterEach(clearFixtures);
@@ -7,13 +7,11 @@ describe("parent", () => {
     const rootClass = "root";
     const parentClass = "parent";
 
-    useFixture(
-      `
+    useFixture(`
       <div class="${parentClass}">
         <div class="${rootClass}"></div>
       </div>
-    `
-    );
+    `);
 
     const subject = document.querySelector(`.${rootClass}`);
     const parentElement = document.querySelector(`.${parentClass}`);
