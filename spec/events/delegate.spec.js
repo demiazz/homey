@@ -1,4 +1,4 @@
-import { delegate } from "../src";
+import { delegate } from "../../src";
 
 describe("delegate", () => {
   afterEach(clearFixtures);

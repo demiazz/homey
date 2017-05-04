@@ -1,12 +1,13 @@
 /* @flow */
 
-import type { EventListener, EventType, Selector } from "./types";
+import type { EventType, Selector } from "./types";
 
 import { html, body } from "./aliases";
 import addClass from "./css/add-class";
 import hasClass from "./css/has-class";
 import removeClass from "./css/remove-class";
 import toggleClass from "./css/toggle-class";
+import delegate from "./events/delegate";
 import on from "./events/on";
 import once from "./events/once";
 import query from "./queries/query";
@@ -115,39 +116,6 @@ function remove(element: Element): boolean {
 }
 
 /* Events */
-
-function delegate(
-  element: Element,
-  selector: Selector,
-  eventType: EventType,
-  listener: EventListener
-): () => void {
-  function wrappedListener(event) {
-    if (!(event.target instanceof Element)) {
-      return;
-    }
-
-    let current = event.target;
-
-    while (current) {
-      if (matches(current, selector)) {
-        listener(event);
-
-        return;
-      }
-
-      if (current === element) {
-        return;
-      }
-
-      current = parent(current);
-    }
-  }
-
-  element.addEventListener(eventType, wrappedListener);
-
-  return () => element.removeEventListener(eventType, wrappedListener);
-}
 
 function dispatch(
   element: Element,
