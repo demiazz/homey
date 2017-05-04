@@ -1,12 +1,8 @@
-import { remove } from "../src";
+import { remove } from "../../src";
 
 describe("remove", () => {
   it("removes element if attached to DOM", () => {
-    useFixture(
-      `
-      <div class="root"></div>
-    `
-    );
+    useFixture(`<div class="root"></div>`);
 
     const subject = document.querySelector(".root");
 

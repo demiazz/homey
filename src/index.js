@@ -11,6 +11,7 @@ import delegate from "./events/delegate";
 import dispatch from "./events/dispatch";
 import on from "./events/on";
 import once from "./events/once";
+import remove from "./manipulation/remove";
 import query from "./queries/query";
 import queryAll from "./queries/query-all";
 import matches from "./traversing/matches";
@@ -98,20 +99,6 @@ function closest(
   }
 
   return parentBy(element, condition);
-}
-
-/* Manipulate */
-
-function remove(element: Element): boolean {
-  const parentElement = parent(element);
-
-  if (parentElement) {
-    parentElement.removeChild(element);
-
-    return true;
-  }
-
-  return false;
 }
 
 /* Exports */
