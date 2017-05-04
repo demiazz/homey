@@ -1,4 +1,4 @@
-import { once } from "../src";
+import { once } from "../../src";
 
 describe("once", () => {
   let subject;
