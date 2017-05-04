@@ -3,6 +3,7 @@
 import type { CSSClass, Selector } from "./types";
 
 import { html, body } from "./aliases";
+import addClass from "./css/add-class";
 import hasClass from "./css/has-class";
 import query from "./queries/query";
 import queryAll from "./queries/query-all";
@@ -23,16 +24,6 @@ type EventType = string;
 type PredicateFn = (element: Element) => boolean;
 
 /* Classes */
-
-function addClass(element: Element, cssClass: CSSClass): boolean {
-  const result = !hasClass(element, cssClass);
-
-  if (result) {
-    element.classList.add(cssClass);
-  }
-
-  return result;
-}
 
 function removeClass(element: Element, cssClass: CSSClass): boolean {
   const result = hasClass(element, cssClass);

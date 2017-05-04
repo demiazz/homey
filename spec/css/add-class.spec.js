@@ -1,4 +1,4 @@
-import { addClass } from "../src";
+import { addClass } from "../../src";
 
 describe("addClass", () => {
   afterEach(clearFixtures);
