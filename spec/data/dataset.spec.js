@@ -1,11 +1,10 @@
-import { dataset } from "../src";
+import { dataset } from "../../src";
 
 describe("dataset", () => {
   afterEach(clearFixtures);
 
   it("returns object with data from data attributes", () => {
-    useFixture(
-      `
+    useFixture(`
       <div
         class="root"
         data-brand="Google"
@@ -13,8 +12,7 @@ describe("dataset", () => {
         data-brand--product-name="GMail"
         data-brand-name="Apple"
       ></div>
-    `
-    );
+    `);
 
     const subject = document.querySelector(".root");
     const actual = dataset(subject);

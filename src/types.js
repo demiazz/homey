@@ -2,6 +2,8 @@
 
 export type CSSClass = string;
 
+export type Dataset = { [key: string]: string };
+
 export type Elements = Array<Element>;
 
 export type EventDetails = { [key: string]: mixed };
