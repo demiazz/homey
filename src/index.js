@@ -1,6 +1,7 @@
 /* @flow */
 
-import { html, body } from "./aliases";
+import body from "./aliases/body";
+import html from "./aliases/html";
 import addClass from "./css/add-class";
 import hasClass from "./css/has-class";
 import removeClass from "./css/remove-class";
@@ -22,30 +23,30 @@ import parentsBy from "./traversing/parents-by";
 
 export {
   /* aliases */
-  html,
   body,
+  html,
   /* css */
-  hasClass,
   addClass,
+  hasClass,
   removeClass,
   toggleClass,
   /* data */
   dataset,
   /* events */
-  on,
-  once,
   delegate,
   dispatch,
+  on,
+  once,
   /* manipulate */
   remove,
   /* queries */
   query,
   queryAll,
-  matches,
   /* traversing */
+  closest,
+  matches,
   parent,
   parentBy,
   parents,
-  parentsBy,
-  closest
+  parentsBy
 };
