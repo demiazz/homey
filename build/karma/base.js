@@ -21,7 +21,7 @@ module.exports = {
       watched: process.env.CI !== "true"
     },
     {
-      pattern: "src/index.js",
+      pattern: "src/**/*.js",
       watched: process.env.CI !== "true",
       included: false
     },
