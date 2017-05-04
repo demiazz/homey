@@ -1,10 +1,14 @@
 /* @flow */
 
+import type { Elements, Selector } from "./types";
+
 import { html, body } from "./aliases";
+import query from "./queries/query";
+import queryAll from "./queries/query-all";
+
+/* Types */
 
 type CSSClass = string;
-
-type Elements = Array<Element>;
 
 type EventDetails = { [key: string]: mixed };
 
@@ -14,25 +18,7 @@ type EventType = string;
 
 type PredicateFn = (element: Element) => boolean;
 
-type Selector = string;
-
-/* Utilities */
-
-function toArray(arrayLike: any): Array<any> {
-  return Array.prototype.slice.call(arrayLike);
-}
-
 /* Queries */
-
-function query(element: Element, selector: Selector): ?Element {
-  return element.querySelector(selector);
-}
-
-function queryAll(element: Element, selector: Selector): Elements {
-  const elements = element.querySelectorAll(selector);
-
-  return (toArray(elements): Elements);
-}
 
 type MatchesFn = (selector: Selector) => boolean;
 

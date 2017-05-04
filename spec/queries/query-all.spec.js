@@ -1,11 +1,10 @@
-import { queryAll } from "../src";
+import { queryAll } from "../../src";
 
 describe("queryAll", () => {
   afterEach(clearFixtures);
 
   it("returns array of childs which matched by selector", () => {
-    useFixture(
-      `
+    useFixture(`
       <div class="root" >
         <div class="matched"></div>
         <div class="matched"></div>
@@ -13,8 +12,7 @@ describe("queryAll", () => {
       </div>
       <div class="matched"></div>
       <div class="matched"></div>
-    `
-    );
+    `);
 
     const subject = document.querySelector(".root");
 
@@ -24,15 +22,13 @@ describe("queryAll", () => {
   });
 
   it("returns empty array when children which matched by selector not existed", () => {
-    useFixture(
-      `
+    useFixture(`
       <div class="root" >
         <div class="notMatched"></div>
       </div>
       <div class="matched"></div>
       <div class="matched"></div>
-    `
-    );
+    `);
 
     const subject = document.querySelector(".root");
 
