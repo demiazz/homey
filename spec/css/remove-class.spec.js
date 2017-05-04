@@ -1,4 +1,4 @@
-import { removeClass } from "../src";
+import { removeClass } from "../../src";
 
 describe("removeClass", () => {
   afterEach(clearFixtures);
