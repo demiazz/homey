@@ -2,6 +2,8 @@
 
 import type { EventListener, EventType } from "../types";
 
+import on from "./on";
+
 function once(
   element: Element,
   eventType: EventType,
@@ -13,9 +15,7 @@ function once(
     listener(event);
   }
 
-  element.addEventListener(eventType, wrappedListener);
-
-  return () => element.removeEventListener(eventType, wrappedListener);
+  return on(element, eventType, wrappedListener);
 }
 
 export default once;
