@@ -10,6 +10,8 @@ export type EventDetails = { [key: string]: mixed };
 
 export type EventListener = (event: Event) => mixed;
 
+export type EventOptions = { bubbles?: boolean, cancelable?: boolean };
+
 export type EventType = string;
 
 export type Predicate = (element: Element) => boolean;

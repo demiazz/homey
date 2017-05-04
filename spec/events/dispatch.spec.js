@@ -41,24 +41,44 @@ describe("dispatch", () => {
     expect(eventType).toBe("custom");
   });
 
-  it("trigger event with `bubbles` equals to `true`", () => {
-    root.addEventListener("click", listener);
+  describe("`bubbles` option", () => {
+    it("triggers event with `bubbles` equals to `true` by default", () => {
+      root.addEventListener("click", listener);
 
-    dispatch(root, "click");
+      dispatch(root, "click");
 
-    const bubbles = listener.calls.first().args[0].bubbles;
+      expect(listener.calls.first().args[0].bubbles).toBe(true);
+    });
 
-    expect(bubbles).toBe(true);
+    it("triggers event with `bubbles` equals to given option", () => {
+      root.addEventListener("click", listener);
+
+      [true, false].forEach((bubbles, index) => {
+        dispatch(root, "click", null, { bubbles });
+
+        expect(listener.calls.argsFor(index)[0].bubbles).toBe(bubbles);
+      });
+    });
   });
 
-  it("trigger event with `cancelable` equals to `true`", () => {
-    root.addEventListener("click", listener);
+  describe("`cancelable` option", () => {
+    it("triggers event with `cancelable` equals to `true` by default", () => {
+      root.addEventListener("click", listener);
 
-    dispatch(root, "click");
+      dispatch(root, "click");
 
-    const cancelable = listener.calls.first().args[0].cancelable;
+      expect(listener.calls.first().args[0].cancelable).toBe(true);
+    });
 
-    expect(cancelable).toBe(true);
+    it("triggers event with `cancelable` equals to given option", () => {
+      root.addEventListener("click", listener);
+
+      [true, false].forEach((cancelable, index) => {
+        dispatch(root, "click", null, { cancelable });
+
+        expect(listener.calls.argsFor(index)[0].cancelable).toBe(cancelable);
+      });
+    });
   });
 
   it("trigger event with empty details by default", () => {
