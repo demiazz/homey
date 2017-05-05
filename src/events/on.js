@@ -12,79 +12,79 @@ declare function on(
   eventType: MouseEventTypes,
   handler: MouseEventHandler,
   useCapture?: boolean
-): mixed;
+): () => void;
 
 declare function on(
   element: Element,
   eventType: FocusEventTypes,
   handler: FocusEventHandler,
   useCapture?: boolean
-): mixed;
+): () => void;
 
 declare function on(
   element: Element,
   eventType: KeyboardEventTypes,
   handler: KeyboardEventHandler,
   useCapture?: boolean
-): mixed;
+): () => void;
 
 declare function on(
   element: Element,
   eventType: TouchEventTypes,
   handler: TouchEventHandler,
   useCapture?: boolean
-): mixed;
+): () => void;
 
 declare function on(
   element: Element,
   eventType: WheelEventTypes,
   handler: WheelEventHandler,
   useCapture?: boolean
-): mixed;
+): () => void;
 
 declare function on(
   element: Element,
   eventType: ProgressEventTypes,
   ler: ProgressEventHandler,
   useCapture?: boolean
-): mixed;
+): () => void;
 
 declare function on(
   element: Element,
   eventType: DragEventTypes,
   handler: DragEventHandler,
   useCapture?: boolean
-): mixed;
+): () => void;
 
 declare function on(
   element: Element,
   eventType: AnimationEventTypes,
   handler: AnimationEventHandler,
   useCapture?: boolean
-): mixed;
+): () => void;
 
 declare function on(
   element: Element,
   eventType: EventType,
   handler: CustomEventHandler,
   useCapture?: boolean
-): mixed;
+): () => void;
 
 declare function on(
   element: Element,
   eventType: EventType,
   handler: DelegateEventHandler,
   useCapture?: boolean
-): mixed;
+): () => void;
 
 declare function on(
   element: Element,
   eventType: EventType,
   handler: EventHandler,
   useCapture?: boolean
-): mixed;
+): () => void;
 
-function on(element, eventType, handler, useCapture = false): () => void {
+function on(element, eventType, handler, useCapture = false) {
   element.addEventListener(eventType, (handler: any), useCapture);
 
   return () =>

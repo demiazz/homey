@@ -14,79 +14,79 @@ declare function once(
   eventType: MouseEventTypes,
   handler: MouseEventHandler,
   useCapture?: boolean
-): mixed;
+): () => void;
 
 declare function once(
   element: Element,
   eventType: FocusEventTypes,
   handler: FocusEventHandler,
   useCapture?: boolean
-): mixed;
+): () => void;
 
 declare function once(
   element: Element,
   eventType: KeyboardEventTypes,
   handler: KeyboardEventHandler,
   useCapture?: boolean
-): mixed;
+): () => void;
 
 declare function once(
   element: Element,
   eventType: TouchEventTypes,
   handler: TouchEventHandler,
   useCapture?: boolean
-): mixed;
+): () => void;
 
 declare function once(
   element: Element,
   eventType: WheelEventTypes,
   handler: WheelEventHandler,
   useCapture?: boolean
-): mixed;
+): () => void;
 
 declare function once(
   element: Element,
   eventType: ProgressEventTypes,
   ler: ProgressEventHandler,
   useCapture?: boolean
-): mixed;
+): () => void;
 
 declare function once(
   element: Element,
   eventType: DragEventTypes,
   handler: DragEventHandler,
   useCapture?: boolean
-): mixed;
+): () => void;
 
 declare function once(
   element: Element,
   eventType: AnimationEventTypes,
   handler: AnimationEventHandler,
   useCapture?: boolean
-): mixed;
+): () => void;
 
 declare function once(
   element: Element,
   eventType: EventType,
   handler: CustomEventHandler,
   useCapture?: boolean
-): mixed;
+): () => void;
 
 declare function once(
   element: Element,
   eventType: EventType,
   handler: DelegateEventHandler,
   useCapture?: boolean
-): mixed;
+): () => void;
 
 declare function once(
   element: Element,
   eventType: EventType,
   handler: EventHandler,
   useCapture?: boolean
-): mixed;
+): () => void;
 
-function once(element, eventType, handler, useCapture = false): () => void {
+function once(element, eventType, handler, useCapture = false) {
   function wrappedHandler(event) {
     element.removeEventListener(eventType, wrappedHandler, useCapture);
 

@@ -20,7 +20,7 @@ declare function delegate(
   eventType: MouseEventTypes,
   handler: MouseEventHandler,
   useCapture?: boolean
-): mixed;
+): () => void;
 
 declare function delegate(
   element: Element,
@@ -28,7 +28,7 @@ declare function delegate(
   eventType: FocusEventTypes,
   handler: FocusEventHandler,
   useCapture?: boolean
-): mixed;
+): () => void;
 
 declare function delegate(
   element: Element,
@@ -36,7 +36,7 @@ declare function delegate(
   eventType: KeyboardEventTypes,
   handler: KeyboardEventHandler,
   useCapture?: boolean
-): mixed;
+): () => void;
 
 declare function delegate(
   element: Element,
@@ -44,7 +44,7 @@ declare function delegate(
   eventType: TouchEventTypes,
   handler: TouchEventHandler,
   useCapture?: boolean
-): mixed;
+): () => void;
 
 declare function delegate(
   element: Element,
@@ -52,7 +52,7 @@ declare function delegate(
   eventType: WheelEventTypes,
   handler: WheelEventHandler,
   useCapture?: boolean
-): mixed;
+): () => void;
 
 declare function delegate(
   element: Element,
@@ -60,7 +60,7 @@ declare function delegate(
   eventType: ProgressEventTypes,
   ler: ProgressEventHandler,
   useCapture?: boolean
-): mixed;
+): () => void;
 
 declare function delegate(
   element: Element,
@@ -68,7 +68,7 @@ declare function delegate(
   eventType: DragEventTypes,
   handler: DragEventHandler,
   useCapture?: boolean
-): mixed;
+): () => void;
 
 declare function delegate(
   element: Element,
@@ -76,7 +76,7 @@ declare function delegate(
   eventType: AnimationEventTypes,
   handler: AnimationEventHandler,
   useCapture?: boolean
-): mixed;
+): () => void;
 
 declare function delegate(
   element: Element,
@@ -84,7 +84,7 @@ declare function delegate(
   eventType: EventType,
   handler: CustomEventHandler,
   useCapture?: boolean
-): mixed;
+): () => void;
 
 declare function delegate(
   element: Element,
@@ -92,7 +92,7 @@ declare function delegate(
   eventType: EventType,
   handler: DelegateEventHandler,
   useCapture?: boolean
-): mixed;
+): () => void;
 
 declare function delegate(
   element: Element,
@@ -100,15 +100,9 @@ declare function delegate(
   eventType: EventType,
   handler: EventHandler,
   useCapture?: boolean
-): mixed;
+): () => void;
 
-function delegate(
-  element,
-  selector,
-  eventType,
-  handler,
-  useCapture = false
-): () => void {
+function delegate(element, selector, eventType, handler, useCapture = false) {
   function wrappedHandler(event) {
     if (!(event.target instanceof Element)) {
       return;
