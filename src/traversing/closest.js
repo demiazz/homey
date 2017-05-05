@@ -1,13 +1,13 @@
 /* @flow */
 
-import type { Predicate, Selector } from "../types";
+import type { CSSSelector, Predicate } from "../types";
 
 import matches from "../traversing/matches";
 import parentBy from "../traversing/parent-by";
 
-type Closest = (element: Element, selector: Selector) => ?Element;
+type Closest = (element: Element, selector: CSSSelector) => ?Element;
 
-function polyfill(element: Element, selector: Selector): ?Element {
+function closestPolyfill(element: Element, selector: CSSSelector): ?Element {
   if (matches(element, selector)) {
     return element;
   }
@@ -15,19 +15,22 @@ function polyfill(element: Element, selector: Selector): ?Element {
   return parentBy(element, selector);
 }
 
-function native(element: Element, selector: Selector): ?Element {
+function closestNative(element: Element, selector: CSSSelector): ?Element {
   return element.closest(selector);
 }
 
 function getClosestFn(): Closest {
   const element = document.createElement("div");
 
-  return element.closest ? native : polyfill;
+  return element.closest ? closestNative : closestPolyfill;
 }
 
 const closestFn: Closest = getClosestFn();
 
-function closest(element: Element, condition: Selector | Predicate): ?Element {
+function closest(
+  element: Element,
+  condition: CSSSelector | Predicate
+): ?Element {
   if (typeof condition === "string") {
     return closestFn(element, condition);
   }
