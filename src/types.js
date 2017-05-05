@@ -19,5 +19,3 @@ export type EventOptions = {
 export type EventType = string;
 
 export type Predicate = (element: Element) => boolean;
-
-export type Selector = string;

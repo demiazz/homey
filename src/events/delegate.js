@@ -1,6 +1,6 @@
 /* @flow */
 
-import type { EventListener, EventType, Selector } from "../types";
+import type { CSSSelector, EventListener, EventType } from "../types";
 
 import matches from "../traversing/matches";
 import parent from "../traversing/parent";
@@ -9,7 +9,7 @@ import on from "./on";
 
 function delegate(
   element: Element,
-  selector: Selector,
+  selector: CSSSelector,
   eventType: EventType,
   listener: EventListener,
   useCapture?: boolean = false
