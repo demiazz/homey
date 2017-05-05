@@ -2,11 +2,11 @@
 
 import type { Dataset } from "./types";
 
-function native(element: HTMLElement): Dataset {
+function datasetNative(element: HTMLElement): Dataset {
   return element.dataset;
 }
 
-function polyfill(element: HTMLElement): Dataset {
+function datasetPolyfill(element: HTMLElement): Dataset {
   return [].slice.call(element.attributes).reduce((data, { name, value }) => {
     if (/^data-(.+)/.test(name)) {
       const normalizedName = name
@@ -23,7 +23,7 @@ function polyfill(element: HTMLElement): Dataset {
 function getDatasetFn() {
   const element = document.createElement("div");
 
-  return element.dataset ? native : polyfill;
+  return element.dataset ? datasetNative : datasetPolyfill;
 }
 
 const datasetFn = getDatasetFn();
