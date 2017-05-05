@@ -31,7 +31,7 @@ const create = typeof window.CustomEvent === "function" ? native : polyfill;
 function dispatch(
   target: EventTarget,
   eventType: EventType,
-  options?: EventOptions = { bubbles: true, cancelable: true }
+  options?: EventOptions = { bubbles: true, cancelable: true, detail: null }
 ): boolean {
   const bubbles = getProperty(options, "bubbles", true);
   const cancelable = getProperty(options, "cancelable", true);
