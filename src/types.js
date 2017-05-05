@@ -1,5 +1,7 @@
 /* @flow */
 
+export type CSSSelector = string;
+
 export type DelegatedEvent = Event & { delegateTarget: EventTarget };
 
 export type DelegatedEventListener = (event: DelegatedEvent) => mixed;

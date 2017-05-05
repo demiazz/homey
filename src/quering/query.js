@@ -1,8 +1,8 @@
 /* @flow */
 
-import type { Selector } from "../types";
+import type { CSSSelector } from "../types";
 
-function query(element: Element, selector: Selector): ?Element {
+function query(element: Element, selector: CSSSelector): ?Element {
   return element.querySelector(selector);
 }
 
