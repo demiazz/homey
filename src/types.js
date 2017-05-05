@@ -1,7 +1,5 @@
 /* @flow */
 
-export type Dataset = { [key: string]: string };
-
 export type DelegatedEvent = Event & { delegateTarget: EventTarget };
 
 export type DelegatedEventListener = (event: DelegatedEvent) => mixed;

@@ -1,6 +1,6 @@
 /* @flow */
 
-import type { Dataset } from "../types";
+import type { Dataset } from "./types";
 
 function native(element: HTMLElement): Dataset {
   return element.dataset;
