@@ -10,7 +10,7 @@ type EventOptions = {
   detail?: any
 };
 
-function native(
+function createWithConstructor(
   eventType: EventType,
   bubbles: boolean,
   cancelable: boolean,
@@ -19,7 +19,7 @@ function native(
   return new CustomEvent(eventType, { bubbles, cancelable, detail });
 }
 
-function polyfill(
+function createWithInit(
   eventType: EventType,
   bubbles: boolean,
   cancelable: boolean,
@@ -32,7 +32,9 @@ function polyfill(
   return event;
 }
 
-const create = typeof window.CustomEvent === "function" ? native : polyfill;
+const create = typeof window.CustomEvent === "function"
+  ? createWithConstructor
+  : createWithInit;
 
 function dispatch(
   target: EventTarget,
