@@ -22,8 +22,8 @@
     "dist/homey.js",
     "dist/homey.min.js",
     "dist/homey.min.js.map",
-    "lib/*.js",
-    "lib/*.js.flow",
+    "lib/**/*.js",
+    "lib/**/*.js.flow",
     "CHANGELOG.md",
     "LICENSE",
     "README.md"
