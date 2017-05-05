@@ -1,8 +1,8 @@
 /* @flow */
 
-import type { Selector } from "../types";
+import type { CSSSelector } from "../types";
 
-type Matches = (selector: Selector) => boolean;
+type Matches = (selector: CSSSelector) => boolean;
 
 function getMatchesFn(): Matches {
   const element = (document.createElement("div"): any);
@@ -19,7 +19,7 @@ function getMatchesFn(): Matches {
 
 const matchesFn: Matches = getMatchesFn();
 
-function matches(element: Element, selector: Selector): boolean {
+function matches(element: Element, selector: CSSSelector): boolean {
   return matchesFn.call(element, selector);
 }
 

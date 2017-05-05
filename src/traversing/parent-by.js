@@ -1,11 +1,14 @@
 /* @flow */
 
-import type { Predicate, Selector } from "../types";
+import type { CSSSelector, Predicate } from "../types";
 
 import matches from "./matches";
 import parent from "./parent";
 
-function parentBy(element: Element, condition: Predicate | Selector): ?Element {
+function parentBy(
+  element: Element,
+  condition: Predicate | CSSSelector
+): ?Element {
   const predicate = typeof condition === "string"
     ? e => matches(e, condition)
     : condition;
