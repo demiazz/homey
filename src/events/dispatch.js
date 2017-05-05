@@ -1,9 +1,14 @@
 /* @flow */
 
-import type { EventOptions } from "../types";
 import type { EventType } from "./types";
 
 import { getProperty } from "../utils";
+
+type EventOptions = {
+  bubbles?: boolean,
+  cancelable?: boolean,
+  detail?: any
+};
 
 function native(
   eventType: EventType,
