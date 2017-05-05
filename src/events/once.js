@@ -1,6 +1,7 @@
 /* @flow */
 
-import type { EventListener, EventType } from "../types";
+import type { EventListener } from "../types";
+import type { EventType } from "./types";
 
 import on from "./on";
 

@@ -1,6 +1,7 @@
 /* @flow */
 
-import type { CSSSelector, EventListener, EventType } from "../types";
+import type { CSSSelector, EventListener } from "../types";
+import type { EventType } from "./types";
 
 import matches from "../traversing/matches";
 import parent from "../traversing/parent";

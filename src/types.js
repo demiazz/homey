@@ -16,6 +16,4 @@ export type EventOptions = {
   detail?: any
 };
 
-export type EventType = string;
-
 export type Predicate = (element: Element) => boolean;
