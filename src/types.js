@@ -1,7 +1,5 @@
 /* @flow */
 
-export type CSSClass = string;
-
 export type Dataset = { [key: string]: string };
 
 export type DelegatedEvent = Event & { delegateTarget: EventTarget };
