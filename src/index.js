@@ -1,5 +1,15 @@
 /* @flow */
 
+import type { CSSClass } from "./css/types";
+import type { Dataset } from "./data/types";
+import type {
+  CustomEventHandler,
+  DelegateEvent,
+  DelegateEventHandler,
+  EventType
+} from "./events/types";
+import type { CSSSelector, Elements } from "./types";
+
 import body from "./aliases/body";
 import html from "./aliases/html";
 import addClass from "./css/add-class";
@@ -20,6 +30,17 @@ import parent from "./traversing/parent";
 import parentBy from "./traversing/parent-by";
 import parents from "./traversing/parents";
 import parentsBy from "./traversing/parents-by";
+
+export type {
+  CSSClass,
+  CSSSelector,
+  CustomEventHandler,
+  Dataset,
+  DelegateEvent,
+  DelegateEventHandler,
+  Elements,
+  EventType
+};
 
 export {
   body,

@@ -1,10 +1,11 @@
 /* Types */
 
-type CSSClass = string;
-type CSSSelector = string;
-type Dataset = { [key: string]: string };
-type Elements = Element[];
-type EventType = string;
+export type CSSClass = string;
+export type CSSSelector = string;
+export type Dataset = { [key: string]: string };
+export type Elements = Element[];
+export type EventType = string;
+
 type EventOptions = { bubbles?: boolean, cancelable?: boolean, detail?: any };
 type Predicate = (element: Element) => boolean;
 
