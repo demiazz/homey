@@ -3,7 +3,7 @@ const babel = require("babel-core");
 function getOptions(modules = false) {
   const babelOptions = {
     presets: [["es2015", { modules }]],
-    plugins: ["transform-flow-strip-types"]
+    plugins: ["remove-comments", "transform-flow-strip-types"]
   };
 
   return babelOptions;

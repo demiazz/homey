@@ -8,7 +8,9 @@ const sources = require("./sources");
 function build() {
   Object.keys(sources).forEach(file => {
     const dest = `lib/${file}.flow`;
-    const code = prettify(sources[file]).replace(/\/\* @flow \*\/\n/, "");
+    const code = prettify(sources[file])
+      .replace(/\/\* @flow \*\/\n/, "")
+      .replace(/\/\* eslint[^*]* \*\/\n/, "");
     const bannered = `${banner.flow}${code}`;
 
     makeDirectory(dirname(dest));

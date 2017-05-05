@@ -1,3 +1,4 @@
+const { readFileSync, writeFileSync } = require("fs");
 const rollup = require("rollup");
 const babel = require("rollup-plugin-babel");
 const commonJS = require("rollup-plugin-commonjs");
@@ -6,7 +7,7 @@ const saveLicense = require("uglify-save-license");
 const { getOptions } = require("./babel");
 const banner = require("./banner");
 const pkg = require("./package");
-const { prettifyFile } = require("./prettify");
+const { prettify } = require("./prettify");
 
 function build(minified = false) {
   const rollupOptions = {
@@ -39,7 +40,11 @@ function build(minified = false) {
 
     if (!minified) {
       result.then(() => {
-        prettifyFile(writeOptions.dest);
+        const code = prettify(
+          readFileSync(writeOptions.dest).toString()
+        ).replace(/"use strict";/, strict => `${strict}\n`);
+
+        writeFileSync(writeOptions.dest, code);
       });
     }
   });
