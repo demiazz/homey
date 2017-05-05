@@ -4,6 +4,10 @@ export type CSSClass = string;
 
 export type Dataset = { [key: string]: string };
 
+export type DelegatedEvent = Event & { delegateTarget: EventTarget };
+
+export type DelegatedEventListener = (event: DelegatedEvent) => mixed;
+
 export type Elements = Array<Element>;
 
 export type EventListener = (event: Event) => mixed;

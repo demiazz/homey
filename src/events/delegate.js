@@ -23,7 +23,11 @@ function delegate(
 
     while (current) {
       if (matches(current, selector)) {
+        (event: any).delegateTarget = element;
+
         listener(event);
+
+        delete (event: any).delegateTarget;
 
         return;
       }

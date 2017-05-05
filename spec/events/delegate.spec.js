@@ -344,4 +344,114 @@ describe("delegate", () => {
       expect(listener).toHaveBeenCalledWith(event);
     });
   });
+
+  describe("`delegateTarget`", () => {
+    it("adds element as `delegateTarget` to event", () => {
+      useFixture(`
+        <div class="root">
+          <div class="child"></div>
+        </div>
+      `);
+
+      const subject = document.querySelector(".root");
+      const child = document.querySelector(".child");
+      const listener = jasmine.createSpy("listener").and.callFake(event => {
+        expect(event.delegateTarget).toBe(subject);
+      });
+
+      delegate(subject, ".child", "click", listener);
+
+      expect(listener).not.toHaveBeenCalled();
+
+      const event = createEvent("click");
+
+      child.dispatchEvent(event);
+
+      expect(listener).toHaveBeenCalledTimes(1);
+    });
+
+    it("adds element as `delegateTarget` to event for each listener", () => {
+      useFixture(`
+        <div class="parent">
+          <div class="root">
+            <div class="child"></div>
+          </div>
+        </parent>
+      `);
+
+      const subject = document.querySelector(".root");
+      const parent = document.querySelector(".parent");
+      const child = document.querySelector(".child");
+
+      const parentListener = jasmine
+        .createSpy("parentListener")
+        .and.callFake(event => {
+          expect(event.delegateTarget).toBe(parent);
+        });
+
+      const subjectListener = jasmine
+        .createSpy("subjectListener")
+        .and.callFake(event => {
+          expect(event.delegateTarget).toBe(subject);
+        });
+
+      delegate(parent, ".child", "click", parentListener);
+      delegate(subject, ".child", "click", subjectListener);
+
+      expect(parentListener).not.toHaveBeenCalled();
+      expect(subjectListener).not.toHaveBeenCalled();
+
+      const event = createEvent("click");
+
+      child.dispatchEvent(event);
+
+      expect(parentListener).toHaveBeenCalledTimes(1);
+      expect(subjectListener).toHaveBeenCalledTimes(1);
+    });
+
+    it("adds `delegateEvent` only for listener", () => {
+      useFixture(`
+        <div class="parent">
+          <div class="root">
+            <div class="child"></div>
+          </div>
+        </div>
+      `);
+
+      const subject = document.querySelector(".root");
+      const child = document.querySelector(".child");
+      const parent = document.querySelector(".parent");
+      const subjectListener = jasmine
+        .createSpy("subjectListener")
+        .and.callFake(event => {
+          expect(event.delegateTarget).toBe(subject);
+        });
+      const childListener = jasmine
+        .createSpy("childListener")
+        .and.callFake(event => {
+          expect(event.delegateTarget).toBe(undefined);
+        });
+      const parentListener = jasmine
+        .createSpy("parentListener")
+        .and.callFake(event => {
+          expect(event.delegateTarget).toBe(undefined);
+        });
+
+      delegate(subject, ".child", "click", subjectListener);
+      child.addEventListener("click", childListener);
+      parent.addEventListener("click", parentListener);
+
+      expect(subjectListener).not.toHaveBeenCalled();
+      expect(childListener).not.toHaveBeenCalled();
+      expect(parentListener).not.toHaveBeenCalled();
+
+      const event = createEvent("click");
+
+      child.dispatchEvent(event);
+
+      expect(subjectListener).toHaveBeenCalledTimes(1);
+      expect(childListener).toHaveBeenCalledTimes(1);
+      expect(parentListener).toHaveBeenCalledTimes(1);
+    });
+  });
 });
