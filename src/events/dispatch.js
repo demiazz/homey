@@ -1,23 +1,44 @@
 /* @flow */
 
-import type { EventDetails, EventOptions, EventType } from "../types";
+import type { EventOptions, EventType } from "../types";
 
 import { getProperty } from "../utils";
 
-function dispatch(
-  element: Element,
+function native(
   eventType: EventType,
-  details?: EventDetails = {},
-  options?: EventOptions = {}
+  bubbles: boolean,
+  cancelable: boolean,
+  detail: any
+): CustomEvent {
+  return new CustomEvent(eventType, { bubbles, cancelable, detail });
+}
+
+function polyfill(
+  eventType: EventType,
+  bubbles: boolean,
+  cancelable: boolean,
+  detail: any
+): CustomEvent {
+  const event = document.createEvent("CustomEvent");
+
+  event.initCustomEvent(eventType, bubbles, cancelable, detail);
+
+  return event;
+}
+
+const create = typeof window.CustomEvent === "function" ? native : polyfill;
+
+function dispatch(
+  target: EventTarget,
+  eventType: EventType,
+  options?: EventOptions = { bubbles: true, cancelable: true }
 ): boolean {
-  const event = (document.createEvent("HTMLEvents"): any);
   const bubbles = getProperty(options, "bubbles", true);
   const cancelable = getProperty(options, "cancelable", true);
+  const detail = getProperty(options, "detail", null);
+  const event = create(eventType, bubbles, cancelable, detail);
 
-  event.initEvent(eventType, bubbles, cancelable);
-  (event: any).details = details;
-
-  return element.dispatchEvent(event);
+  return target.dispatchEvent(event);
 }
 
 export default dispatch;

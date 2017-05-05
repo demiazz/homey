@@ -1,117 +1,155 @@
 import { dispatch } from "../../src";
 
 describe("dispatch", () => {
-  let root;
+  afterEach(clearFixtures);
+
+  let subject;
   let listener;
 
   beforeEach(() => {
     useFixture(`<div class="root"></div>`);
 
-    root = document.querySelector(".root");
+    subject = document.querySelector(".root");
     listener = jasmine.createSpy("listener");
   });
 
-  afterEach(clearFixtures);
+  describe("event types", () => {
+    it("triggers DOM event", () => {
+      listener.and.callFake(event => {
+        expect(event.type).toBe("click");
+      });
 
-  it("trigger DOM event", () => {
-    root.addEventListener("click", listener);
+      subject.addEventListener("click", listener);
 
-    expect(listener).not.toHaveBeenCalled();
+      expect(listener).not.toHaveBeenCalled();
 
-    dispatch(root, "click");
+      dispatch(subject, "click");
 
-    expect(listener).toHaveBeenCalledTimes(1);
-
-    const eventType = listener.calls.first().args[0].type;
-
-    expect(eventType).toBe("click");
-  });
-
-  it("trigger custom event", () => {
-    root.addEventListener("custom", listener);
-
-    expect(listener).not.toHaveBeenCalled();
-
-    dispatch(root, "custom");
-
-    expect(listener).toHaveBeenCalledTimes(1);
-
-    const eventType = listener.calls.first().args[0].type;
-
-    expect(eventType).toBe("custom");
-  });
-
-  describe("`bubbles` option", () => {
-    it("triggers event with `bubbles` equals to `true` by default", () => {
-      root.addEventListener("click", listener);
-
-      dispatch(root, "click");
-
-      expect(listener.calls.first().args[0].bubbles).toBe(true);
+      expect(listener).toHaveBeenCalledTimes(1);
     });
 
-    it("triggers event with `bubbles` equals to given option", () => {
-      root.addEventListener("click", listener);
+    it("triggers custom event", () => {
+      listener.and.callFake(event => {
+        expect(event.type).toBe("custom");
+      });
 
-      [true, false].forEach((bubbles, index) => {
-        dispatch(root, "click", null, { bubbles });
+      subject.addEventListener("custom", listener);
 
-        expect(listener.calls.argsFor(index)[0].bubbles).toBe(bubbles);
+      expect(listener).not.toHaveBeenCalled();
+
+      dispatch(subject, "custom");
+
+      expect(listener).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe("event options", () => {
+    describe("`bubbles` option", () => {
+      it("triggers event with `bubbles` equals to `true` by default", () => {
+        listener.and.callFake(event => {
+          expect(event.bubbles).toBe(true);
+        });
+
+        subject.addEventListener("click", listener);
+
+        dispatch(subject, "click");
+
+        expect(listener).toHaveBeenCalledTimes(1);
+      });
+
+      it("triggers event with given `bubbles` option", () => {
+        [true, false].forEach(bubbles => {
+          listener = jasmine.createSpy("listener").and.callFake(event => {
+            expect(event.bubbles).toBe(bubbles);
+          });
+
+          subject.addEventListener("click", listener);
+
+          dispatch(subject, "click", { bubbles });
+
+          expect(listener).toHaveBeenCalledTimes(1);
+
+          subject.removeEventListener("click", listener);
+        });
+      });
+    });
+
+    describe("`cancelable` option", () => {
+      it("triggers event with `cancelable` equals to `true` by default", () => {
+        listener.and.callFake(event => {
+          expect(event.cancelable).toBe(true);
+        });
+
+        subject.addEventListener("click", listener);
+
+        dispatch(subject, "click");
+
+        expect(listener).toHaveBeenCalledTimes(1);
+      });
+
+      it("triggers event with given `cancelable` option", () => {
+        [true, false].forEach(cancelable => {
+          listener = jasmine.createSpy("listener").and.callFake(event => {
+            expect(event.cancelable).toBe(cancelable);
+          });
+
+          subject.addEventListener("click", listener);
+
+          dispatch(subject, "click", { cancelable });
+
+          expect(listener).toHaveBeenCalledTimes(1);
+
+          subject.removeEventListener("click", listener);
+        });
+      });
+    });
+
+    describe("`detail` option", () => {
+      it("triggers event with `detail` equals to `null` by default", () => {
+        listener.and.callFake(event => {
+          expect(event.detail).toBe(null);
+        });
+
+        subject.addEventListener("click", listener);
+
+        dispatch(subject, "click");
+
+        expect(listener).toHaveBeenCalledTimes(1);
+      });
+
+      it("triggers event with given `detail` option", () => {
+        const detail = { hello: "world" };
+
+        listener = jasmine.createSpy("listener").and.callFake(event => {
+          expect(event.detail).toBe(detail);
+        });
+
+        subject.addEventListener("click", listener);
+
+        dispatch(subject, "click", { detail });
+
+        expect(listener).toHaveBeenCalledTimes(1);
       });
     });
   });
 
-  describe("`cancelable` option", () => {
-    it("triggers event with `cancelable` equals to `true` by default", () => {
-      root.addEventListener("click", listener);
+  describe("preventing", () => {
+    it("returns `true` if no one listener doesn't call `preventDefault`", () => {
+      subject.addEventListener("click", listener);
 
-      dispatch(root, "click");
-
-      expect(listener.calls.first().args[0].cancelable).toBe(true);
+      expect(dispatch(subject, "click")).toBe(true);
+      expect(listener).toHaveBeenCalledTimes(1);
     });
 
-    it("triggers event with `cancelable` equals to given option", () => {
-      root.addEventListener("click", listener);
-
-      [true, false].forEach((cancelable, index) => {
-        dispatch(root, "click", null, { cancelable });
-
-        expect(listener.calls.argsFor(index)[0].cancelable).toBe(cancelable);
+    it("returns `false` if any listener calls `preventDefault`", () => {
+      listener.and.callFake(event => {
+        event.preventDefault();
       });
+
+      subject.addEventListener("click", listener);
+
+      expect(dispatch(subject, "click")).toBe(false);
+      expect(listener).toHaveBeenCalledTimes(1);
     });
-  });
-
-  it("trigger event with empty details by default", () => {
-    root.addEventListener("click", listener);
-
-    dispatch(root, "click");
-
-    const details = listener.calls.first().args[0].details;
-
-    expect(details).toEqual({});
-  });
-
-  it("trigger event with given details", () => {
-    const details = { key: "value" };
-
-    root.addEventListener("click", listener);
-
-    dispatch(root, "click", details);
-
-    const eventDetails = listener.calls.first().args[0].details;
-
-    expect(eventDetails).toBe(details);
-  });
-
-  it("returns `true` if no one listener doesn't call `preventDefault`", () => {
-    root.addEventListener("click", () => {});
-
-    expect(dispatch(root, "click")).toBe(true);
-  });
-
-  it("returns `false` if any listener calls `preventDefault`", () => {
-    root.addEventListener("click", event => event.preventDefault());
-
-    expect(dispatch(root, "click")).toBe(false);
   });
 });
