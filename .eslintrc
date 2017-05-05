@@ -20,8 +20,6 @@
       "optionalDependencies": false,
       "peerDependencies": false,
     }],
-    "import/prefer-default-export": "off",
-    "no-inner-declarations": "off",
     "no-param-reassign": "off",
     "prefer-spread": "off",
     "prefer-rest-params": "off"
