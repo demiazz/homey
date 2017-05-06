@@ -15,7 +15,7 @@ import parent from "../traversing/parent";
 import on from "./on";
 
 declare function delegate(
-  element: Element,
+  target: EventTarget,
   selector: CSSSelector,
   eventType: MouseEventTypes,
   handler: MouseEventHandler,
@@ -23,7 +23,7 @@ declare function delegate(
 ): () => void;
 
 declare function delegate(
-  element: Element,
+  target: EventTarget,
   selector: CSSSelector,
   eventType: FocusEventTypes,
   handler: FocusEventHandler,
@@ -31,7 +31,7 @@ declare function delegate(
 ): () => void;
 
 declare function delegate(
-  element: Element,
+  target: EventTarget,
   selector: CSSSelector,
   eventType: KeyboardEventTypes,
   handler: KeyboardEventHandler,
@@ -39,7 +39,7 @@ declare function delegate(
 ): () => void;
 
 declare function delegate(
-  element: Element,
+  target: EventTarget,
   selector: CSSSelector,
   eventType: TouchEventTypes,
   handler: TouchEventHandler,
@@ -47,7 +47,7 @@ declare function delegate(
 ): () => void;
 
 declare function delegate(
-  element: Element,
+  target: EventTarget,
   selector: CSSSelector,
   eventType: WheelEventTypes,
   handler: WheelEventHandler,
@@ -55,7 +55,7 @@ declare function delegate(
 ): () => void;
 
 declare function delegate(
-  element: Element,
+  target: EventTarget,
   selector: CSSSelector,
   eventType: ProgressEventTypes,
   ler: ProgressEventHandler,
@@ -63,7 +63,7 @@ declare function delegate(
 ): () => void;
 
 declare function delegate(
-  element: Element,
+  target: EventTarget,
   selector: CSSSelector,
   eventType: DragEventTypes,
   handler: DragEventHandler,
@@ -71,7 +71,7 @@ declare function delegate(
 ): () => void;
 
 declare function delegate(
-  element: Element,
+  target: EventTarget,
   selector: CSSSelector,
   eventType: AnimationEventTypes,
   handler: AnimationEventHandler,
@@ -79,7 +79,7 @@ declare function delegate(
 ): () => void;
 
 declare function delegate(
-  element: Element,
+  target: EventTarget,
   selector: CSSSelector,
   eventType: EventType,
   handler: CustomEventHandler,
@@ -87,7 +87,7 @@ declare function delegate(
 ): () => void;
 
 declare function delegate(
-  element: Element,
+  target: EventTarget,
   selector: CSSSelector,
   eventType: EventType,
   handler: DelegateEventHandler,
@@ -95,14 +95,14 @@ declare function delegate(
 ): () => void;
 
 declare function delegate(
-  element: Element,
+  target: EventTarget,
   selector: CSSSelector,
   eventType: EventType,
   handler: EventHandler,
   useCapture?: boolean
 ): () => void;
 
-function delegate(element, selector, eventType, handler, useCapture = false) {
+function delegate(target, selector, eventType, handler, useCapture = false) {
   function wrappedHandler(event) {
     if (!(event.target instanceof Element)) {
       return;
@@ -112,7 +112,7 @@ function delegate(element, selector, eventType, handler, useCapture = false) {
 
     while (current) {
       if (matches(current, selector)) {
-        ((event: any): DelegateEvent).delegateTarget = element;
+        ((event: any): DelegateEvent).delegateTarget = target;
 
         handler(event);
 
@@ -121,7 +121,7 @@ function delegate(element, selector, eventType, handler, useCapture = false) {
         return;
       }
 
-      if (current === element) {
+      if (current === target) {
         return;
       }
 
@@ -129,7 +129,7 @@ function delegate(element, selector, eventType, handler, useCapture = false) {
     }
   }
 
-  return on(element, eventType, wrappedHandler, useCapture);
+  return on(target, eventType, wrappedHandler, useCapture);
 }
 
 export default delegate;
