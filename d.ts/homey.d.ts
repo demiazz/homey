@@ -28,9 +28,9 @@ export function dataset(element: HTMLElement): Dataset;
 /* Events */
 
 export function dispatch(target: EventTarget, eventType: EventType, options?: EventOptions): boolean;
-export function on(element: Element, eventType: EventType, listener: EventListener, useCapture?: boolean): () => void;
-export function once(element: Element, eventType: EventType, listener: EventListener, useCapture?: boolean): () => void;
-export function delegate(element: Element, selector: CSSSelector, eventType: EventType, listener: EventListener, useCapture?: boolean): () => void;
+export function on(target: EventTarget, eventType: EventType, listener: EventListener, useCapture?: boolean): () => void;
+export function once(target: EventTarget, eventType: EventType, listener: EventListener, useCapture?: boolean): () => void;
+export function delegate(target: EventTarget, selector: CSSSelector, eventType: EventType, listener: EventListener, useCapture?: boolean): () => void;
 
 /* Manipulation */
 
