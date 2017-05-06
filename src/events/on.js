@@ -8,87 +8,87 @@ import type {
 } from "./types";
 
 declare function on(
-  element: Element,
+  target: EventTarget,
   eventType: MouseEventTypes,
   handler: MouseEventHandler,
   useCapture?: boolean
 ): () => void;
 
 declare function on(
-  element: Element,
+  target: EventTarget,
   eventType: FocusEventTypes,
   handler: FocusEventHandler,
   useCapture?: boolean
 ): () => void;
 
 declare function on(
-  element: Element,
+  target: EventTarget,
   eventType: KeyboardEventTypes,
   handler: KeyboardEventHandler,
   useCapture?: boolean
 ): () => void;
 
 declare function on(
-  element: Element,
+  target: EventTarget,
   eventType: TouchEventTypes,
   handler: TouchEventHandler,
   useCapture?: boolean
 ): () => void;
 
 declare function on(
-  element: Element,
+  target: EventTarget,
   eventType: WheelEventTypes,
   handler: WheelEventHandler,
   useCapture?: boolean
 ): () => void;
 
 declare function on(
-  element: Element,
+  target: EventTarget,
   eventType: ProgressEventTypes,
   ler: ProgressEventHandler,
   useCapture?: boolean
 ): () => void;
 
 declare function on(
-  element: Element,
+  target: EventTarget,
   eventType: DragEventTypes,
   handler: DragEventHandler,
   useCapture?: boolean
 ): () => void;
 
 declare function on(
-  element: Element,
+  target: EventTarget,
   eventType: AnimationEventTypes,
   handler: AnimationEventHandler,
   useCapture?: boolean
 ): () => void;
 
 declare function on(
-  element: Element,
+  target: EventTarget,
   eventType: EventType,
   handler: CustomEventHandler,
   useCapture?: boolean
 ): () => void;
 
 declare function on(
-  element: Element,
+  target: EventTarget,
   eventType: EventType,
   handler: DelegateEventHandler,
   useCapture?: boolean
 ): () => void;
 
 declare function on(
-  element: Element,
+  target: EventTarget,
   eventType: EventType,
   handler: EventHandler,
   useCapture?: boolean
 ): () => void;
 
-function on(element, eventType, handler, useCapture = false) {
-  element.addEventListener(eventType, (handler: any), useCapture);
+function on(target, eventType, handler, useCapture = false) {
+  target.addEventListener(eventType, (handler: any), useCapture);
 
   return () =>
-    element.removeEventListener(eventType, (handler: any), useCapture);
+    target.removeEventListener(eventType, (handler: any), useCapture);
 }
 
 export default on;
