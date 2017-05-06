@@ -10,90 +10,90 @@ import type {
 import on from "./on";
 
 declare function once(
-  element: Element,
+  target: EventTarget,
   eventType: MouseEventTypes,
   handler: MouseEventHandler,
   useCapture?: boolean
 ): () => void;
 
 declare function once(
-  element: Element,
+  target: EventTarget,
   eventType: FocusEventTypes,
   handler: FocusEventHandler,
   useCapture?: boolean
 ): () => void;
 
 declare function once(
-  element: Element,
+  target: EventTarget,
   eventType: KeyboardEventTypes,
   handler: KeyboardEventHandler,
   useCapture?: boolean
 ): () => void;
 
 declare function once(
-  element: Element,
+  target: EventTarget,
   eventType: TouchEventTypes,
   handler: TouchEventHandler,
   useCapture?: boolean
 ): () => void;
 
 declare function once(
-  element: Element,
+  target: EventTarget,
   eventType: WheelEventTypes,
   handler: WheelEventHandler,
   useCapture?: boolean
 ): () => void;
 
 declare function once(
-  element: Element,
+  target: EventTarget,
   eventType: ProgressEventTypes,
   ler: ProgressEventHandler,
   useCapture?: boolean
 ): () => void;
 
 declare function once(
-  element: Element,
+  target: EventTarget,
   eventType: DragEventTypes,
   handler: DragEventHandler,
   useCapture?: boolean
 ): () => void;
 
 declare function once(
-  element: Element,
+  target: EventTarget,
   eventType: AnimationEventTypes,
   handler: AnimationEventHandler,
   useCapture?: boolean
 ): () => void;
 
 declare function once(
-  element: Element,
+  target: EventTarget,
   eventType: EventType,
   handler: CustomEventHandler,
   useCapture?: boolean
 ): () => void;
 
 declare function once(
-  element: Element,
+  target: EventTarget,
   eventType: EventType,
   handler: DelegateEventHandler,
   useCapture?: boolean
 ): () => void;
 
 declare function once(
-  element: Element,
+  target: EventTarget,
   eventType: EventType,
   handler: EventHandler,
   useCapture?: boolean
 ): () => void;
 
-function once(element, eventType, handler, useCapture = false) {
+function once(target, eventType, handler, useCapture = false) {
   function wrappedHandler(event) {
-    element.removeEventListener(eventType, wrappedHandler, useCapture);
+    target.removeEventListener(eventType, wrappedHandler, useCapture);
 
     handler(event);
   }
 
-  return on(element, eventType, wrappedHandler, useCapture);
+  return on(target, eventType, wrappedHandler, useCapture);
 }
 
 export default once;
