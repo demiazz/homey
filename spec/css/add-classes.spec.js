@@ -45,7 +45,7 @@ describe("addClasses", () => {
     expect(subject.classList.contains("bar")).toBe(true);
   });
 
-  it("returns `true` if any given class has been added to element", () => {
+  it("returns `false` if all given class hasn't been added to element", () => {
     useFixture(`<div class="root foo bar"></div>`);
 
     const subject = document.querySelector(".root");
