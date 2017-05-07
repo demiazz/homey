@@ -3,7 +3,7 @@ import { addClass } from "../../src";
 describe("addClass", () => {
   afterEach(clearFixtures);
 
-  it("adds given class to element if element has't given class already", () => {
+  it("adds given class to element if element hasn't given class already", () => {
     useFixture(`<div class="root"></div>`);
 
     const subject = document.querySelector(".root");

@@ -13,6 +13,7 @@ import type { CSSSelector, Elements } from "./types";
 import body from "./aliases/body";
 import html from "./aliases/html";
 import addClass from "./css/add-class";
+import addClasses from "./css/add-classes";
 import hasClass from "./css/has-class";
 import removeClass from "./css/remove-class";
 import toggleClass from "./css/toggle-class";
@@ -46,6 +47,7 @@ export {
   body,
   html,
   addClass,
+  addClasses,
   hasClass,
   removeClass,
   toggleClass,
