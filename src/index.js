@@ -16,6 +16,7 @@ import addClass from "./css/add-class";
 import addClasses from "./css/add-classes";
 import hasClass from "./css/has-class";
 import removeClass from "./css/remove-class";
+import removeClasses from "./css/remove-classes";
 import toggleClass from "./css/toggle-class";
 import dataset from "./data/dataset";
 import delegate from "./events/delegate";
@@ -50,6 +51,7 @@ export {
   addClasses,
   hasClass,
   removeClass,
+  removeClasses,
   toggleClass,
   dataset,
   delegate,
