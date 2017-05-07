@@ -1,6 +1,6 @@
 /* @flow */
 
-import type { CSSClass } from "./css/types";
+import type { CSSClass, CSSClassesMap } from "./css/types";
 import type { Dataset } from "./data/types";
 import type {
   CustomEventHandler,
@@ -18,6 +18,7 @@ import hasClass from "./css/has-class";
 import removeClass from "./css/remove-class";
 import removeClasses from "./css/remove-classes";
 import toggleClass from "./css/toggle-class";
+import toggleClasses from "./css/toggle-classes";
 import dataset from "./data/dataset";
 import delegate from "./events/delegate";
 import dispatch from "./events/dispatch";
@@ -35,6 +36,7 @@ import parentsBy from "./traversing/parents-by";
 
 export type {
   CSSClass,
+  CSSClassesMap,
   CSSSelector,
   CustomEventHandler,
   Dataset,
@@ -53,6 +55,7 @@ export {
   removeClass,
   removeClasses,
   toggleClass,
+  toggleClasses,
   dataset,
   delegate,
   dispatch,

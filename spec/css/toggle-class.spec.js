@@ -3,7 +3,7 @@ import { toggleClass } from "../../src";
 describe("toggleClass", () => {
   afterEach(clearFixtures);
 
-  it("adds given class if element has a given class already", () => {
+  it("adds given class if element hasn't a given class already", () => {
     useFixture(`<div class="root"></div>`);
 
     const subject = document.querySelector(".root");

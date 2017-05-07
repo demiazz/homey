@@ -1,6 +1,7 @@
 /* Types */
 
 export type CSSClass = string;
+export type CSSClassMap = { [key: string]: boolean };
 export type CSSSelector = string;
 export type Dataset = { [key: string]: string };
 export type Elements = Element[];
@@ -22,6 +23,7 @@ export function hasClass(element: Element, cssClass: CSSClass): boolean;
 export function removeClass(element: Element, cssClass: CSSClass): boolean;
 export function removeClasses(element: Element, ...cssClasses: CSSClass[]): boolean;
 export function toggleClass(element: Element, cssClass: CSSClass, state?: boolean): boolean;
+export function toggleClasses(element: Element, ...cssClasses: (CSSClass | CSSClassMap)[]): boolean;
 
 /* Data */
 
