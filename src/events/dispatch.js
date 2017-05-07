@@ -6,24 +6,23 @@ import { getProperty } from "../utils";
 
 type EventOptions = {
   bubbles?: boolean,
-  cancelable?: boolean,
-  detail?: any
+  cancelable?: boolean
 };
 
 function createWithConstructor(
   eventType: EventType,
+  detail: any,
   bubbles: boolean,
-  cancelable: boolean,
-  detail: any
+  cancelable: boolean
 ): CustomEvent {
   return new CustomEvent(eventType, { bubbles, cancelable, detail });
 }
 
 function createWithInit(
   eventType: EventType,
+  detail: any,
   bubbles: boolean,
-  cancelable: boolean,
-  detail: any
+  cancelable: boolean
 ): CustomEvent {
   const event = document.createEvent("CustomEvent");
 
@@ -39,12 +38,12 @@ const create = typeof window.CustomEvent === "function"
 function dispatch(
   target: EventTarget,
   eventType: EventType,
-  options?: EventOptions = { bubbles: true, cancelable: true, detail: null }
+  detail: any = null,
+  options?: EventOptions = { bubbles: true, cancelable: true }
 ): boolean {
   const bubbles = getProperty(options, "bubbles", true);
   const cancelable = getProperty(options, "cancelable", true);
-  const detail = getProperty(options, "detail", null);
-  const event = create(eventType, bubbles, cancelable, detail);
+  const event = create(eventType, detail, bubbles, cancelable);
 
   return target.dispatchEvent(event);
 }

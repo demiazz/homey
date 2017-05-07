@@ -43,6 +43,34 @@ describe("dispatch", () => {
     });
   });
 
+  describe("event detail", () => {
+    it("triggers event with `detail` equals to `null` by default", () => {
+      listener.and.callFake(event => {
+        expect(event.detail).toBe(null);
+      });
+
+      subject.addEventListener("click", listener);
+
+      dispatch(subject, "click");
+
+      expect(listener).toHaveBeenCalledTimes(1);
+    });
+
+    it("triggers event with given `detail`", () => {
+      const detail = { hello: "world" };
+
+      listener = jasmine.createSpy("listener").and.callFake(event => {
+        expect(event.detail).toBe(detail);
+      });
+
+      subject.addEventListener("click", listener);
+
+      dispatch(subject, "click", detail);
+
+      expect(listener).toHaveBeenCalledTimes(1);
+    });
+  });
+
   describe("event options", () => {
     describe("`bubbles` option", () => {
       it("triggers event with `bubbles` equals to `true` by default", () => {
@@ -65,7 +93,7 @@ describe("dispatch", () => {
 
           subject.addEventListener("click", listener);
 
-          dispatch(subject, "click", { bubbles });
+          dispatch(subject, "click", null, { bubbles });
 
           expect(listener).toHaveBeenCalledTimes(1);
 
@@ -95,40 +123,12 @@ describe("dispatch", () => {
 
           subject.addEventListener("click", listener);
 
-          dispatch(subject, "click", { cancelable });
+          dispatch(subject, "click", null, { cancelable });
 
           expect(listener).toHaveBeenCalledTimes(1);
 
           subject.removeEventListener("click", listener);
         });
-      });
-    });
-
-    describe("`detail` option", () => {
-      it("triggers event with `detail` equals to `null` by default", () => {
-        listener.and.callFake(event => {
-          expect(event.detail).toBe(null);
-        });
-
-        subject.addEventListener("click", listener);
-
-        dispatch(subject, "click");
-
-        expect(listener).toHaveBeenCalledTimes(1);
-      });
-
-      it("triggers event with given `detail` option", () => {
-        const detail = { hello: "world" };
-
-        listener = jasmine.createSpy("listener").and.callFake(event => {
-          expect(event.detail).toBe(detail);
-        });
-
-        subject.addEventListener("click", listener);
-
-        dispatch(subject, "click", { detail });
-
-        expect(listener).toHaveBeenCalledTimes(1);
       });
     });
   });
