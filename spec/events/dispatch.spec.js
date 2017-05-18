@@ -46,7 +46,7 @@ describe("dispatch", () => {
   describe("event detail", () => {
     it("triggers event with `detail` equals to `null` by default", () => {
       listener.and.callFake(event => {
-        expect(event.detail).toBe(null);
+        expect(event.detail).toEqual({});
       });
 
       subject.addEventListener("click", listener);

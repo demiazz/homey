@@ -38,7 +38,7 @@ const create = typeof window.CustomEvent === "function"
 function dispatch(
   target: EventTarget,
   eventType: EventType,
-  detail: any = null,
+  detail: any = {},
   options?: EventOptions = { bubbles: true, cancelable: true }
 ): boolean {
   const bubbles = getProperty(options, "bubbles", true);
