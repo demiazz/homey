@@ -25,6 +25,7 @@ import dispatch from "./events/dispatch";
 import on from "./events/on";
 import once from "./events/once";
 import remove from "./manipulation/remove";
+import setHtml from "./manipulation/setHtml";
 import query from "./quering/query";
 import queryAll from "./quering/query-all";
 import closest from "./traversing/closest";
@@ -62,6 +63,7 @@ export {
   on,
   once,
   remove,
+  setHtml,
   query,
   queryAll,
   closest,
