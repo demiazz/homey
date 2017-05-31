@@ -3,7 +3,7 @@ import { setHtml } from "../../src";
 describe("setHtml", () => {
   afterEach(clearFixtures);
 
-  it("sets inner html for given element", () => {
+  it("replace element content with given html from string", () => {
     useFixture(`
       <div class="root">
         <div class="before"></div>
