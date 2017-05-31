@@ -39,6 +39,8 @@ export function delegate(target: EventTarget, selector: CSSSelector, eventType: 
 /* Manipulation */
 
 export function remove(element: Element): boolean;
+export function setHtml(element: Element, html: string): void;
+export function setText(element: Element, text: string): void;
 
 /* Quering */
 
