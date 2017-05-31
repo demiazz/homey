@@ -17,6 +17,6 @@ describe("setText", () => {
     setText(subject, "text content");
 
     expect(subject.querySelector(".before")).toBe(null);
-    expect(subject.innerText).toBe("text content");
+    expect(subject.textContent).toBe("text content");
   });
 });
