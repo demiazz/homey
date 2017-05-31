@@ -30,6 +30,7 @@ import setText from "./manipulation/set-text";
 import query from "./quering/query";
 import queryAll from "./quering/query-all";
 import closest from "./traversing/closest";
+import getHtml from "./traversing/get-html";
 import getText from "./traversing/get-text";
 import matches from "./traversing/matches";
 import parent from "./traversing/parent";
@@ -70,6 +71,7 @@ export {
   query,
   queryAll,
   closest,
+  getHtml,
   getText,
   matches,
   parent,
