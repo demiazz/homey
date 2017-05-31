@@ -1,6 +1,6 @@
 import { setText } from "../../src";
 
-describe("setHtml", () => {
+describe("setText", () => {
   afterEach(clearFixtures);
 
   it("replace element content with given string", () => {
