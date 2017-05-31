@@ -26,6 +26,7 @@ import on from "./events/on";
 import once from "./events/once";
 import remove from "./manipulation/remove";
 import setHtml from "./manipulation/setHtml";
+import setText from "./manipulation/setText";
 import query from "./quering/query";
 import queryAll from "./quering/query-all";
 import closest from "./traversing/closest";
@@ -64,6 +65,7 @@ export {
   once,
   remove,
   setHtml,
+  setText,
   query,
   queryAll,
   closest,
