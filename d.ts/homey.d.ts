@@ -6,6 +6,7 @@ export type CSSSelector = string;
 export type Dataset = { [key: string]: string };
 export type Elements = Element[];
 export type EventType = string;
+export type Insertable = string | Node | NodeList;
 
 type EventOptions = { bubbles?: boolean, cancelable?: boolean, detail?: any };
 type Predicate = (element: Element) => boolean;
@@ -38,6 +39,7 @@ export function delegate(target: EventTarget, selector: CSSSelector, eventType: 
 
 /* Manipulation */
 
+export function prepend(element: Element, ...insertable: Insertable[]): void;
 export function remove(element: Element): boolean;
 export function setHtml(element: Element, html: string): void;
 export function setText(element: Node, text: string): void;

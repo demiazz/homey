@@ -8,6 +8,7 @@ import type {
   DelegateEventHandler,
   EventType
 } from "./events/types";
+import type { Insertable } from "./manipulation/types";
 import type { CSSSelector, Elements } from "./types";
 
 import body from "./aliases/body";
@@ -24,6 +25,7 @@ import delegate from "./events/delegate";
 import dispatch from "./events/dispatch";
 import on from "./events/on";
 import once from "./events/once";
+import prepend from "./manipulation/prepend";
 import remove from "./manipulation/remove";
 import setHtml from "./manipulation/set-html";
 import setText from "./manipulation/set-text";
@@ -47,7 +49,8 @@ export type {
   DelegateEvent,
   DelegateEventHandler,
   Elements,
-  EventType
+  EventType,
+  Insertable
 };
 
 export {
@@ -65,6 +68,7 @@ export {
   dispatch,
   on,
   once,
+  prepend,
   remove,
   setHtml,
   setText,
