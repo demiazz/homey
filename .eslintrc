@@ -27,7 +27,8 @@
   "globals": {
     "useFixture": false,
     "clearFixtures": false,
-    "createEvent": false
+    "createEvent": false,
+    "getSignificantNodes": false
   },
   "parser": "babel-eslint"
 }
