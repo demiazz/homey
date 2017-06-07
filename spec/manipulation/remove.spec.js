@@ -1,6 +1,8 @@
 import { remove } from "../../src";
 
 describe("remove", () => {
+  afterEach(clearFixtures);
+
   it("removes element if attached to DOM", () => {
     useFixture(`<div class="root"></div>`);
 
