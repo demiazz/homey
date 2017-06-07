@@ -31,4 +31,6 @@ export default function prepend(
       prependNodeList(element, insertable);
     }
   });
+
+  element.normalize();
 }
