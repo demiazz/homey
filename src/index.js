@@ -25,6 +25,7 @@ import delegate from "./events/delegate";
 import dispatch from "./events/dispatch";
 import on from "./events/on";
 import once from "./events/once";
+import append from "./manipulation/append";
 import prepend from "./manipulation/prepend";
 import remove from "./manipulation/remove";
 import setHtml from "./manipulation/set-html";
@@ -68,6 +69,7 @@ export {
   dispatch,
   on,
   once,
+  append,
   prepend,
   remove,
   setHtml,
