@@ -9,6 +9,10 @@ module.exports = {
 
   files: [
     {
+      pattern: "build/jasmine/matchers.js",
+      watched: process.env.CI !== "true"
+    },
+    {
       pattern: "build/jasmine/setup.js",
       watched: process.env.CI !== "true"
     },
@@ -32,6 +36,7 @@ module.exports = {
   ],
 
   preprocessors: {
+    "build/jasmine/matchers.js": ["rollup"],
     "build/jasmine/setup.js": ["rollup"],
     "build/jasmine/fixtures.js": ["rollup"],
     "build/jasmine/helpers.js": ["rollup"],
