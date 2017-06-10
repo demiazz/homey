@@ -6,28 +6,21 @@ describe("append", () => {
   it("inserts given HTML string to end of element", () => {
     useFixture(`
       <div class="root">
+        Text Node
         <span>Existing Node</span>
       </div>
     `);
 
     const subject = document.querySelector(".root");
 
-    append(subject, "Text Node<span>Span Node</span>");
+    append(subject, "New Text Node<span>Span Node</span>");
 
-    const nodes = getSignificantNodes(subject);
-
-    expect(nodes.length).toBe(3);
-
-    expect(nodes[0]).toBeElementNode();
-    expect(nodes[0]).toBeTag("span");
-    expect(nodes[0]).toHaveText("Existing Node");
-
-    expect(nodes[1]).toBeTextNode();
-    expect(nodes[1]).toHaveText("Text Node");
-
-    expect(nodes[2]).toBeElementNode();
-    expect(nodes[2]).toBeTag("span");
-    expect(nodes[2]).toHaveText("Span Node");
+    expect(subject).toHaveSameHtml(`
+      Text Node
+      <span>Existing Node</span>
+      New Text Node
+      <span>Span Node</span>
+    `);
   });
 
   it("inserts given node to begin of element", () => {
@@ -47,23 +40,12 @@ describe("append", () => {
     append(subject, elementNode);
     append(subject, textNode);
 
-    const nodes = getSignificantNodes(subject);
-
-    expect(nodes.length).toBe(4);
-
-    expect(nodes[0]).toBeTextNode();
-    expect(nodes[0]).toHaveText("Text Node");
-
-    expect(nodes[1]).toBeElementNode();
-    expect(nodes[1]).toBeTag("span");
-    expect(nodes[1]).toHaveText("Existing Node");
-
-    expect(nodes[2]).toBeElementNode();
-    expect(nodes[2]).toBeTag("span");
-    expect(nodes[2]).toHaveText("Span Node");
-
-    expect(nodes[3]).toBeTextNode();
-    expect(nodes[3]).toHaveText("New Text Node");
+    expect(subject).toHaveSameHtml(`
+      Text Node
+      <span>Existing Node</span>
+      <span>Span Node</span>
+      New Text Node
+    `);
   });
 
   it("inserts given nodes from node list to begin of element", () => {
@@ -87,23 +69,12 @@ describe("append", () => {
 
     append(subject, fragment.childNodes);
 
-    const nodes = getSignificantNodes(subject);
-
-    expect(nodes.length).toBe(4);
-
-    expect(nodes[0]).toBeTextNode();
-    expect(nodes[0]).toHaveText("Text Node");
-
-    expect(nodes[1]).toBeElementNode();
-    expect(nodes[1]).toBeTag("span");
-    expect(nodes[1]).toHaveText("Existing Node");
-
-    expect(nodes[2]).toBeTextNode();
-    expect(nodes[2]).toHaveText("New Text Node");
-
-    expect(nodes[3]).toBeElementNode();
-    expect(nodes[3]).toBeTag("span");
-    expect(nodes[3]).toHaveText("Span Node");
+    expect(subject).toHaveSameHtml(`
+      Text Node
+      <span>Existing Node</span>
+      New Text Node
+      <span>Span Node</span>
+    `);
   });
 
   it("inserts given document fragment to begin of element", () => {
@@ -127,23 +98,12 @@ describe("append", () => {
 
     append(subject, fragment);
 
-    const nodes = getSignificantNodes(subject);
-
-    expect(nodes.length).toBe(4);
-
-    expect(nodes[0]).toBeTextNode();
-    expect(nodes[0]).toHaveText("Text Node");
-
-    expect(nodes[1]).toBeElementNode();
-    expect(nodes[1]).toBeTag("span");
-    expect(nodes[1]).toHaveText("Existing Node");
-
-    expect(nodes[2]).toBeTextNode();
-    expect(nodes[2]).toHaveText("New Text Node");
-
-    expect(nodes[3]).toBeElementNode();
-    expect(nodes[3]).toBeTag("span");
-    expect(nodes[3]).toHaveText("Span Node");
+    expect(subject).toHaveSameHtml(`
+      Text Node
+      <span>Existing Node</span>
+      New Text Node
+      <span>Span Node</span>
+    `);
   });
 
   it("inserts given multiple arguments to begin of element", () => {
@@ -177,36 +137,15 @@ describe("append", () => {
       fragment.childNodes
     );
 
-    const nodes = getSignificantNodes(subject);
-
-    expect(nodes.length).toBe(8);
-
-    expect(nodes[0]).toBeTextNode();
-    expect(nodes[0]).toHaveText("Text Node");
-
-    expect(nodes[1]).toBeElementNode();
-    expect(nodes[1]).toBeTag("span");
-    expect(nodes[1]).toHaveText("Existing Node");
-
-    expect(nodes[2]).toBeTextNode();
-    expect(nodes[2]).toHaveText("HTML Text Node");
-
-    expect(nodes[3]).toBeElementNode();
-    expect(nodes[3]).toBeTag("span");
-    expect(nodes[3]).toHaveText("Span from HTML");
-
-    expect(nodes[4]).toBeTextNode();
-    expect(nodes[4]).toHaveText("Standalone Text Node");
-
-    expect(nodes[5]).toBeElementNode();
-    expect(nodes[5]).toBeTag("span");
-    expect(nodes[5]).toHaveText("Standalone Element Node");
-
-    expect(nodes[6]).toBeTextNode();
-    expect(nodes[6]).toHaveText("Text Node from NodeList");
-
-    expect(nodes[7]).toBeElementNode();
-    expect(nodes[7]).toBeTag("span");
-    expect(nodes[7]).toHaveText("Element Node from NodeList");
+    expect(subject).toHaveSameHtml(`
+      Text Node
+      <span>Existing Node</span>
+      HTML Text Node
+      <span>Span from HTML</span>
+      Standalone Text Node
+      <span>Standalone Element Node</span>
+      Text Node from NodeList
+      <span>Element Node from NodeList</span>
+    `);
   });
 });

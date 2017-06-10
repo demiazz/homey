@@ -31,6 +31,4 @@ export default function append(
       appendNodeList(element, insertable);
     }
   });
-
-  element.normalize();
 }
