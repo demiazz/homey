@@ -1,4 +1,5 @@
 /* @flow */
+/* eslint no-redeclare: "off" */
 
 import type { Insertable } from "./types";
 
@@ -18,10 +19,14 @@ function prependNodeList(element: Element, insertable: NodeList<*>): void {
   });
 }
 
-export default function prepend(
+declare function prepend(
   element: Element,
   ...insertables: Array<Insertable>
-): void {
+): void;
+
+export default function prepend(element) {
+  const insertables = Array.prototype.slice.call(arguments, 1);
+
   insertables.reverse().forEach(insertable => {
     if (typeof insertable === "string") {
       prependString(element, insertable);
