@@ -26,6 +26,7 @@ import dispatch from "./events/dispatch";
 import on from "./events/on";
 import once from "./events/once";
 import append from "./manipulation/append";
+import before from "./manipulation/before";
 import prepend from "./manipulation/prepend";
 import remove from "./manipulation/remove";
 import setHtml from "./manipulation/set-html";
@@ -70,6 +71,7 @@ export {
   on,
   once,
   append,
+  before,
   prepend,
   remove,
   setHtml,
