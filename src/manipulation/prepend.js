@@ -24,7 +24,7 @@ declare function prepend(
   ...insertables: Array<Insertable>
 ): void;
 
-export default function prepend(element) {
+function prepend(element) {
   const insertables = Array.prototype.slice.call(arguments, 1);
 
   insertables.reverse().forEach(insertable => {
@@ -37,3 +37,5 @@ export default function prepend(element) {
     }
   });
 }
+
+export default prepend;

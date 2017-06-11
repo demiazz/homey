@@ -24,7 +24,7 @@ declare function append(
   ...insertables: Array<Insertable>
 ): void;
 
-export default function append(element) {
+function append(element) {
   const insertables = Array.prototype.slice.call(arguments, 1);
 
   insertables.forEach(insertable => {
@@ -37,3 +37,5 @@ export default function append(element) {
     }
   });
 }
+
+export default append;
