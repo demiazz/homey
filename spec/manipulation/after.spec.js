@@ -1,9 +1,9 @@
-import { before } from "../../src";
+import { after } from "../../src";
 
-describe("before", () => {
+describe("after", () => {
   afterEach(clearFixtures);
 
-  it("inserts given HTML string before of element", () => {
+  it("inserts given HTML string after of element", () => {
     useFixture(`
       <div class="root">
         <div class="child"></div>
@@ -13,16 +13,16 @@ describe("before", () => {
     const subject = document.querySelector(".root");
     const child = document.querySelector(".child");
 
-    before(child, "Text Node<span>Span Node</span>");
+    after(child, "Text Node<span>Span Node</span>");
 
     expect(subject).toHaveSameHtml(`
+      <div class="child"></div>
       Text Node
       <span>Span Node</span>
-      <div class="child"></div>
     `);
   });
 
-  it("inserts given node before of element", () => {
+  it("inserts given node after of element", () => {
     useFixture(`
       <div class="root">
         <div class="child"></div>
@@ -36,17 +36,17 @@ describe("before", () => {
 
     elementNode.textContent = "Span Node";
 
-    before(child, textNode);
-    before(child, elementNode);
+    after(child, textNode);
+    after(child, elementNode);
 
     expect(subject).toHaveSameHtml(`
-      Text Node
-      <span>Span Node</span>
       <div class="child"></div>
+      <span>Span Node</span>
+      Text Node
     `);
   });
 
-  it("inserts given nodes from node list before of element", () => {
+  it("inserts given nodes from node list after of element", () => {
     useFixture(`
       <div class="root">
         <div class="child"></div>
@@ -64,16 +64,16 @@ describe("before", () => {
 
     elementNode.textContent = "Span Node";
 
-    before(child, fragment.childNodes);
+    after(child, fragment.childNodes);
 
     expect(subject).toHaveSameHtml(`
+      <div class="child"></div>
       Text Node
       <span>Span Node</span>
-      <div class="child"></div>
     `);
   });
 
-  it("inserts given document fragment before of element", () => {
+  it("inserts given document fragment after of element", () => {
     useFixture(`
       <div class="root">
         <div class="child"></div>
@@ -91,16 +91,16 @@ describe("before", () => {
 
     elementNode.textContent = "Span Node";
 
-    before(child, fragment);
+    after(child, fragment);
 
     expect(subject).toHaveSameHtml(`
+      <div class="child"></div>
       Text Node
       <span>Span Node</span>
-      <div class="child"></div>
     `);
   });
 
-  it("inserts given multiple arguments before of element", () => {
+  it("inserts given multiple arguments after of element", () => {
     useFixture(`
       <div class="root">
         <div class="child"></div>
@@ -122,7 +122,7 @@ describe("before", () => {
     fragment.appendChild(textNode);
     fragment.appendChild(elementNode);
 
-    before(
+    after(
       child,
       html,
       standaloneTextNode,
@@ -131,20 +131,20 @@ describe("before", () => {
     );
 
     expect(subject).toHaveSameHtml(`
+      <div class="child"></div>
       HTML Text Node
       <span>Span from HTML</span>
       Standalone Text Node
       <span>Standalone Element Node</span>
       Text Node from NodeList
       <span>Element Node from NodeList</span>
-      <div class="child"></div>
     `);
   });
 
   it("throws error when element haven't parent", () => {
     const subject = document.createElement("div");
 
-    expect(() => before(subject, "<span>Node</span>")).toThrow(
+    expect(() => after(subject, "<span>Node</span>")).toThrow(
       new Error("The node has no parent")
     );
   });

@@ -39,6 +39,7 @@ export function delegate(target: EventTarget, selector: CSSSelector, eventType: 
 
 /* Manipulation */
 
+export function after(element: Element, ...insertable: Insertable[]): void;
 export function append(element: Element, ...insertable: Insertable[]): void;
 export function before(element: Element, ...insertable: Insertable[]): void;
 export function prepend(element: Element, ...insertable: Insertable[]): void;

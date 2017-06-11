@@ -25,6 +25,7 @@ import delegate from "./events/delegate";
 import dispatch from "./events/dispatch";
 import on from "./events/on";
 import once from "./events/once";
+import after from "./manipulation/after";
 import append from "./manipulation/append";
 import before from "./manipulation/before";
 import prepend from "./manipulation/prepend";
@@ -70,6 +71,7 @@ export {
   dispatch,
   on,
   once,
+  after,
   append,
   before,
   prepend,
