@@ -57,6 +57,7 @@ export function queryAll(element: Element, selector: CSSSelector): Elements;
 export function closest(element: Element, condition: CSSSelector | Predicate): Element | null;
 export function getHtml(element: Element): string;
 export function getText(element: Node): string;
+export function hasAttr(element: Element, attribute: string): boolean;
 export function matches(element: Element, selector: CSSSelector): boolean;
 export function parent(element: Element): Element | null;
 export function parentBy(element: Element, condition: CSSSelector | Predicate): Element | null;
