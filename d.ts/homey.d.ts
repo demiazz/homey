@@ -55,6 +55,7 @@ export function queryAll(element: Element, selector: CSSSelector): Elements;
 /* Traversing */
 
 export function closest(element: Element, condition: CSSSelector | Predicate): Element | null;
+export function getAttr(element: Element, attribute: string): string | null;
 export function getHtml(element: Element): string;
 export function getText(element: Node): string;
 export function hasAttr(element: Element, attribute: string): boolean;
