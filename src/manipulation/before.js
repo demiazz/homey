@@ -3,11 +3,7 @@
 
 import type { Insertable } from "./types";
 
-import { toArray } from "../utils";
-
-function beforeString(element: Element, insertable: string): void {
-  element.insertAdjacentHTML("beforebegin", insertable);
-}
+import { drop, toArray } from "../utils";
 
 function beforeNode(
   element: Element,
@@ -15,16 +11,6 @@ function beforeNode(
   insertable: Node
 ): void {
   parentNode.insertBefore(insertable, element);
-}
-
-function beforeNodeList(
-  element: Element,
-  parentNode: Node,
-  insertables: Node<*>
-): void {
-  toArray(insertables).forEach(insertable => {
-    beforeNode(element, parentNode, insertable);
-  });
 }
 
 declare function before(
@@ -39,15 +25,15 @@ function before(element) {
     throw new Error("The node has no parent");
   }
 
-  const insertables = Array.prototype.slice.call(arguments, 1);
-
-  insertables.forEach(insertable => {
+  drop(arguments, 1).forEach(insertable => {
     if (typeof insertable === "string") {
-      beforeString(element, insertable);
+      element.insertAdjacentHTML("beforebegin", insertable);
     } else if (insertable instanceof Node) {
       beforeNode(element, parentNode, insertable);
     } else {
-      beforeNodeList(element, parentNode, insertable);
+      toArray(insertable).forEach(node => {
+        beforeNode(element, parentNode, node);
+      });
     }
   });
 }

@@ -1,5 +1,9 @@
 /* @flow */
 
+function drop(arrayLike: any, count: number): Array<any> {
+  return Array.prototype.slice.call(arrayLike, count);
+}
+
 function getProperty(
   object: { [key: string]: any },
   property: string,
@@ -14,4 +18,4 @@ function toArray(arrayLike: any): Array<any> {
   return Array.prototype.slice.call(arrayLike);
 }
 
-export { getProperty, toArray };
+export { drop, getProperty, toArray };

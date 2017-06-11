@@ -3,20 +3,10 @@
 
 import type { Insertable } from "./types";
 
-import { toArray } from "../utils";
-
-function prependString(element: Element, insertable: string): void {
-  element.insertAdjacentHTML("afterbegin", insertable);
-}
+import { drop, toArray } from "../utils";
 
 function prependNode(element: Element, insertable: Node): void {
   element.insertBefore(insertable, element.firstChild);
-}
-
-function prependNodeList(element: Element, insertable: NodeList<*>): void {
-  toArray(insertable).reverse().forEach(node => {
-    prependNode(element, node);
-  });
 }
 
 declare function prepend(
@@ -25,15 +15,15 @@ declare function prepend(
 ): void;
 
 function prepend(element) {
-  const insertables = Array.prototype.slice.call(arguments, 1);
-
-  insertables.reverse().forEach(insertable => {
+  drop(arguments, 1).reverse().forEach(insertable => {
     if (typeof insertable === "string") {
-      prependString(element, insertable);
+      element.insertAdjacentHTML("afterbegin", insertable);
     } else if (insertable instanceof Node) {
       prependNode(element, insertable);
     } else {
-      prependNodeList(element, insertable);
+      toArray(insertable).reverse().forEach(node => {
+        prependNode(element, node);
+      });
     }
   });
 }

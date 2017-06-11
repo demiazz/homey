@@ -3,20 +3,10 @@
 
 import type { Insertable } from "./types";
 
-import { toArray } from "../utils";
-
-function appendString(element: Element, insertable: string): void {
-  element.insertAdjacentHTML("beforeend", insertable);
-}
+import { drop, toArray } from "../utils";
 
 function appendNode(element: Element, insertable: Node): void {
   element.appendChild(insertable);
-}
-
-function appendNodeList(element: Element, insertable: NodeList<*>): void {
-  toArray(insertable).forEach(node => {
-    appendNode(element, node);
-  });
 }
 
 declare function append(
@@ -25,15 +15,15 @@ declare function append(
 ): void;
 
 function append(element) {
-  const insertables = Array.prototype.slice.call(arguments, 1);
-
-  insertables.forEach(insertable => {
+  drop(arguments, 1).forEach(insertable => {
     if (typeof insertable === "string") {
-      appendString(element, insertable);
+      element.insertAdjacentHTML("beforeend", insertable);
     } else if (insertable instanceof Node) {
       appendNode(element, insertable);
     } else {
-      appendNodeList(element, insertable);
+      toArray(insertable).forEach(node => {
+        appendNode(element, node);
+      });
     }
   });
 }
