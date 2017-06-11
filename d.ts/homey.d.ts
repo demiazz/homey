@@ -44,6 +44,7 @@ export function append(element: Element, ...insertable: Insertable[]): void;
 export function before(element: Element, ...insertable: Insertable[]): void;
 export function prepend(element: Element, ...insertable: Insertable[]): void;
 export function remove(element: Element): boolean;
+export function setAttr(element: Element, attribute: string, value: any): void;
 export function setHtml(element: Element, html: string): void;
 export function setText(element: Node, text: string): void;
 

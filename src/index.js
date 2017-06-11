@@ -30,6 +30,7 @@ import append from "./manipulation/append";
 import before from "./manipulation/before";
 import prepend from "./manipulation/prepend";
 import remove from "./manipulation/remove";
+import setAttr from "./manipulation/set-attr";
 import setHtml from "./manipulation/set-html";
 import setText from "./manipulation/set-text";
 import query from "./quering/query";
@@ -78,6 +79,7 @@ export {
   before,
   prepend,
   remove,
+  setAttr,
   setHtml,
   setText,
   query,
