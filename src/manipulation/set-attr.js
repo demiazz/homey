@@ -1,8 +1,10 @@
 /* @flow */
 
+import removeAttr from "./remove-attr";
+
 function setAttr(element: Element, attribute: string, value: any): void {
   if (value === null) {
-    element.removeAttribute(attribute);
+    removeAttr(element, attribute);
   } else {
     element.setAttribute(attribute, value);
   }
