@@ -18,4 +18,12 @@ describe("getAttr", () => {
 
     expect(getAttr(subject, "id")).toBeNull();
   });
+
+  it("returns default value if element hasn't attribute with given name", () => {
+    useFixture(`<div class="root"></div>`);
+
+    const subject = document.querySelector(".root");
+
+    expect(getAttr(subject, "id", "root")).toBe("root");
+  });
 });

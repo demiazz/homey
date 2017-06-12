@@ -1,11 +1,15 @@
 /* @flow */
 
-function getAttr(element: Element, attribute: string): ?string {
+function getAttr(
+  element: Element,
+  attribute: string,
+  defaultValue: ?string = null
+): ?string {
   if (element.hasAttribute(attribute)) {
     return element.getAttribute(attribute);
   }
 
-  return null;
+  return defaultValue;
 }
 
 export default getAttr;
