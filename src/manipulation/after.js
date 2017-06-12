@@ -5,8 +5,12 @@ import type { Insertable } from "./types";
 
 import { drop, toArray } from "../utils";
 
-function afterNode(element: Element, parentNode: Node, insertable: Node): void {
-  parentNode.insertBefore(insertable, element.nextSibling);
+function afterNode(
+  element: Element,
+  parentElement: Element,
+  insertable: Node
+): void {
+  parentElement.insertBefore(insertable, element.nextSibling);
 }
 
 declare function after(
@@ -15,20 +19,20 @@ declare function after(
 ): void;
 
 function after(element) {
-  const parentNode = element.parentNode;
+  const parentElement = element.parentElement;
 
-  if (!parentNode) {
-    throw new Error("The node has no parent");
+  if (!parentElement) {
+    throw new Error("The element has no parent");
   }
 
   drop(arguments, 1).reverse().forEach(insertable => {
     if (typeof insertable === "string") {
       element.insertAdjacentHTML("afterend", insertable);
     } else if (insertable instanceof Node) {
-      afterNode(element, parentNode, insertable);
+      afterNode(element, parentElement, insertable);
     } else {
       toArray(insertable).reverse().forEach(node => {
-        afterNode(element, parentNode, node);
+        afterNode(element, parentElement, node);
       });
     }
   });

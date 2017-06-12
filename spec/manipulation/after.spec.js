@@ -145,7 +145,7 @@ describe("after", () => {
     const subject = document.createElement("div");
 
     expect(() => after(subject, "<span>Node</span>")).toThrow(
-      new Error("The node has no parent")
+      new Error("The element has no parent")
     );
   });
 });

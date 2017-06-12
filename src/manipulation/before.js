@@ -7,10 +7,10 @@ import { drop, toArray } from "../utils";
 
 function beforeNode(
   element: Element,
-  parentNode: Node,
+  parentElement: Element,
   insertable: Node
 ): void {
-  parentNode.insertBefore(insertable, element);
+  parentElement.insertBefore(insertable, element);
 }
 
 declare function before(
@@ -19,20 +19,20 @@ declare function before(
 ): void;
 
 function before(element) {
-  const parentNode = element.parentNode;
+  const parentElement = element.parentElement;
 
-  if (!parentNode) {
-    throw new Error("The node has no parent");
+  if (!parentElement) {
+    throw new Error("The element has no parent");
   }
 
   drop(arguments, 1).forEach(insertable => {
     if (typeof insertable === "string") {
       element.insertAdjacentHTML("beforebegin", insertable);
     } else if (insertable instanceof Node) {
-      beforeNode(element, parentNode, insertable);
+      beforeNode(element, parentElement, insertable);
     } else {
       toArray(insertable).forEach(node => {
-        beforeNode(element, parentNode, node);
+        beforeNode(element, parentElement, node);
       });
     }
   });
