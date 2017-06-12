@@ -1,6 +1,6 @@
 /* @flow */
 
-function setText(element: Node, text: string): void {
+function setText(element: Element, text: string): void {
   element.textContent = text;
 }
 

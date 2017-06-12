@@ -47,7 +47,7 @@ export function removeAttr(element: Element, attribute: string): void;
 export function remove(element: Element): boolean;
 export function setAttr(element: Element, attribute: string, value: any): void;
 export function setHtml(element: Element, html: string): void;
-export function setText(element: Node, text: string): void;
+export function setText(element: Element, text: string): void;
 
 /* Quering */
 
@@ -59,7 +59,7 @@ export function queryAll(element: Element, selector: CSSSelector): Elements;
 export function closest(element: Element, condition: CSSSelector | Predicate): Element | null;
 export function getAttr(element: Element, attribute: string, defaultValue: string | null): string | null;
 export function getHtml(element: Element): string;
-export function getText(element: Node): string;
+export function getText(element: Element): string;
 export function hasAttr(element: Element, attribute: string): boolean;
 export function matches(element: Element, selector: CSSSelector): boolean;
 export function parent(element: Element): Element | null;

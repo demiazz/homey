@@ -1,6 +1,6 @@
 /* @flow */
 
-function getText(element: Node): string {
+function getText(element: Element): string {
   return element.textContent;
 }
 
