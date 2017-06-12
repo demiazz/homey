@@ -3,6 +3,7 @@
 
 import type { Insertable } from "./types";
 
+import parent from "../traversing/parent";
 import { drop, toArray } from "../utils";
 
 function beforeNode(
@@ -19,7 +20,7 @@ declare function before(
 ): void;
 
 function before(element) {
-  const parentElement = element.parentElement;
+  const parentElement = parent(element);
 
   if (!parentElement) {
     throw new Error("The element has no parent");
