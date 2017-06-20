@@ -1,7 +1,7 @@
 /* @flow */
 /* eslint no-redeclare: "off" */
 
-import type { CSSClass } from "./types";
+import type { CSSClass } from "../types";
 
 import removeClass from "./remove-class";
 

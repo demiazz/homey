@@ -1,6 +1,6 @@
 /* @flow */
 
-import type { CSSClass } from "./types";
+import type { CSSClass } from "../types";
 
 import addClass from "./add-class";
 import hasClass from "./has-class";

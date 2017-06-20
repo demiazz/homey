@@ -1,6 +1,6 @@
 /* @flow */
 
-import parent from "../traversing/parent";
+import parent from "./parent";
 
 function remove(element: Element): boolean {
   const parentElement = parent(element);

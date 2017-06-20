@@ -1,7 +1,7 @@
 /* @flow */
 /* eslint no-redeclare: "off" */
 
-import type { CSSClass, CSSClassesMap } from "./types";
+import type { CSSClass, CSSClassesMap } from "../types";
 
 import toggleClass from "./toggle-class";
 

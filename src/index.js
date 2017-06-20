@@ -1,51 +1,53 @@
 /* @flow */
 
-import type { CSSClass, CSSClassesMap } from "./css/types";
-import type { Dataset } from "./data/types";
 import type {
+  CSSClass,
+  CSSClassesMap,
+  CSSSelector,
   CustomEventHandler,
+  Dataset,
   DelegateEvent,
   DelegateEventHandler,
-  EventType
-} from "./events/types";
-import type { Insertable } from "./manipulation/types";
-import type { CSSSelector, Elements } from "./types";
+  Elements,
+  EventType,
+  Insertable
+} from "./types";
 
-import body from "./aliases/body";
-import html from "./aliases/html";
-import addClass from "./css/add-class";
-import addClasses from "./css/add-classes";
-import hasClass from "./css/has-class";
-import removeClass from "./css/remove-class";
-import removeClasses from "./css/remove-classes";
-import toggleClass from "./css/toggle-class";
-import toggleClasses from "./css/toggle-classes";
-import dataset from "./data/dataset";
-import delegate from "./events/delegate";
-import dispatch from "./events/dispatch";
-import on from "./events/on";
-import once from "./events/once";
-import after from "./manipulation/after";
-import append from "./manipulation/append";
-import before from "./manipulation/before";
-import prepend from "./manipulation/prepend";
-import removeAttr from "./manipulation/remove-attr";
-import remove from "./manipulation/remove";
-import setAttr from "./manipulation/set-attr";
-import setHtml from "./manipulation/set-html";
-import setText from "./manipulation/set-text";
-import query from "./quering/query";
-import queryAll from "./quering/query-all";
-import closest from "./traversing/closest";
-import getAttr from "./traversing/get-attr";
-import getHtml from "./traversing/get-html";
-import getText from "./traversing/get-text";
-import hasAttr from "./traversing/has-attr";
-import matches from "./traversing/matches";
-import parent from "./traversing/parent";
-import parentBy from "./traversing/parent-by";
-import parents from "./traversing/parents";
-import parentsBy from "./traversing/parents-by";
+import addClass from "./fn/add-class";
+import addClasses from "./fn/add-classes";
+import after from "./fn/after";
+import append from "./fn/append";
+import before from "./fn/before";
+import body from "./fn/body";
+import closest from "./fn/closest";
+import dataset from "./fn/dataset";
+import delegate from "./fn/delegate";
+import dispatch from "./fn/dispatch";
+import getAttr from "./fn/get-attr";
+import getHtml from "./fn/get-html";
+import getText from "./fn/get-text";
+import hasAttr from "./fn/has-attr";
+import hasClass from "./fn/has-class";
+import html from "./fn/html";
+import matches from "./fn/matches";
+import on from "./fn/on";
+import once from "./fn/once";
+import parent from "./fn/parent";
+import parentBy from "./fn/parent-by";
+import parents from "./fn/parents";
+import parentsBy from "./fn/parents-by";
+import prepend from "./fn/prepend";
+import query from "./fn/query";
+import queryAll from "./fn/query-all";
+import remove from "./fn/remove";
+import removeAttr from "./fn/remove-attr";
+import removeClass from "./fn/remove-class";
+import removeClasses from "./fn/remove-classes";
+import setAttr from "./fn/set-attr";
+import setHtml from "./fn/set-html";
+import setText from "./fn/set-text";
+import toggleClass from "./fn/toggle-class";
+import toggleClasses from "./fn/toggle-classes";
 
 export type {
   CSSClass,
@@ -61,39 +63,39 @@ export type {
 };
 
 export {
-  body,
-  html,
   addClass,
   addClasses,
-  hasClass,
-  removeClass,
-  removeClasses,
-  toggleClass,
-  toggleClasses,
-  dataset,
-  delegate,
-  dispatch,
-  on,
-  once,
   after,
   append,
   before,
-  prepend,
-  removeAttr,
-  remove,
-  setAttr,
-  setHtml,
-  setText,
-  query,
-  queryAll,
+  body,
   closest,
+  dataset,
+  delegate,
+  dispatch,
   getAttr,
   getHtml,
   getText,
   hasAttr,
+  hasClass,
+  html,
   matches,
+  on,
+  once,
   parent,
   parentBy,
   parents,
-  parentsBy
+  parentsBy,
+  prepend,
+  query,
+  queryAll,
+  remove,
+  removeAttr,
+  removeClass,
+  removeClasses,
+  setAttr,
+  setHtml,
+  setText,
+  toggleClass,
+  toggleClasses
 };

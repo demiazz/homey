@@ -2,8 +2,8 @@
 
 import type { CSSSelector, Predicate } from "../types";
 
-import matches from "../traversing/matches";
-import parentBy from "../traversing/parent-by";
+import matches from "./matches";
+import parentBy from "./parent-by";
 
 type Closest = (element: Element, selector: CSSSelector) => ?Element;
 

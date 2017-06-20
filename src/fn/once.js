@@ -5,90 +5,95 @@ import type {
   CustomEventHandler,
   DelegateEventHandler,
   EventType
-} from "./types";
+} from "../types";
 
-declare function on(
+import on from "./on";
+
+declare function once(
   target: EventTarget,
   eventType: MouseEventTypes,
   handler: MouseEventHandler,
   useCapture?: boolean
 ): () => void;
 
-declare function on(
+declare function once(
   target: EventTarget,
   eventType: FocusEventTypes,
   handler: FocusEventHandler,
   useCapture?: boolean
 ): () => void;
 
-declare function on(
+declare function once(
   target: EventTarget,
   eventType: KeyboardEventTypes,
   handler: KeyboardEventHandler,
   useCapture?: boolean
 ): () => void;
 
-declare function on(
+declare function once(
   target: EventTarget,
   eventType: TouchEventTypes,
   handler: TouchEventHandler,
   useCapture?: boolean
 ): () => void;
 
-declare function on(
+declare function once(
   target: EventTarget,
   eventType: WheelEventTypes,
   handler: WheelEventHandler,
   useCapture?: boolean
 ): () => void;
 
-declare function on(
+declare function once(
   target: EventTarget,
   eventType: ProgressEventTypes,
   ler: ProgressEventHandler,
   useCapture?: boolean
 ): () => void;
 
-declare function on(
+declare function once(
   target: EventTarget,
   eventType: DragEventTypes,
   handler: DragEventHandler,
   useCapture?: boolean
 ): () => void;
 
-declare function on(
+declare function once(
   target: EventTarget,
   eventType: AnimationEventTypes,
   handler: AnimationEventHandler,
   useCapture?: boolean
 ): () => void;
 
-declare function on(
+declare function once(
   target: EventTarget,
   eventType: EventType,
   handler: CustomEventHandler,
   useCapture?: boolean
 ): () => void;
 
-declare function on(
+declare function once(
   target: EventTarget,
   eventType: EventType,
   handler: DelegateEventHandler,
   useCapture?: boolean
 ): () => void;
 
-declare function on(
+declare function once(
   target: EventTarget,
   eventType: EventType,
   handler: EventHandler,
   useCapture?: boolean
 ): () => void;
 
-function on(target, eventType, handler, useCapture = false) {
-  target.addEventListener(eventType, (handler: any), useCapture);
+function once(target, eventType, handler, useCapture = false) {
+  function wrappedHandler(event) {
+    target.removeEventListener(eventType, wrappedHandler, useCapture);
 
-  return () =>
-    target.removeEventListener(eventType, (handler: any), useCapture);
+    handler(event);
+  }
+
+  return on(target, eventType, wrappedHandler, useCapture);
 }
 
-export default on;
+export default once;

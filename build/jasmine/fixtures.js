@@ -1,5 +1,5 @@
 window.useFixture = function useFixture(html) {
-  document.body.insertAdjacentHTML("beforeend", html);
+  document.body.innerHTML = html;
 };
 
 window.clearFixtures = function clearFixtures() {

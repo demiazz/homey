@@ -1,17 +1,16 @@
 /* @flow */
 /* eslint no-redeclare: "off", import/no-mutable-exports: "off" */
 
-import type { CSSSelector } from "../types";
 import type {
+  CSSSelector,
   CustomEventHandler,
   DelegateEvent,
   DelegateEventHandler,
   EventType
-} from "./types";
+} from "../types";
 
-import matches from "../traversing/matches";
-import parent from "../traversing/parent";
-
+import matches from "./matches";
+import parent from "./parent";
 import on from "./on";
 
 declare function delegate(

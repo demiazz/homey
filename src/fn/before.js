@@ -1,10 +1,11 @@
 /* @flow */
 /* eslint no-redeclare: "off" */
 
-import type { Insertable } from "./types";
+import type { Insertable } from "../types";
 
-import parent from "../traversing/parent";
 import { drop, toArray } from "../utils";
+
+import parent from "./parent";
 
 function beforeNode(
   element: Element,

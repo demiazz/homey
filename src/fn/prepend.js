@@ -1,7 +1,7 @@
 /* @flow */
 /* eslint no-redeclare: "off" */
 
-import type { Insertable } from "./types";
+import type { Insertable } from "../types";
 
 import { drop, toArray } from "../utils";
 

@@ -1,6 +1,6 @@
 /* @flow */
 
-import type { EventType } from "./types";
+import type { EventType } from "../types";
 
 import { getProperty } from "../utils";
 
