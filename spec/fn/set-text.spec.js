@@ -1,6 +1,6 @@
-import { setText } from "../../src";
+import setText from "../../src/fn/set-text";
 
-describe("setText", () => {
+describe("fn/set-text", () => {
   afterEach(clearFixtures);
 
   it("replace element content with given string", () => {

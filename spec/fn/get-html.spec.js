@@ -1,6 +1,6 @@
-import { getHtml } from "../../src";
+import getHtml from "../../src/fn/get-html";
 
-describe("getHtml", () => {
+describe("fn/get-html", () => {
   afterEach(clearFixtures);
 
   it("returns inner html of element in string representation", () => {

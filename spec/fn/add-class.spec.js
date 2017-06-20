@@ -1,6 +1,6 @@
-import { addClass } from "../../src";
+import addClass from "../../src/fn/add-class";
 
-describe("addClass", () => {
+describe("fn/add-class", () => {
   afterEach(clearFixtures);
 
   it("adds given class to element if element hasn't given class already", () => {

@@ -1,6 +1,6 @@
-import { getText } from "../../src";
+import getText from "../../src/fn/get-text";
 
-describe("getText", () => {
+describe("fn/get-text", () => {
   afterEach(clearFixtures);
 
   it("returns inner text of element", () => {

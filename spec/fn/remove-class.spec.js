@@ -1,6 +1,6 @@
-import { removeClass } from "../../src";
+import removeClass from "../../src/fn/remove-class";
 
-describe("removeClass", () => {
+describe("fn/remove-class", () => {
   afterEach(clearFixtures);
 
   it("remove given class from element if element has given class already", () => {

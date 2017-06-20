@@ -1,6 +1,6 @@
-import { remove } from "../../src";
+import remove from "../../src/fn/remove";
 
-describe("remove", () => {
+describe("fn/remove", () => {
   afterEach(clearFixtures);
 
   it("removes element if attached to DOM", () => {

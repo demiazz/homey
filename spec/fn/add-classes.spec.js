@@ -1,6 +1,6 @@
-import { addClasses } from "../../src";
+import addClasses from "../../src/fn/add-classes";
 
-describe("addClasses", () => {
+describe("fn/add-classes", () => {
   afterEach(clearFixtures);
 
   it("adds classes from given list which not added to element early", () => {

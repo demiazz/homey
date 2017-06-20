@@ -1,6 +1,6 @@
-import { delegate } from "../../src";
+import delegate from "../../src/fn/delegate";
 
-describe("delegate", () => {
+describe("fn/delegate", () => {
   afterEach(clearFixtures);
 
   it("adds listener for DOM events", () => {

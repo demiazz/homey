@@ -1,6 +1,7 @@
-import { closest, matches } from "../../src";
+import closest from "../../src/fn/closest";
+import matches from "../../src/fn/matches";
 
-describe("closest", () => {
+describe("fn/closest", () => {
   afterEach(clearFixtures);
 
   it("returns element if matches by selector", () => {

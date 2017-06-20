@@ -1,6 +1,6 @@
-import { on } from "../../src";
+import on from "../../src/fn/on";
 
-describe("on", () => {
+describe("fn/on", () => {
   afterEach(clearFixtures);
 
   it("adds listener for DOM event", () => {

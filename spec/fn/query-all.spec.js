@@ -1,6 +1,6 @@
-import { queryAll } from "../../src";
+import queryAll from "../../src/fn/query-all";
 
-describe("queryAll", () => {
+describe("fn/query-all", () => {
   afterEach(clearFixtures);
 
   it("returns array of childs which matched by selector", () => {

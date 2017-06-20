@@ -1,6 +1,6 @@
-import { once } from "../../src";
+import once from "../../src/fn/once";
 
-describe("once", () => {
+describe("fn/once", () => {
   afterEach(clearFixtures);
 
   it("adds listener for DOM event", () => {

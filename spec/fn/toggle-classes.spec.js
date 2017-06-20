@@ -1,6 +1,6 @@
-import { toggleClasses } from "../../src";
+import toggleClasses from "../../src/fn/toggle-classes";
 
-describe("toggleClasses", () => {
+describe("fn/toggle-classes", () => {
   afterEach(clearFixtures);
 
   describe("given a string", () => {

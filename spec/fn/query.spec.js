@@ -1,6 +1,6 @@
-import { query } from "../../src";
+import query from "../../src/fn/query";
 
-describe("query", () => {
+describe("fn/query", () => {
   afterEach(clearFixtures);
 
   it("returns first child which matched by selector", () => {

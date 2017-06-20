@@ -1,6 +1,6 @@
-import { removeAttr } from "../../src";
+import removeAttr from "../../src/fn/remove-attr";
 
-describe("removeAttr", () => {
+describe("fn/remove-attr", () => {
   afterEach(clearFixtures);
 
   it("removes attribute from element", () => {

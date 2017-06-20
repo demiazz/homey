@@ -1,6 +1,6 @@
-import { removeClasses } from "../../src";
+import removeClasses from "../../src/fn/remove-classes";
 
-describe("removeClasses", () => {
+describe("fn/remove-classes", () => {
   afterEach(clearFixtures);
 
   it("adds classes from given list which added to element early", () => {

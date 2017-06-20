@@ -1,6 +1,6 @@
-import { before } from "../../src";
+import before from "../../src/fn/before";
 
-describe("before", () => {
+describe("fn/before", () => {
   afterEach(clearFixtures);
 
   it("inserts given HTML string before of element", () => {

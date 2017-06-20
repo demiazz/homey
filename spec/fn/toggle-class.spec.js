@@ -1,6 +1,6 @@
-import { toggleClass } from "../../src";
+import toggleClass from "../../src/fn/toggle-class";
 
-describe("toggleClass", () => {
+describe("fn/toggle-class", () => {
   afterEach(clearFixtures);
 
   it("adds given class if element hasn't a given class already", () => {

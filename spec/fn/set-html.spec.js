@@ -1,6 +1,6 @@
-import { setHtml } from "../../src";
+import setHtml from "../../src/fn/set-html";
 
-describe("setHtml", () => {
+describe("fn/set-html", () => {
   afterEach(clearFixtures);
 
   it("replace element content with given html from string", () => {

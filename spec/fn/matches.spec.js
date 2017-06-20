@@ -1,6 +1,6 @@
-import { matches } from "../../src";
+import matches from "../../src/fn/matches";
 
-describe("matches", () => {
+describe("fn/matches", () => {
   afterEach(clearFixtures);
 
   it("returns true if element matched by selector", () => {

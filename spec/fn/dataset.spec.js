@@ -1,6 +1,6 @@
-import { dataset } from "../../src";
+import dataset from "../../src/fn/dataset";
 
-describe("dataset", () => {
+describe("fn/dataset", () => {
   afterEach(clearFixtures);
 
   it("returns object with data from data attributes", () => {

@@ -1,6 +1,6 @@
-import { prepend } from "../../src";
+import prepend from "../../src/fn/prepend";
 
-describe("prepend", () => {
+describe("fn/prepend", () => {
   afterEach(clearFixtures);
 
   it("inserts given HTML string to begin of element", () => {

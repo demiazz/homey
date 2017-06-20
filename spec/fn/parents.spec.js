@@ -1,6 +1,6 @@
-import { parents } from "../../src";
+import parents from "../../src/fn/parents";
 
-describe("parents", () => {
+describe("fn/parents", () => {
   it("returns all parents", () => {
     useFixture(`
       <div class="parent">

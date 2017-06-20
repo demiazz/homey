@@ -1,6 +1,7 @@
-import { matches, parentsBy } from "../../src";
+import matches from "../../src/fn/matches";
+import parentsBy from "../../src/fn/parents-by";
 
-describe("parentsBy", () => {
+describe("fn/parents-by", () => {
   afterEach(clearFixtures);
 
   describe("when selector is given", () => {

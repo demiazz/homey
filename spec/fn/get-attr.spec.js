@@ -1,6 +1,6 @@
-import { getAttr } from "../../src";
+import getAttr from "../../src/fn/get-attr";
 
-describe("getAttr", () => {
+describe("fn/get-attr", () => {
   afterEach(clearFixtures);
 
   it("returns attributes value if exists", () => {

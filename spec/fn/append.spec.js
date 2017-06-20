@@ -1,6 +1,6 @@
-import { append } from "../../src";
+import append from "../../src/fn/append";
 
-describe("append", () => {
+describe("fn/append", () => {
   afterEach(clearFixtures);
 
   it("inserts given HTML string to end of element", () => {

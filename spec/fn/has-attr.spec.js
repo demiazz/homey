@@ -1,6 +1,6 @@
-import { hasAttr } from "../../src";
+import hasAttr from "../../src/fn/has-attr";
 
-describe("hasAttr", () => {
+describe("fn/has-attr", () => {
   afterEach(clearFixtures);
 
   it("returns true if element has a given attribute", () => {

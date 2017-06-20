@@ -1,6 +1,6 @@
-import { parent } from "../../src";
+import parent from "../../src/fn/parent";
 
-describe("parent", () => {
+describe("fn/parent", () => {
   afterEach(clearFixtures);
 
   it("returns parent element", () => {

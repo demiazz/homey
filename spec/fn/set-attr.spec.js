@@ -1,6 +1,6 @@
-import { setAttr } from "../../src";
+import setAttr from "../../src/fn/set-attr";
 
-describe("setAttr", () => {
+describe("fn/set-attr", () => {
   afterEach(clearFixtures);
 
   it("sets attribute to a given value", () => {

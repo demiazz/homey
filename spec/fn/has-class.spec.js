@@ -1,6 +1,6 @@
-import { hasClass } from "../../src";
+import hasClass from "../../src/fn/has-class";
 
-describe("hasClass", () => {
+describe("fn/has-class", () => {
   afterEach(clearFixtures);
 
   it("returns true if element has a given class", () => {

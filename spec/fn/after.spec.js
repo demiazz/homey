@@ -1,6 +1,6 @@
-import { after } from "../../src";
+import after from "../../src/fn/after";
 
-describe("after", () => {
+describe("fn/after", () => {
   afterEach(clearFixtures);
 
   it("inserts given HTML string after of element", () => {

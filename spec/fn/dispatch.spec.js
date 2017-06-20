@@ -1,6 +1,6 @@
-import { dispatch } from "../../src";
+import dispatch from "../../src/fn/dispatch";
 
-describe("dispatch", () => {
+describe("fn/dispatch", () => {
   afterEach(clearFixtures);
 
   let subject;
