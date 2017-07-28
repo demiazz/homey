@@ -59,7 +59,7 @@ module.exports = {
 
   plugins: [
     "karma-jasmine",
-    "karma-rollup-plugin",
+    "karma-rollup-preprocessor",
     "karma-sourcemap-loader",
     "karma-spec-reporter"
   ],

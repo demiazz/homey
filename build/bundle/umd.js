@@ -20,7 +20,9 @@ function build(minified = false) {
     banner: minified ? banner.short : banner.base,
     dest: minified ? `dist/${pkg.name}.min.js` : `dist/${pkg.name}.js`,
     format: "umd",
-    moduleId: pkg.name,
+    amd: {
+      id: pkg.name
+    },
     moduleName: pkg.name,
     sourceMap: minified
   };
@@ -42,7 +44,7 @@ function build(minified = false) {
       result.then(() => {
         const code = prettify(
           readFileSync(writeOptions.dest).toString()
-        ).replace(/"use strict";/, strict => `${strict}\n`);
+        ).replace(/"use strict";/, strict => `${strict}`);
 
         writeFileSync(writeOptions.dest, code);
       });
