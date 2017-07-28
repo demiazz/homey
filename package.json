@@ -39,8 +39,9 @@
     "build": "node build/bundle/index.js",
     "clean": "node build/bundle/clean.js",
     "docs": "node build/docs.js",
-    "version": "yarn run build && yarn run docs && git add -A README.md",
-    "postversion": "yarn run clean",
+    "prepack": "yarn run build",
+    "postpack": "yarn run clean",
+    "version": "yarn run docs && git add -A README.md",
     "lint-staged": "$(yarn bin)/lint-staged"
   },
   "lint-staged": {
