@@ -1,5 +1,7 @@
 /*.log
 /coverage
 /dist
-/lib
+/*.js
+/*.js.flow
+/fn
 /node_modules

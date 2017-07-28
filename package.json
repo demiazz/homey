@@ -15,15 +15,17 @@
     "name": "Alexey Plutalov",
     "email": "demiazz.py@gmail.com"
   },
-  "main": "lib/index.js",
+  "main": "index.js",
   "typings": "d.ts/homey.d.ts",
   "files": [
     "d.ts/homey.d.ts",
     "dist/homey.js",
     "dist/homey.min.js",
     "dist/homey.min.js.map",
-    "lib/**/*.js",
-    "lib/**/*.js.flow",
+    "*.js",
+    "*.js.flow",
+    "fn/*.js",
+    "fn/*.js.flow",
     "CHANGELOG.md",
     "LICENSE",
     "README.md"
@@ -35,8 +37,10 @@
     "test:watch": "cross-env NODE_ENV=test $(yarn bin)/karma start build/karma/local.js",
     "test:ci": "cross-env NODE_ENV=test $(yarn bin)/karma start build/karma/ci.js",
     "build": "node build/bundle/index.js",
+    "clean": "node build/bundle/clean.js",
     "docs": "node build/docs.js",
     "version": "yarn run build && yarn run docs && git add -A README.md",
+    "postversion": "yarn run clean",
     "lint-staged": "$(yarn bin)/lint-staged"
   },
   "lint-staged": {

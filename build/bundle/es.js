@@ -7,7 +7,7 @@ const sources = require("./sources");
 
 function build() {
   Object.keys(sources).forEach(file => {
-    const dest = `lib/${file}.flow`;
+    const dest = `${file}.flow`;
     const code = prettify(sources[file])
       .replace(/\/\* @flow \*\/\n/, "")
       .replace(/\/\* eslint[^*]* \*\/\n/, "");
