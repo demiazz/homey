@@ -1,6 +1,6 @@
 {
   "name": "homey",
-  "version": "0.1.0-beta.12",
+  "version": "0.1.0-beta.13",
   "description": "Homey shortcut's collection for DOM API",
   "license": "MIT",
   "homepage": "https://github.com/demiazz/homey",
